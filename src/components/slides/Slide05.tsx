@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { Grid, Eye, Cpu, Compass, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
+import { SectionLabel } from '../ui/SectionLabel';
+import { SpeakerTag } from '../ui/SpeakerTag';
+import { CheckCircle2, Compass } from 'lucide-react';
 
 interface Quadrant {
   id: string;
@@ -11,54 +12,44 @@ interface Quadrant {
   focus: string;
   implication: string;
   example: string;
-  color: string;
-  activeColor: string;
 }
 
 const QUADRANTS: Quadrant[] = [
   {
     id: "diff",
     title: "1. Khác Biệt Hóa (Differentiation)",
-    techStatus: "Công nghệ ổn định / Đã có",
-    marketStatus: "Thị trường ổn định / Đã có",
-    focus: "Cải tiến giá trị tương đối, chất lượng, dịch vụ và tối ưu chi phí.",
+    techStatus: "Công nghệ ổn định",
+    marketStatus: "Thị trường ổn định",
+    focus: "Cải tiến giá trị tương đối, chất lượng, chi phí và dịch vụ.",
     implication: "Khách hàng đã biết rõ sản phẩm, dễ so sánh tiêu chuẩn kỹ thuật; cạnh tranh chuyển sang định vị và uy tín thương hiệu.",
-    example: "Các mẫu smartphone cận cao cấp bổ sung camera zoom hoặc hoàn thiện vật liệu vỏ máy.",
-    color: "border-teal-500/30 bg-teal-950/20",
-    activeColor: "border-teal-400 bg-teal-950/60 ring-2 ring-teal-400"
+    example: "Các mẫu smartphone cận cao cấp hoàn thiện vật liệu vỏ máy hoặc camera zoom."
   },
   {
     id: "arch",
     title: "2. Đổi Mới Kiến Trúc (Architectural)",
-    techStatus: "Công nghệ hiện có / Ổn định",
-    marketStatus: "Thị trường mới / Phân khúc mới",
+    techStatus: "Công nghệ hiện có",
+    marketStatus: "Thị trường / Phân khúc mới",
     focus: "Tái kết hợp thành phần hiện có phục vụ công việc hoặc bối cảnh sử dụng khác.",
     implication: "Không cần phát minh công nghệ lõi mới; chìa khóa là thấu hiểu bối cảnh khách hàng mới chưa được khai thác.",
-    example: "Máy quét mã vạch công nghiệp được thu nhỏ thành thiết bị kiểm kho cầm tay hoặc bán vé tàu điện.",
-    color: "border-blue-500/30 bg-blue-950/20",
-    activeColor: "border-blue-400 bg-blue-950/60 ring-2 ring-blue-400"
+    example: "Máy quét mã vạch công nghiệp thu nhỏ thành thiết bị kiểm kho cầm tay hoặc bán vé xe bus."
   },
   {
     id: "tech",
     title: "3. Đổi Mới Công Nghệ (Technological)",
-    techStatus: "Công nghệ mới lạ / Biến đổi",
-    marketStatus: "Thị trường hiện hữu / Quen thuộc",
-    focus: "Xác lập ưu thế hiệu năng, kiểm chứng khả năng tương thích và tốc độ thay thế.",
+    techStatus: "Công nghệ mới lạ",
+    marketStatus: "Thị trường hiện hữu",
+    focus: "Xác lập ưu thế hiệu năng, kiểm chứng khả năng sử dụng và tốc độ thay thế.",
     implication: "Nhu cầu thị trường đã rõ ràng nhưng người mua thận trọng về độ tin cậy và chi phí chuyển đổi giải pháp.",
-    example: "Động cơ điện thay thế động cơ đốt trong trên các phương tiện giao thông quen thuộc.",
-    color: "border-indigo-500/30 bg-indigo-950/20",
-    activeColor: "border-indigo-400 bg-indigo-950/60 ring-2 ring-indigo-400"
+    example: "Động cơ điện thay thế động cơ đốt trong trên các phương tiện quen thuộc."
   },
   {
     id: "complex",
     title: "4. Sản Phẩm Phức Tạp (Complex / Radical)",
     techStatus: "Công nghệ mới lạ",
     marketStatus: "Thị trường mới hình thành",
-    focus: "Đồng phát triển với người dùng dẫn đầu, điều chỉnh kiến trúc và cùng định hình thị trường.",
+    focus: "Đồng phát triển với người dùng, điều chỉnh kiến trúc và cơ chế chấp nhận.",
     implication: "Khách hàng chưa đủ từ vựng để diễn đạt nhu cầu; đòi hỏi tạo mẫu thực nghiệm nhiều vòng lặp nhanh.",
-    example: "Thiết bị y tế chẩn đoán tiên tiến thế hệ đầu tiên hoặc hệ thống viễn thông lượng tử.",
-    color: "border-amber-500/30 bg-amber-950/20",
-    activeColor: "border-amber-400 bg-amber-950/60 ring-2 ring-amber-400"
+    example: "Thiết bị y tế chẩn đoán hình ảnh tiên tiến hoặc hệ thống viễn thông lượng tử."
   }
 ];
 
@@ -73,27 +64,34 @@ const IDEO_STEPS = [
 export const Slide05: React.FC<{ slide: SlideData }> = ({ slide }) => {
   const [selectedQuad, setSelectedQuad] = useState<string>("diff");
 
-  const currentQuad = QUADRANTS.find(q => q.id === selectedQuad) || QUADRANTS[0];
+  const current = QUADRANTS.find(q => q.id === selectedQuad) || QUADRANTS[0];
 
   return (
-    <SlideLayout slide={slide} rightBadge="Ma trận 2×2 & Nghiên cứu người dùng">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-center">
-        {/* Left Column: Interactive 2x2 Matrix */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="font-semibold text-teal-300">Ma trận Độ trưởng thành: Công nghệ × Thị trường</span>
-            <span className="text-[11px] italic">Bấm vào từng góc phần tư để xem phân tích</span>
+    <div className="editorial-container">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <SectionLabel index={5} label="MA TRẬN CÔNG NGHỆ × THỊ TRƯỜNG" accent="#4f46e5" />
+        <SpeakerTag name={slide.presenter} time={slide.duration} color="#4f46e5" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* Left Column: Interactive 2x2 Clean Matrix */}
+        <div className="lg:col-span-7 space-y-4">
+          <div>
+            <h2 className="display-lg text-slate-900 leading-tight">
+              Công Nghệ Và Thị Trường<br />
+              <span className="text-indigo-600">Quyết Định Cách Đổi Mới</span>
+            </h2>
+            <p className="text-sm text-slate-600 mt-2 font-serif italic">
+              Ma trận 2×2 độ trưởng thành và quy trình học hỏi thực nghiệm 5 bước từ IDEO
+            </p>
           </div>
 
-          {/* The 2x2 Grid with Axis Labels */}
-          <div className="relative p-2 bg-slate-900/80 rounded-2xl border border-slate-800">
-            {/* Top axis: Market Maturity */}
-            <div className="grid grid-cols-2 text-center text-[11px] font-bold pb-2 text-slate-400">
-              <div>Thị trường Đã có / Ổn định</div>
-              <div>Thị trường Mới / Đang hình thành</div>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-3">
+            <div className="grid grid-cols-2 text-center text-xs font-bold text-slate-500 pb-1">
+              <span>Thị trường Đã có / Ổn định</span>
+              <span>Thị trường Mới / Đang hình thành</span>
             </div>
 
-            {/* Matrix Body: 4 Quadrants */}
             <div className="grid grid-cols-2 gap-2.5">
               {QUADRANTS.map((quad) => {
                 const isSelected = selectedQuad === quad.id;
@@ -101,81 +99,74 @@ export const Slide05: React.FC<{ slide: SlideData }> = ({ slide }) => {
                   <button
                     key={quad.id}
                     onClick={() => setSelectedQuad(quad.id)}
-                    className={`p-3.5 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between h-28 cursor-pointer ${
-                      isSelected ? quad.activeColor : `${quad.color} hover:bg-slate-800/80`
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-28 ${
+                      isSelected
+                        ? 'bg-indigo-50/70 border-indigo-600 ring-2 ring-indigo-500/20 shadow-xs'
+                        : 'bg-white border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-bold text-white leading-tight">{quad.title}</span>
-                      {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />}
+                      <span className="text-xs font-bold text-slate-900">{quad.title}</span>
+                      {isSelected && <CheckCircle2 className="w-4 h-4 text-indigo-600" />}
                     </div>
-                    <div className="text-[10px] text-slate-300 line-clamp-2 leading-tight">
+                    <p className="text-[11px] text-slate-600 line-clamp-2 leading-tight">
                       {quad.focus}
-                    </div>
-                    <div className="text-[9px] font-mono text-teal-400/90 truncate">
+                    </p>
+                    <span className="text-[10px] font-mono text-indigo-600 font-semibold">
                       {quad.techStatus}
-                    </div>
+                    </span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* Dynamic Explanation for Selected Quadrant */}
-          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-teal-500/30 text-xs space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-teal-300">{currentQuad.title}</span>
-              <span className="text-[10px] text-amber-300 font-mono">Quản trị trọng tâm</span>
-            </div>
-            <p className="text-[11px] text-slate-200 leading-relaxed">
-              <strong>Hàm ý:</strong> {currentQuad.implication}
+          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+            <span className="font-bold text-indigo-900">{current.title} — Hàm ý quản trị:</span>
+            <p className="text-[11px] text-slate-700 leading-relaxed">
+              {current.implication}
             </p>
-            <p className="text-[11px] text-slate-400">
-              <strong className="text-slate-300">Ví dụ:</strong> {currentQuad.example}
+            <p className="text-[11px] text-slate-500 pt-1 font-mono">
+              <strong>Ví dụ:</strong> {current.example}
             </p>
           </div>
         </div>
 
-        {/* Right Column: Case study IDEO and 5-step User-Centered Learning Process */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
-          <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase">
-                <Compass className="w-4 h-4 text-amber-400" /> Tình huống IDEO
-              </div>
-              <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">
-                Design Thinking
-              </span>
-            </div>
-            <p className="text-[11px] text-slate-300 leading-relaxed">
-              IDEO chứng minh rằng người dùng không thể diễn đạt rõ ràng nhu cầu với những sản phẩm chưa từng trải nghiệm. Thay vì bảng hỏi tĩnh, cần <strong>làm nguyên mẫu nhanh và quan sát thao tác thật</strong>.
-            </p>
-
-            {/* 5-step IDEO sequence */}
-            <div className="space-y-1.5 pt-1">
-              {IDEO_STEPS.map((s) => (
-                <div key={s.step} className="flex items-center justify-between p-1.5 rounded-lg bg-slate-800/60 border border-slate-700/60 text-xs">
-                  <span className="font-bold text-teal-300 text-[11px]">{s.name}</span>
-                  <span className="text-[10px] text-slate-400">{s.desc}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="relative rounded-xl overflow-hidden border border-slate-700 h-28 group">
+        {/* Right Column: Case study IDEO and Documentary Photo */}
+        <div className="lg:col-span-5 space-y-4">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-48 group">
             <img 
               src="/images/ideo-design.jpg" 
               alt="IDEO Prototyping Workshop" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex items-end p-2.5">
-              <span className="text-[10px] text-slate-300 font-medium">
-                Thực nghiệm nguyên mẫu tại xưởng thiết kế IDEO
+            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
+              <span className="text-xs text-white">
+                Thực nghiệm nguyên mẫu tại xưởng thiết kế IDEO: Người dùng thể hiện nhu cầu qua hành động
               </span>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="text-xs font-bold text-slate-900 uppercase font-mono">
+                Quy trình 5 bước học hỏi IDEO
+              </span>
+              <span className="text-[10px] bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-mono font-bold">
+                Design Thinking
+              </span>
+            </div>
+            <div className="space-y-1.5 text-xs">
+              {IDEO_STEPS.map((s) => (
+                <div key={s.step} className="flex items-center justify-between p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+                  <span className="font-bold text-slate-800 text-[11px]">{s.name}</span>
+                  <span className="text-[10px] text-slate-500">{s.desc}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </div>
   );
 };

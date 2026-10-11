@@ -1,7 +1,8 @@
 import React from 'react';
 import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { RefreshCw, MessageSquare, CheckCircle, Sparkles, ArrowRight } from 'lucide-react';
+import { SectionLabel } from '../ui/SectionLabel';
+import { SpeakerTag } from '../ui/SpeakerTag';
+import { MessageSquare, CheckCircle2 } from 'lucide-react';
 
 const SUMMARY_STEPS = [
   { step: 1, title: "1. Nhận diện nhu cầu", desc: "Bắt đầu từ vấn đề thực tế của khách hàng, không chỉ từ phát minh kỹ thuật." },
@@ -13,21 +14,33 @@ const SUMMARY_STEPS = [
 
 export const Slide21: React.FC<{ slide: SlideData }> = ({ slide }) => {
   return (
-    <SlideLayout slide={slide} rightBadge="Tổng kết & Câu hỏi thảo luận">
-      <div className="flex flex-col justify-between h-full space-y-4">
-        {/* Core Management Synthesis Grid */}
+    <div className="editorial-container">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <SectionLabel index={21} label="KẾT LUẬN & THẢO LUẬN" accent="#0d9488" />
+        <SpeakerTag name={slide.presenter} time={slide.duration} color="#0d9488" />
+      </div>
+
+      <div className="space-y-6">
+        <div>
+          <h2 className="display-lg text-slate-900 leading-tight">
+            Đổi Mới Là Quá Trình<br />
+            <span className="text-[#147D82]">Học Hỏi Liên Tục</span>
+          </h2>
+          <p className="text-sm text-slate-600 mt-2 font-serif italic">
+            Tổng kết chuỗi năm quyết định quản trị cốt lõi và câu hỏi gợi mở thảo luận cuối buổi
+          </p>
+        </div>
+
+        {/* 5 Summary Steps */}
         <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
           {SUMMARY_STEPS.map((s) => (
-            <div key={s.step} className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 flex flex-col justify-between h-32">
-              <div className="flex items-center justify-between">
-                <span className="w-5 h-5 rounded-full bg-teal-500/20 text-teal-400 text-xs font-bold flex items-center justify-center font-mono">
-                  {s.step}
-                </span>
-                <CheckCircle className="w-3.5 h-3.5 text-teal-400" />
-              </div>
+            <div key={s.step} className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs flex flex-col justify-between h-36">
+              <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-800 text-xs font-bold flex items-center justify-center font-mono">
+                {s.step}
+              </span>
               <div>
-                <div className="text-xs font-bold text-white leading-tight">{s.title}</div>
-                <p className="text-[10px] text-slate-300 mt-1 leading-snug line-clamp-3">
+                <h4 className="text-xs font-bold text-slate-900 leading-snug">{s.title}</h4>
+                <p className="text-[11px] text-slate-500 mt-1 leading-snug">
                   {s.desc}
                 </p>
               </div>
@@ -36,36 +49,35 @@ export const Slide21: React.FC<{ slide: SlideData }> = ({ slide }) => {
         </div>
 
         {/* Central Closing Statement & Discussion Question */}
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-slate-900 via-teal-950/40 to-slate-900 border border-teal-500/40 shadow-2xl space-y-4 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" /> Thông điệp đọng lại của Chương 6
-          </div>
+        <div className="p-6 rounded-2xl bg-white border border-teal-200 shadow-sm space-y-4 text-center">
+          <span className="inline-block px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-bold font-mono uppercase">
+            Thông điệp trọng tâm của Chương 6
+          </span>
 
-          <h2 className="text-xl md:text-2xl font-black text-white max-w-3xl mx-auto leading-snug">
+          <h3 className="text-lg md:text-xl font-serif font-bold text-slate-900 max-w-3xl mx-auto leading-relaxed">
             “Đổi mới không phải cuộc thi xem ai có công nghệ mới nhất. Đó là năng lực liên tục xác định đúng vấn đề thị trường, tạo giải pháp hữu ích và không ngừng học hỏi.”
-          </h2>
+          </h3>
 
-          <div className="p-4 rounded-xl bg-slate-800/80 border border-amber-500/40 max-w-2xl mx-auto text-left flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+          <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 max-w-2xl mx-auto text-left flex items-start gap-3">
+            <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
               <MessageSquare className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-xs font-bold text-amber-300 uppercase tracking-wide">
+              <span className="text-xs font-bold text-amber-900 uppercase font-mono">
                 Câu hỏi thảo luận dành cho cả lớp:
-              </div>
-              <p className="text-sm font-semibold text-white mt-1 leading-relaxed">
+              </span>
+              <p className="text-sm font-semibold text-slate-900 mt-1 leading-relaxed">
                 “Nếu một ứng dụng có rất nhiều lượt tải nhưng phần lớn người dùng không quay lại, chúng ta cần thêm những chỉ số nào trước khi đánh giá đó là một đổi mới thành công?”
               </p>
             </div>
           </div>
         </div>
 
-        {/* Presentation Closing Footer */}
-        <div className="flex items-center justify-between text-xs text-slate-400 px-2">
+        <div className="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-200 font-mono">
           <span>Nhóm 4 · Môn Quản trị Đổi mới và Sáng tạo · HUB</span>
-          <span className="text-teal-400 font-medium">Trân trọng cảm ơn Giảng viên và các bạn đã lắng nghe!</span>
+          <span className="text-teal-700 font-bold">Trân trọng cảm ơn Giảng viên và các bạn đã lắng nghe!</span>
         </div>
       </div>
-    </SlideLayout>
+    </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SLIDES_METADATA } from '../data/slidesMetadata';
 import { EditorialNavBar } from './EditorialNavBar';
 import { PresentationEngine } from './PresentationEngine';
-import { ArrowUp, BookOpen, User, Clock, CheckCircle2, ChevronRight, Sparkles } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 
 // Import All 21 Slide Components
 import { Slide01 } from './slides/Slide01';
@@ -27,25 +27,6 @@ import { Slide19 } from './slides/Slide19';
 import { Slide20 } from './slides/Slide20';
 import { Slide21 } from './slides/Slide21';
 
-// Full Editorial Imagery Mapping across Scrollytelling Sections
-const SECTION_MEDIA: Record<number, { image: string; caption: string; style: string }> = {
-  1: { image: "/images/hero-innovation.jpg", caption: "Hệ sinh thái mạng lưới công nghệ & thị trường toàn cầu", style: "hero" },
-  2: { image: "/images/mobile-app.jpg", caption: "Hành vi người dùng smartphone: Khoảng cách giữa tải về và sử dụng", style: "split" },
-  3: { image: "/images/technology-network.jpg", caption: "Quy trình năm bước quản trị đổi mới và vòng lặp phản hồi thị trường", style: "banner" },
-  5: { image: "/images/ideo-design.jpg", caption: "Quy trình Design Thinking thực nghiệm tại IDEO", style: "split" },
-  6: { image: "/images/nokia-phone.jpg", caption: "Kỷ nguyên điện thoại nắp gập và biến đổi giá trị cảm nhận Nokia", style: "split" },
-  7: { image: "/images/patent-blueprint.jpg", caption: "Bản vẽ kỹ thuật QFD: Dịch tiếng nói khách hàng thành thông số", style: "split" },
-  8: { image: "/images/persil-washing.jpg", caption: "Thử nghiệm mẫu vải Persil Power và bài học bối cảnh sử dụng", style: "split" },
-  9: { image: "/images/b2b-cnc.jpg", caption: "Thiết bị cơ khí chính xác CNC và mạng lưới mua hàng tổ chức", style: "split" },
-  12: { image: "/images/arm-processor.jpg", caption: "Kiến trúc vi xử lý bán dẫn ARM: Cấp phép sở hữu trí tuệ", style: "split" },
-  13: { image: "/images/ct-scanner.jpg", caption: "Hệ thống máy chụp cắt lớp EMI CT Scanner và năng lực hỗ trợ dịch vụ", style: "split" },
-  14: { image: "/images/customer-journey.jpg", caption: "Đồng hành và tư vấn chuyển đổi giảm bất định cho khách hàng", style: "split" },
-  18: { image: "/images/fe-online.jpg", caption: "Giao diện số hóa tiêu dùng FE ONLINE 2.0 trên di động", style: "split" },
-  19: { image: "/images/finance-growth.jpg", caption: "Thị trường tài chính tiêu dùng và số liệu giải ngân 2024", style: "split" },
-  20: { image: "/images/team-collaboration.jpg", caption: "Hội đồng quản trị rủi ro tín dụng và kiểm soát vận hành", style: "split" },
-  21: { image: "/images/academic-lecture.jpg", caption: "Giảng đường đại học: Đổi mới là quá trình học hỏi liên tục", style: "hero" }
-};
-
 export const ScrollytellingApp: React.FC = () => {
   const [viewMode, setViewMode] = useState<'scrollytelling' | 'slide'>('scrollytelling');
 
@@ -56,12 +37,12 @@ export const ScrollytellingApp: React.FC = () => {
   if (viewMode === 'slide') {
     return (
       <div className="relative w-screen h-screen">
-        <div className="fixed top-4 right-4 z-50">
+        <div className="fixed top-3 right-4 z-50">
           <button
             onClick={() => setViewMode('scrollytelling')}
-            className="px-3.5 py-1.5 rounded-full bg-[#147D82] text-white font-bold text-xs shadow-xl hover:bg-teal-600 transition-all cursor-pointer border border-teal-300/40"
+            className="px-3.5 py-1.5 rounded-full bg-white text-slate-800 font-bold text-xs shadow-lg hover:bg-slate-50 transition-all cursor-pointer border border-slate-300 font-mono"
           >
-            ← Quay lại Chế độ Scrollytelling
+            ← Chế độ Cuộn Dọc
           </button>
         </div>
         <PresentationEngine />
@@ -70,20 +51,18 @@ export const ScrollytellingApp: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#070e17] text-[#F6F5F1] font-sans selection:bg-[#147D82] selection:text-white">
-      {/* Sticky Top Navigation */}
+    <div className="min-h-screen bg-[#fafaf9] text-[#1a1a2e] font-sans selection:bg-[#147D82] selection:text-white">
+      {/* Sticky Top Clean Navigation */}
       <EditorialNavBar 
         currentMode={viewMode} 
         onToggleMode={() => setViewMode(viewMode === 'scrollytelling' ? 'slide' : 'scrollytelling')} 
       />
 
-      {/* Main Continuous Scrollytelling Stream */}
-      <main className="max-w-[1700px] mx-auto px-4 sm:px-6 lg:px-12 py-10 space-y-24">
-        {SLIDES_METADATA.map((slide, idx) => {
+      {/* Main Continuous Scrollytelling Stream with Solid White/Warm Canvas */}
+      <main className="w-full">
+        {SLIDES_METADATA.map((slide) => {
           const sid = `slide-${String(slide.slideNumber).padStart(2, '0')}`;
-          const media = SECTION_MEDIA[slide.slideNumber];
 
-          // Dynamic Component Selector
           let SlideContent: React.ReactNode = null;
           switch (slide.slideNumber) {
             case 1: SlideContent = <Slide01 slide={slide} />; break;
@@ -109,32 +88,18 @@ export const ScrollytellingApp: React.FC = () => {
             case 21: SlideContent = <Slide21 slide={slide} />; break;
           }
 
+          // Alternate subtle clean section background for visual rhythm
+          const isEven = slide.slideNumber % 2 === 0;
+
           return (
             <section
               key={slide.id}
               id={sid}
-              className="scroll-mt-16 relative rounded-3xl overflow-hidden border border-slate-800/80 bg-[#0c1825]/90 shadow-2xl transition-all hover:border-slate-700/80"
+              className={`editorial-section ${isEven ? 'bg-[#f4f4f0]' : 'bg-[#fafaf9]'}`}
             >
-              {/* Render Section Presentation Content */}
-              <div className="min-h-[580px] w-full flex flex-col justify-center">
+              <div className="w-full">
                 {SlideContent}
               </div>
-
-              {/* Documentary Photography Integration Banner if available */}
-              {media && (
-                <div className="px-8 pb-6 pt-2 bg-[#08121e]/60 border-t border-slate-800/60 flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[#147D82]" />
-                    <span className="text-xs text-slate-300 font-medium">
-                      <strong>Tư liệu thực tế:</strong> {media.caption}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono">
-                    <BookOpen className="w-3.5 h-3.5 text-teal-400" />
-                    <span>Nguồn ảnh: Unsplash / Wikimedia Commons License (Không dùng AI)</span>
-                  </div>
-                </div>
-              )}
             </section>
           );
         })}
@@ -143,22 +108,22 @@ export const ScrollytellingApp: React.FC = () => {
       {/* Floating Scroll To Top Button */}
       <button
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-[#147D82] text-white shadow-2xl hover:bg-teal-600 transition-all cursor-pointer border border-teal-400/40"
+        className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white text-slate-800 shadow-xl hover:bg-slate-50 transition-all cursor-pointer border border-slate-200"
         title="Cuộn lên đầu trang"
       >
-        <ArrowUp className="w-5 h-5" />
+        <ArrowUp className="w-5 h-5 text-[#147D82]" />
       </button>
 
-      {/* Global Academic Editorial Footer */}
-      <footer className="w-full bg-[#050a12] border-t border-slate-800 py-12 px-6 text-center text-xs text-slate-400 space-y-3">
-        <div className="text-sm font-bold text-white">
-          Chương 6: Đổi Mới Từ Thị Trường · Quản trị Đổi mới và Sáng tạo
+      {/* Clean Global Academic Editorial Footer */}
+      <footer className="w-full bg-[#f0f0eb] border-t border-slate-200 py-12 px-6 text-center text-xs text-slate-600 space-y-2">
+        <div className="text-sm font-bold text-slate-900 font-serif">
+          Chương 6: Đổi Mới Từ Thị Trường · Quản Trị Đổi Mới và Sáng Tạo
         </div>
         <div>
           Trường Đại học Ngân hàng TP. Hồ Chí Minh (HUB) • Khoa Quản trị Kinh doanh • Nhóm 4
         </div>
-        <div className="text-[11px] text-slate-500 font-mono max-w-2xl mx-auto">
-          Ứng dụng thiết kế theo tiêu chuẩn Visual-first Academic Scrollytelling & 16:9 Presentation Engine. 100% hình ảnh thực tế được xác minh bản quyền.
+        <div className="text-[11px] text-slate-500 font-mono">
+          Thiết kế theo chuẩn Visual-First Editorial Scrollytelling. Dữ liệu học thuật chính xác, hình ảnh tài liệu xác thực 100%.
         </div>
       </footer>
     </div>

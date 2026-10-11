@@ -1,128 +1,116 @@
 import React, { useState } from 'react';
 import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { Download, Repeat, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
+import { SectionLabel } from '../ui/SectionLabel';
+import { SpeakerTag } from '../ui/SpeakerTag';
+import { Download, Repeat, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export const Slide02: React.FC<{ slide: SlideData }> = ({ slide }) => {
   const [activeTab, setActiveTab] = useState<'download' | 'adoption'>('download');
 
   return (
-    <SlideLayout slide={slide} rightBadge="Tương tác & Dẫn nhập">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-        {/* Left Column: Interactive Smartphone Mockup */}
-        <div className="lg:col-span-5 flex flex-col items-center justify-center">
-          <div className="w-[300px] h-[480px] bg-slate-900 rounded-[36px] p-4 shadow-2xl border-4 border-slate-700 relative flex flex-col justify-between">
-            {/* Phone Speaker Notch */}
-            <div className="w-24 h-4 bg-slate-800 rounded-full mx-auto mb-2" />
+    <div className="editorial-container">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <SectionLabel index={2} label="DẪN NHẬP BÀI HỌC" accent="#e11d48" />
+        <SpeakerTag name={slide.presenter} time={slide.duration} color="#e11d48" />
+      </div>
 
-            {/* Simulated App Screen */}
-            <div className="flex-1 bg-gradient-to-b from-slate-950 to-slate-900 rounded-[24px] p-4 flex flex-col justify-between border border-slate-800">
-              <div className="text-center pt-2">
-                <span className="text-[10px] font-semibold text-teal-400 uppercase tracking-wider">Ứng dụng Ghi chú Thông minh</span>
-                <div className="text-sm font-bold text-white mt-1">NoteCraft AI v2.4</div>
-              </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* Left Column: Narrative & Critical Insight */}
+        <div className="lg:col-span-7 space-y-6">
+          <div>
+            <h2 className="display-lg text-slate-900 leading-tight">
+              Mới Có Đồng Nghĩa<br />
+              <span className="text-rose-600">Với Có Giá Trị?</span>
+            </h2>
+            <p className="text-lg text-slate-600 mt-2 font-serif italic">
+              Nghịch lý lượt tải ứng dụng và bài toán kiểm chứng giá trị sử dụng
+            </p>
+          </div>
 
-              {activeTab === 'download' ? (
-                <div className="p-4 rounded-xl bg-red-950/40 border border-red-500/30 text-center animate-fadeIn">
-                  <div className="w-12 h-12 bg-red-500/20 text-red-400 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <Download className="w-6 h-6" />
-                  </div>
-                  <div className="text-xs font-bold text-red-300">Tải về vì quảng cáo bắt mắt</div>
-                  <p className="text-[11px] text-slate-400 mt-1 leading-snug">
-                    Hơn 20 bộ lọc màu sắc, hiệu ứng 3D phức tạp nhưng nút tìm kiếm ghi chú bị giấu sâu.
-                  </p>
-                  <div className="mt-2 text-[10px] font-mono text-red-400 bg-red-950/60 py-1 rounded">
-                    Rời bỏ sau 2 lần dùng
-                  </div>
-                </div>
-              ) : (
-                <div className="p-4 rounded-xl bg-teal-950/40 border border-teal-500/30 text-center animate-fadeIn">
-                  <div className="w-12 h-12 bg-teal-500/20 text-teal-400 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <Repeat className="w-6 h-6" />
-                  </div>
-                  <div className="text-xs font-bold text-teal-300">Giá trị sử dụng lặp lại</div>
-                  <p className="text-[11px] text-slate-400 mt-1 leading-snug">
-                    Mở ra là ghi được ngay, thanh tìm kiếm hiển thị ở trang chủ, đồng bộ mượt mà không lỗi.
-                  </p>
-                  <div className="mt-2 text-[10px] font-mono text-teal-400 bg-teal-950/60 py-1 rounded">
-                    Tỷ lệ gắn bó 78%
-                  </div>
-                </div>
-              )}
+          <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200 text-slate-800 space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-800 flex items-center gap-1.5 font-mono">
+              <AlertCircle className="w-4 h-4 text-amber-600" /> Câu hỏi gợi mở cho hội trường
+            </span>
+            <p className="text-base font-semibold leading-relaxed text-slate-900">
+              “Mọi người ở đây đã từng tải một ứng dụng vì quảng cáo rất hấp dẫn, nhưng chỉ dùng 1–2 lần rồi xóa đi chưa?”
+            </p>
+          </div>
 
-              {/* Toggle Buttons */}
-              <div className="grid grid-cols-2 gap-2 pt-2">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-1">
+              <span className="text-xs font-bold text-rose-600 uppercase font-mono">Tính Mới (Novelty)</span>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Được định nghĩa bởi tính năng hiện đại, giao diện bắt mắt. Thu hút sự tò mò ban đầu nhưng không giữ chân người dùng nếu không giải quyết được việc gì.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs space-y-1">
+              <span className="text-xs font-bold text-teal-600 uppercase font-mono">Giá Trị Dùng (Value)</span>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Đo bằng công việc mà sản phẩm giúp người dùng hoàn thành (Jobs-to-be-Done) nhanh hơn, tiện hơn hoặc giảm bớt phiền toái thường nhật.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Clean Interactive Smartphone Scenario & Photography */}
+        <div className="lg:col-span-5 space-y-3">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-md space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+              <span className="text-xs font-bold text-slate-800">Ví dụ minh họa: Ứng dụng Ghi chú</span>
+              <div className="flex items-center gap-1">
                 <button
                   onClick={() => setActiveTab('download')}
-                  className={`py-2 text-[11px] font-bold rounded-lg transition-all ${
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                     activeTab === 'download' 
-                      ? 'bg-red-500/30 text-red-300 border border-red-500/50' 
-                      : 'bg-slate-800 text-slate-400 hover:text-white'
+                      ? 'bg-rose-100 text-rose-700 font-bold' 
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                 >
-                  Giai đoạn Tải
+                  Khi Tải về
                 </button>
                 <button
                   onClick={() => setActiveTab('adoption')}
-                  className={`py-2 text-[11px] font-bold rounded-lg transition-all ${
+                  className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-all cursor-pointer ${
                     activeTab === 'adoption' 
-                      ? 'bg-teal-500/30 text-teal-300 border border-teal-500/50' 
-                      : 'bg-slate-800 text-slate-400 hover:text-white'
+                      ? 'bg-teal-100 text-teal-700 font-bold' 
+                      : 'text-slate-500 hover:text-slate-800'
                   }`}
                 >
-                  Sử dụng Lặp lại
+                  Dùng Lặp lại
                 </button>
               </div>
             </div>
 
-            {/* Bottom Home Indicator */}
-            <div className="w-20 h-1 bg-slate-600 rounded-full mx-auto mt-2" />
-          </div>
-        </div>
-
-        {/* Right Column: Key Academic Insights */}
-        <div className="lg:col-span-7 space-y-6">
-          <div className="p-5 rounded-2xl bg-slate-800/60 border border-slate-700/60 backdrop-blur-xs">
-            <div className="text-sm font-bold text-amber-300 flex items-center gap-2 mb-2">
-              <AlertCircle className="w-4 h-4 text-amber-400" />
-              Câu hỏi dẫn nhập bài học
-            </div>
-            <p className="text-lg md:text-xl font-semibold text-white leading-snug">
-              “Bạn đã từng tải một ứng dụng vì quảng cáo rất hấp dẫn, nhưng chỉ dùng 1–2 lần rồi gỡ bỏ chưa?”
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-              <div className="text-xs font-bold text-red-400 uppercase tracking-wide flex items-center gap-1.5 mb-1">
-                <AlertCircle className="w-4 h-4" /> Tính Mới (Novelty)
+            {activeTab === 'download' ? (
+              <div className="p-4 rounded-xl bg-rose-50/60 border border-rose-200 space-y-2 animate-fadeIn">
+                <div className="flex items-center gap-2 text-rose-700 font-bold text-xs">
+                  <Download className="w-4 h-4" /> Bẫy tính năng dư thừa (Feature Bloat)
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Ứng dụng có hơn 20 bộ lọc màu sắc, hiệu ứng hoạt họa 3D phức tạp nhưng thanh tìm kiếm ghi chú bị giấu sâu qua 3 tầng menu. Người dùng mở ra 1 lần rồi bỏ vì mất thời gian.
+                </p>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Được định nghĩa bởi thông số kỹ thuật, thuật toán tiên tiến hoặc thiết kế bắt mắt. Thu hút sự tò mò ban đầu nhưng không giữ chân người dùng.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800">
-              <div className="text-xs font-bold text-teal-400 uppercase tracking-wide flex items-center gap-1.5 mb-1">
-                <CheckCircle2 className="w-4 h-4" /> Giá Trị Sử Dụng (Value)
+            ) : (
+              <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-200 space-y-2 animate-fadeIn">
+                <div className="flex items-center gap-2 text-teal-700 font-bold text-xs">
+                  <Repeat className="w-4 h-4" /> Đổi mới giải quyết đúng việc cần làm
+                </div>
+                <p className="text-xs text-slate-700 leading-relaxed">
+                  Nút tìm kiếm ngay trang chủ, đồng bộ tức thì, ghi chú chỉ mất 1 chạm. Người dùng gắn bó lâu dài vì giải quyết nhanh công việc họ cần.
+                </p>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Đo bằng công việc mà sản phẩm giúp người dùng hoàn thành (Jobs-to-be-Done) nhanh hơn, ít tốn sức hơn hoặc đáng tin cậy hơn giải pháp cũ.
-              </p>
-            </div>
-          </div>
+            )}
 
-          <div className="p-4 rounded-xl bg-gradient-to-r from-teal-950/60 to-slate-900/60 border border-teal-500/30">
-            <div className="flex items-center gap-2 text-xs font-bold text-teal-300 mb-1">
-              <span>Hàm ý quản trị cốt lõi</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+            <div className="relative rounded-xl overflow-hidden h-44 border border-slate-100">
+              <img 
+                src="/images/mobile-app.jpg" 
+                alt="Smartphone app interface usage" 
+                className="w-full h-full object-cover"
+              />
             </div>
-            <p className="text-xs text-slate-200 leading-relaxed">
-              Một cải tiến nhỏ như <strong>giảm số bước xác nhận</strong> hay <strong>làm rõ thông tin thanh toán</strong> có thể tạo ra giá trị kinh tế lớn hơn mười tính năng trang trí hiện đại nhưng không ai cần.
-            </p>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </div>
   );
 };

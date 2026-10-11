@@ -1,57 +1,25 @@
 import React, { useState } from 'react';
 import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
+import { SectionLabel } from '../ui/SectionLabel';
+import { SpeakerTag } from '../ui/SpeakerTag';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import { Calculator, AlertTriangle, ArrowRight, CheckCircle2, TrendingUp } from 'lucide-react';
+import { AlertTriangle, Calculator } from 'lucide-react';
 
-interface DiffusionModel {
-  id: string;
-  name: string;
-  coreMechanism: string;
-  question: string;
-  strengths: string;
-}
-
-const MODELS: DiffusionModel[] = [
-  {
-    id: "epidemic",
-    name: "1. Mô hình Dịch bệnh (Epidemic)",
-    coreMechanism: "Thông tin lan truyền do tiếp xúc trực tiếp giữa người đã dùng và người chưa dùng.",
-    question: "“Bạn đã nghe ai giới thiệu về sản phẩm này chưa?”",
-    strengths: "Phù hợp giải thích tốc độ lan truyền thông điệp truyền miệng; giả định người dùng đồng nhất."
-  },
-  {
-    id: "bass",
-    name: "2. Mô hình Bass (1969)",
-    coreMechanism: "Phân biệt 2 nhóm: Người tự đổi mới (Hệ số p) và Người bắt chước hiệu ứng xã hội (Hệ số q).",
-    question: "“Bạn mua vì đam mê độc lập hay vì thấy số đông đang dùng?”",
-    strengths: "Ứng dụng rất rộng cho sản phẩm tiêu dùng bền và thiết bị công nghệ."
-  },
-  {
-    id: "probit",
-    name: "3. Mô hình Probit (Ngưỡng chi phí - lợi ích)",
-    coreMechanism: "Mỗi cá nhân có một ngưỡng kinh tế riêng; chỉ mua khi giá giảm hoặc lợi ích vượt ngưỡng.",
-    question: "“Sản phẩm đã giảm giá đủ sâu để bạn chấp nhận chưa?”",
-    strengths: "Giải thích rõ sự không đồng nhất về ngân sách và chi phí cơ hội giữa các cá nhân."
-  },
-  {
-    id: "bayesian",
-    name: "4. Mô hình Bayesian (Học hỏi & Cập nhật niềm tin)",
-    coreMechanism: "Người dùng bắt đầu với nghi ngại, sau đó liên tục cập nhật xác suất khi có thêm dữ liệu trải nghiệm.",
-    question: "“Sau khi thấy bằng chứng thử nghiệm thực tế, bạn đã tin tưởng hơn chưa?”",
-    strengths: "Nhấn mạnh vai trò của bằng chứng xác thực, demo và cam kết độ tin cậy."
-  }
+const MODELS = [
+  { id: "epidemic", name: "1. Dịch bệnh (Epidemic)", desc: "Lan truyền thông tin trực tiếp giữa người đã dùng và người chưa dùng.", q: "“Bạn đã nghe ai giới thiệu chưa?”" },
+  { id: "bass", name: "2. Mô hình Bass (1969)", desc: "Phân biệt nhóm tự đổi mới (p) và nhóm bắt chước chịu ảnh hưởng xã hội (q).", q: "“Bạn mua vì đam mê hay vì thấy số đông?”" },
+  { id: "probit", name: "3. Mô hình Probit", desc: "Mỗi người có ngưỡng chi phí - lợi ích riêng; chỉ mua khi giá giảm hoặc giá trị vượt ngưỡng.", q: "“Giá đã đủ rẻ để bạn mua chưa?”" },
+  { id: "bayesian", name: "4. Mô hình Bayesian", desc: "Người dùng liên tục cập nhật niềm tin xác suất khi có thêm dữ liệu trải nghiệm mới.", q: "“Sau khi thấy demo bạn đã tin chưa?”" },
 ];
 
-// Illustrative Bass diffusion curve data (Clearly labeled simulated)
 const BASS_SIMULATION = [
-  { year: "Năm 1", adopters: 120, cumulative: 120 },
-  { year: "Năm 2", adopters: 350, cumulative: 470 },
-  { year: "Năm 3", adopters: 780, cumulative: 1250 },
-  { year: "Năm 4", adopters: 1100, cumulative: 2350 },
-  { year: "Năm 5", adopters: 850, cumulative: 3200 },
-  { year: "Năm 6", adopters: 420, cumulative: 3620 },
-  { year: "Năm 7", adopters: 180, cumulative: 3800 },
+  { year: "Năm 1", adopters: 120 },
+  { year: "Năm 2", adopters: 350 },
+  { year: "Năm 3", adopters: 780 },
+  { year: "Năm 4", adopters: 1100 },
+  { year: "Năm 5", adopters: 850 },
+  { year: "Năm 6", adopters: 420 },
+  { year: "Năm 7", adopters: 180 },
 ];
 
 export const Slide17: React.FC<{ slide: SlideData }> = ({ slide }) => {
@@ -60,107 +28,98 @@ export const Slide17: React.FC<{ slide: SlideData }> = ({ slide }) => {
   const current = MODELS.find(m => m.id === activeModel) || MODELS[0];
 
   return (
-    <SlideLayout slide={slide} rightBadge="Forecasting Workbench & Case Apple Newton">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-center">
-        {/* Left Column: Interactive Diffusion Model Switcher */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="font-bold text-teal-300">Bốn Mô Hình Phía Cầu (Demand-side Models)</span>
-            <span className="text-[11px] italic">Bấm chọn mô hình để phân tích cơ chế</span>
+    <div className="editorial-container">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <SectionLabel index={17} label="DỰ BÁO NHU CẦU" accent="#4f46e5" />
+        <SpeakerTag name={slide.presenter} time={slide.duration} color="#4f46e5" />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* Left Column: 4 Demand Models & Chart */}
+        <div className="lg:col-span-7 space-y-4">
+          <div>
+            <h2 className="display-lg text-slate-900 leading-tight">
+              Dự Báo Sự Lan Tỏa<br />
+              <span className="text-indigo-700">Của Đổi Mới</span>
+            </h2>
+            <p className="text-sm text-slate-600 mt-2 font-serif italic">
+              Bốn mô hình phía cầu, cơ chế phía cung và bài học dự báo Apple Newton (1993)
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2.5">
             {MODELS.map((m) => {
               const isSelected = activeModel === m.id;
               return (
                 <button
                   key={m.id}
                   onClick={() => setActiveModel(m.id)}
-                  className={`p-3 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between h-20 cursor-pointer ${
+                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-20 ${
                     isSelected
-                      ? 'bg-slate-800 border-teal-400 shadow-md ring-1 ring-teal-400'
-                      : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                      ? 'bg-indigo-50/70 border-indigo-600 ring-2 ring-indigo-500/20 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <span className="text-xs font-bold text-white leading-tight">{m.name}</span>
-                  <span className="text-[10px] text-teal-400 truncate">{m.question}</span>
+                  <span className="text-xs font-bold text-slate-900">{m.name}</span>
+                  <span className="text-[10px] text-indigo-600 font-medium truncate">{m.q}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Model Mechanism Card */}
-          <div className="p-3.5 rounded-xl bg-slate-900/90 border border-teal-500/30 text-xs space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-teal-300">{current.name}</span>
-              <span className="text-[10px] font-mono text-amber-300">Cơ chế toán học</span>
-            </div>
-            <p className="text-[11px] text-slate-200 leading-relaxed">
-              <strong>Bản chất:</strong> {current.coreMechanism}
-            </p>
-            <p className="text-[11px] text-slate-400">
-              <strong>Ý nghĩa:</strong> {current.strengths}
-            </p>
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+            <span className="font-bold text-indigo-900">{current.name}:</span>
+            <p className="text-[11px] text-slate-700 leading-relaxed">{current.desc}</p>
           </div>
 
-          {/* Simulated Diffusion Curve Chart (Strictly labeled) */}
-          <div className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="font-bold text-slate-300 flex items-center gap-1">
-                <TrendingUp className="w-3.5 h-3.5 text-teal-400" /> Minh họa đường cong chấp nhận Bass (Mô phỏng minh họa)
-              </span>
-              <span className="text-[9px] font-mono text-amber-400 bg-amber-950/60 px-1.5 py-0.5 rounded">
-                Dữ liệu mô phỏng giả định
-              </span>
+          {/* Clean Line Chart Simulation */}
+          <div className="chart-wrapper p-3.5">
+            <div className="flex items-center justify-between mb-1 text-[11px]">
+              <span className="font-bold text-slate-800">Minh họa đường cong Bass theo thời gian (Minh họa toán học)</span>
+              <span className="text-[10px] text-slate-400 font-mono">Dữ liệu giả định minh họa</span>
             </div>
             <div className="w-full h-28">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={BASS_SIMULATION}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                   <XAxis dataKey="year" tick={{ fontSize: 9, fill: '#64748b' }} />
                   <YAxis tick={{ fontSize: 9, fill: '#64748b' }} />
-                  <Tooltip contentStyle={{ fontSize: 11, backgroundColor: '#0f172a', borderColor: '#334155' }} />
-                  <Line type="monotone" dataKey="adopters" name="Số người mới/năm" stroke="#209EA6" strokeWidth={2} dot={{ r: 2 }} />
+                  <Tooltip contentStyle={{ fontSize: 11, borderRadius: 8 }} />
+                  <Line type="monotone" dataKey="adopters" name="Số người áp dụng mới" stroke="#4f46e5" strokeWidth={2} dot={{ r: 2 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Apple Newton Case & Funnel Math Example */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-3">
-          {/* Apple Newton Case */}
-          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-amber-400 uppercase flex items-center gap-1">
-                <AlertTriangle className="w-3.5 h-3.5 text-amber-400" /> Bài học Apple Newton (1993)
+        {/* Right Column: Apple Newton Case & Funnel Math */}
+        <div className="lg:col-span-5 space-y-4">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="text-xs font-bold text-amber-700 uppercase font-mono flex items-center gap-1.5">
+                <AlertTriangle className="w-4 h-4 text-amber-600" /> Bài học Apple Newton (1993)
               </span>
-              <span className="text-[10px] font-mono text-slate-400">Sai lệch dự báo</span>
+              <span className="text-[10px] text-slate-500 font-mono">Sai lệch dự báo</span>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Các chuyên gia từng dự báo doanh số Newton đạt <strong>400.000 máy/năm</strong>. Tuy nhiên thực tế chỉ bán được vỏn vẹn <strong>70.000 máy</strong> vì tính năng nhận dạng chữ viết tay bị lỗi và người mua chưa hiểu rõ công dụng giữa sổ tay giấy và laptop.
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Các chuyên gia dự báo doanh số Newton đạt <strong>400.000 máy/năm</strong>. Thực tế chỉ bán được <strong>70.000 máy</strong> vì tính năng nhận dạng chữ viết tay bị lỗi và định vị công dụng chưa rõ. Dự báo phải bắt đầu từ việc xác thực công dụng thật.
             </p>
-            <div className="text-[11px] text-amber-300/90 font-medium">
-              → Dự báo thất bại khi công dụng sản phẩm chưa được người dùng xác thực.
-            </div>
           </div>
 
-          {/* Mathematical Pitfall of Conversion Funnels */}
-          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 text-xs">
-            <div className="flex items-center gap-1.5 text-teal-300 font-bold">
-              <Calculator className="w-4 h-4 text-teal-400" />
-              <span>Cạm bẫy toán học: Mẫu số phễu chuyển đổi</span>
-            </div>
-            <div className="p-2 rounded bg-slate-800 text-[11px] text-slate-200 font-mono space-y-0.5">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2 text-xs">
+            <span className="font-bold text-slate-900 uppercase font-mono flex items-center gap-1.5">
+              <Calculator className="w-4 h-4 text-teal-600" /> Cạm bẫy toán học: Mẫu số phễu chuyển đổi
+            </span>
+            <div className="p-2.5 rounded-lg bg-slate-50 font-mono text-[11px] text-slate-800 space-y-0.5">
               <div>1.000 tiếp cận → 400 đăng ký → 250 hoàn tất</div>
               <div>→ 150 dùng lần đầu → 90 người quay lại lặp lại.</div>
             </div>
-            <p className="text-[11px] text-slate-400 leading-snug">
-              Tỷ lệ quay lại là <strong>60% trên người đã dùng (90/150)</strong> nhưng chỉ là <strong>9% trên tổng số tiếp cận (90/1.000)</strong>. Không được lấy tỷ lệ 60% để phóng đại rằng 60% thị trường đã chấp nhận!
+            <p className="text-[11px] text-slate-600 leading-snug">
+              Tỷ lệ quay lại bằng <strong>60% trên người đã dùng (90/150)</strong> nhưng chỉ là <strong>9% trên tổng số tiếp cận (90/1.000)</strong>. Không được lấy 60% để tuyên bố 60% thị trường đã chấp nhận!
             </p>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </div>
   );
 };

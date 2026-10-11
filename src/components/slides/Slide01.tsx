@@ -1,71 +1,78 @@
 import React from 'react';
 import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { Award, Compass, Layers, Sparkles } from 'lucide-react';
+import { SectionLabel } from '../ui/SectionLabel';
+import { SpeakerTag } from '../ui/SpeakerTag';
+import { ArrowRight, BookOpen, Layers } from 'lucide-react';
 
 export const Slide01: React.FC<{ slide: SlideData }> = ({ slide }) => {
   return (
-    <SlideLayout slide={slide} rightBadge="Khai mạc chương trình">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
-        {/* Left Column: Editorial Information */}
-        <div className="lg:col-span-7 flex flex-col justify-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#147D82]/20 border border-[#147D82]/40 text-[#209EA6] text-xs font-semibold uppercase tracking-wider w-fit">
-            <Sparkles className="w-3.5 h-3.5 text-[#C08755]" />
-            Trường Đại học Ngân hàng TP. Hồ Chí Minh (HUB) • Khoa QTKD
-          </div>
+    <div className="editorial-container">
+      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+        <SectionLabel index={1} label="KHỞI ĐẦU CHỦ ĐỀ" accent="#147D82" />
+        <SpeakerTag name={slide.presenter} time={slide.duration} color="#147D82" />
+      </div>
 
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* Left Editorial Narrative */}
+        <div className="lg:col-span-7 space-y-6">
           <div className="space-y-3">
-            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
-              Đổi Mới Từ Thị Trường
-            </h2>
-            <p className="text-lg md:text-xl text-teal-300 font-medium">
+            <h1 className="display-xl text-slate-900 leading-[1.08]">
+              Đổi Mới<br />
+              <span className="text-[#147D82]">Từ Thị Trường</span>
+            </h1>
+            <p className="text-xl md:text-2xl font-serif text-slate-700 italic">
               Từ công nghệ mới đến giá trị được thị trường chấp nhận
             </p>
-            <p className="text-sm md:text-base text-slate-300 leading-relaxed max-w-xl">
-              "Công nghệ giống như nguyên liệu nấu ăn: nguyên liệu đắt tiền chưa chắc tạo nên món ăn hợp khẩu vị nếu không giải quyết được đúng vấn đề khách hàng đang gặp phải."
-            </p>
           </div>
 
+          <p className="drop-cap text-slate-700 text-base md:text-lg leading-relaxed">
+            Khi nhắc đến đổi mới, chúng ta thường hình dung một phát minh công nghệ vượt trội hoặc một thiết bị hiện đại. Tuy nhiên, tính mới của công nghệ chưa đủ để giải thích vì sao sản phẩm thành công hay thất bại. Công nghệ giống như nguyên liệu nấu ăn: nguyên liệu đắt tiền chưa chắc tạo nên món ăn hợp khẩu vị nếu không giải quyết được vấn đề người dùng đang gặp phải.
+          </p>
+
           <div className="grid grid-cols-3 gap-3 pt-2">
-            <div className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 backdrop-blur-xs">
-              <div className="text-xs text-slate-400 font-medium">Môn học</div>
-              <div className="text-sm font-bold text-white mt-0.5">Quản trị Đổi mới & Sáng tạo</div>
-              <div className="text-[11px] text-teal-400 mt-1 font-mono">MAG323_261_L01</div>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold">Học phần</span>
+              <div className="text-xs font-bold text-slate-900 mt-1">Quản trị Đổi mới & Sáng tạo</div>
+              <div className="text-[10px] text-teal-600 font-mono mt-0.5">MAG323_261_L01</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 backdrop-blur-xs">
-              <div className="text-xs text-slate-400 font-medium">Nhóm thực hiện</div>
-              <div className="text-sm font-bold text-white mt-0.5">Nhóm 4</div>
-              <div className="text-[11px] text-amber-400 mt-1">3 Diễn giả luân phiên</div>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold">Nhóm thực hiện</span>
+              <div className="text-xs font-bold text-slate-900 mt-1">Nhóm 4 · 3 Diễn giả</div>
+              <div className="text-[10px] text-slate-500 mt-0.5">Đại học Ngân hàng TP.HCM</div>
             </div>
-            <div className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 backdrop-blur-xs">
-              <div className="text-xs text-slate-400 font-medium">Giảng viên hướng dẫn</div>
-              <div className="text-sm font-bold text-white mt-0.5">ThS. Nguyễn Thị Thanh</div>
-              <div className="text-[11px] text-slate-400 mt-1">Khoa QTKD · HUB</div>
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+              <span className="text-[11px] font-mono text-slate-400 uppercase font-semibold">Giảng viên hướng dẫn</span>
+              <div className="text-xs font-bold text-slate-900 mt-1">ThS. Nguyễn Thị Thanh</div>
+              <div className="text-[10px] text-slate-500 mt-0.5">Khoa Quản trị Kinh doanh</div>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Hero Visual Image with Editorial Badge */}
-        <div className="lg:col-span-5 relative h-full flex items-center justify-center">
-          <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden shadow-2xl border border-teal-500/30 group">
+        {/* Right High-Impact Documentary Photo Card */}
+        <div className="lg:col-span-5 space-y-3">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-[400px] group">
             <img 
               src="/images/hero-innovation.jpg" 
-              alt="Technology and Innovation Ecosystem" 
+              alt="Technology and Global Network Ecosystem" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#102A43] via-transparent to-transparent opacity-80" />
-            
-            <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-[#102A43]/85 backdrop-blur-md border border-white/10">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#C08755] uppercase tracking-wider">
-                <Compass className="w-3.5 h-3.5" /> Luận điểm trọng tâm
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-5">
+              <div className="text-white space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-teal-300 font-bold">
+                  Luận điểm trung tâm
+                </span>
+                <p className="text-xs leading-snug text-slate-200">
+                  Ưu thế kỹ thuật chỉ chuyển hóa thành lợi thế cạnh tranh khi giải pháp phù hợp với phương thức tiêu dùng và được kiểm chứng qua hành vi thực tế.
+                </p>
               </div>
-              <p className="text-xs text-slate-200 mt-1 leading-snug">
-                Ưu thế kỹ thuật chỉ chuyển hóa thành lợi thế cạnh tranh khi giải pháp phù hợp với phương thức tiêu dùng và được thị trường xác nhận.
-              </p>
             </div>
+          </div>
+          <div className="text-[11px] text-slate-500 font-mono flex items-center justify-between">
+            <span>Tư liệu: NASA Earth Science Archives</span>
+            <span>Chương 6 · Tr. 81–85</span>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </div>
   );
 };
