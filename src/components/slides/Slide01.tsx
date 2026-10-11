@@ -56,7 +56,7 @@ export const Slide01: React.FC = () => {
               <span className="text-xs font-mono font-bold uppercase text-teal-300 tracking-wider">
                 Câu hỏi xuyên suốt bài học
               </span>
-              <h3 className="display-lg text-white text-2xl md:text-3xl font-serif mt-1 leading-snug">
+              <h3 className="display-lg text-white text-2xl md:text-3xl mt-1 leading-snug">
                 “Ai thực sự quyết định sự thành công của một đổi mới?”
               </h3>
               <p className="text-xs text-slate-300 mt-2 font-mono">

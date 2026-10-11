@@ -131,7 +131,7 @@ export const Slide13: React.FC = () => {
             <p className="text-slate-700 leading-relaxed">
               EMI nắm bằng sáng chế đột phá nhưng là một hãng ghi âm/điện tử tiêu dùng, không có hạ tầng dịch vụ y tế. Khi bệnh viện Mỹ đặt mua máy, EMI không thể cung cấp đội ngũ bảo trì tại chỗ trong 24 giờ.
             </p>
-            <div className="p-3 rounded-xl bg-white border border-rose-200 font-serif italic text-rose-900 text-[11px]">
+            <div className="p-3 rounded-xl bg-white border border-rose-200 italic text-rose-900 text-[11px]">
               “GE và Siemens đã đảo ngược thế cờ không phải vì máy quét chụp nét hơn, mà vì họ sở hữu năng lực bổ trợ (complementary assets) hoàn chỉnh trong ngành y tế.”
             </div>
           </div>

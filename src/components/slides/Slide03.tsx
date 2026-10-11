@@ -48,7 +48,7 @@ export const Slide03: React.FC = () => {
   return (
     <EditorialSectionFrame meta={meta}>
       <div className="space-y-6">
-        <p className="text-base text-slate-700 leading-relaxed font-serif max-w-4xl">
+        <p className="text-base text-slate-700 leading-relaxed max-w-4xl">
           Đổi mới không phải là một phát kiến ngẫu hứng hay một sự kiện đơn lẻ. Đó là một <strong>chuỗi năm quyết định quản trị liên kết hữu cơ</strong>: mỗi quyết định phía trước định hình nền tảng cho quyết định tiếp theo, và phản hồi từ thị trường luôn thúc đẩy doanh nghiệp quay lại điều chỉnh thiết kế ban đầu.
         </p>
 

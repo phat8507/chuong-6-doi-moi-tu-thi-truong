@@ -71,7 +71,7 @@ export const Slide21: React.FC = () => {
             CÂU HỎI QUAY VỀ TRẢI NGHIỆM BAN ĐẦU (TIẾP NỐI SECTION 02)
           </div>
 
-          <blockquote className="text-xl md:text-2xl font-serif font-bold text-slate-900 leading-relaxed">
+          <blockquote className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 leading-relaxed">
             “Nếu một ứng dụng công nghệ đạt hàng triệu lượt tải xuống trong tuần đầu, nhưng chỉ một phần rất nhỏ người dùng tiếp tục quay lại sử dụng sau 30 ngày —<br />
             <span className="text-[#147D82] underline decoration-slate-300 underline-offset-8">
               Đổi mới đó đã thực sự thành công hay chưa?

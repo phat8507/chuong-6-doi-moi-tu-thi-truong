@@ -116,7 +116,7 @@ export const ScrollytellingApp: React.FC = () => {
 
       {/* Clean Global Academic Editorial Footer */}
       <footer className="w-full bg-[#f0f0eb] border-t border-slate-200 py-12 px-6 text-center text-xs text-slate-600 space-y-2">
-        <div className="text-sm font-bold text-slate-900 font-serif">
+        <div className="text-sm font-bold text-slate-900">
           Chương 6: Đổi Mới Từ Thị Trường · Quản Trị Đổi Mới và Sáng Tạo
         </div>
         <div>

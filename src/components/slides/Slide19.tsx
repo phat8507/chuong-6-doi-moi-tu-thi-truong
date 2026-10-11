@@ -40,7 +40,7 @@ export const Slide19: React.FC = () => {
             <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
               Quy mô giải ngân 2024
             </span>
-            <div className="text-2xl font-serif font-bold text-teal-800">
+            <div className="text-2xl font-bold tracking-tight text-teal-800">
               &gt; 43.000 <span className="text-sm font-sans font-normal text-slate-600">tỷ VND</span>
             </div>
             <div className="text-[11px] text-emerald-700 font-medium">
@@ -55,7 +55,7 @@ export const Slide19: React.FC = () => {
             <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
               Lợi nhuận trước thuế (LNTT 2024)
             </span>
-            <div className="text-2xl font-serif font-bold text-slate-900">
+            <div className="text-2xl font-bold tracking-tight text-slate-900">
               512 / ~515 <span className="text-sm font-sans font-normal text-slate-600">tỷ VND</span>
             </div>
             <div className="text-[11px] text-slate-600">
@@ -70,7 +70,7 @@ export const Slide19: React.FC = () => {
             <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
               Khối lượng tương tác kênh số
             </span>
-            <div className="text-2xl font-serif font-bold text-indigo-700">
+            <div className="text-2xl font-bold tracking-tight text-indigo-700">
               &gt; 200.000 <span className="text-sm font-sans font-normal text-slate-600">phiên/tháng</span>
             </div>
             <div className="text-[11px] text-slate-600">

@@ -104,7 +104,7 @@ export const Slide20: React.FC = () => {
                     </span>
                     <Icon className={`w-4 h-4 ${isSelected ? 'text-teal-700' : 'text-slate-400'}`} />
                   </div>
-                  <h3 className="text-sm font-bold text-slate-900 font-serif mb-1">
+                  <h3 className="text-sm font-bold text-slate-900 mb-1">
                     {p.title}
                   </h3>
                   <div className="text-[11px] text-teal-700 font-medium mb-2">
@@ -131,7 +131,7 @@ export const Slide20: React.FC = () => {
               <CurrentIcon className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-sm font-bold text-slate-900 font-serif">
+              <div className="text-sm font-bold text-slate-900">
                 Bộ Câu Hỏi Đánh Giá Thẩm Định: {current.title}
               </div>
               <span className="text-[11px] text-teal-700 font-mono">

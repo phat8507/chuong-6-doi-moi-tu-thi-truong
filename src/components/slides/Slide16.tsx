@@ -209,7 +209,7 @@ export const Slide16: React.FC = () => {
         <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-100">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-900 font-serif text-sm">
+              <span className="font-bold text-slate-900 text-sm">
                 {current.name}
               </span>
               <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-teal-100 text-teal-800">
@@ -235,7 +235,7 @@ export const Slide16: React.FC = () => {
               <span className="font-mono font-bold text-teal-950 text-[11px] block">
                 TIẾNG NÓI KHÁCH HÀNG (QUOTE ĐIỂN HÌNH):
               </span>
-              <p className="text-teal-900 font-serif italic leading-relaxed text-[11px]">
+              <p className="text-teal-900 italic leading-relaxed text-[11px]">
                 {current.mindset}
               </p>
             </div>

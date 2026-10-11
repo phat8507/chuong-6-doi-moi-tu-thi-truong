@@ -135,7 +135,7 @@ export const Slide15: React.FC = () => {
                     <CurrentIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-base font-bold text-slate-900 font-serif">
+                    <h3 className="text-base font-bold text-slate-900">
                       {current.name}
                     </h3>
                     <span className="text-[11px] font-mono text-teal-700">

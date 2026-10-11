@@ -109,7 +109,7 @@ export const Slide18: React.FC = () => {
 
             {/* In-depth panel for active pillar */}
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs space-y-3 mt-3">
-              <div className="flex items-center gap-2 text-teal-900 font-bold font-serif text-sm">
+              <div className="flex items-center gap-2 text-teal-900 font-bold text-sm">
                 <CurrentIcon className="w-4 h-4 text-teal-700" />
                 <span>{current.step}. Chi tiết: {current.title}</span>
               </div>

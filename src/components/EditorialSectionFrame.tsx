@@ -19,7 +19,7 @@ export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ me
               {meta.partNumber} / {meta.partTitle}
             </span>
             <span className="text-slate-300 text-xs font-mono">—</span>
-            <span className="text-slate-500 text-xs font-serif italic">
+            <span className="text-slate-500 text-xs font-medium">
               {meta.partTheme}
             </span>
           </div>
@@ -43,7 +43,7 @@ export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ me
           <h2 className="display-lg text-slate-900 mt-0.5 leading-tight tracking-tight">
             {meta.title}
           </h2>
-          <p className="text-base font-serif text-slate-700 italic mt-1 max-w-4xl">
+          <p className="text-base text-slate-600 mt-1 max-w-4xl leading-relaxed">
             {meta.coreMessage}
           </p>
         </div>
