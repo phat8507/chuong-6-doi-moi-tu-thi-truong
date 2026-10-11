@@ -1,8 +1,8 @@
 import React from 'react';
-import { PresentationEngine } from './components/PresentationEngine';
+import { ScrollytellingApp } from './components/ScrollytellingApp';
 
 export function App() {
-  return <PresentationEngine />;
+  return <ScrollytellingApp />;
 }
 
 export default App;
