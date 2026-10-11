@@ -115,21 +115,6 @@ export const ScrollytellingApp: React.FC = () => {
               id={sid}
               className="scroll-mt-16 relative rounded-3xl overflow-hidden border border-slate-800/80 bg-[#0c1825]/90 shadow-2xl transition-all hover:border-slate-700/80"
             >
-              {/* Editorial Section Number Ribbon */}
-              <div className="absolute top-0 right-0 z-20 px-6 py-2 rounded-bl-2xl bg-slate-900/90 border-l border-b border-slate-700/60 flex items-center gap-3 backdrop-blur-md">
-                <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold">
-                  <User className="w-3.5 h-3.5" />
-                  <span>{slide.presenter}</span>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-slate-400 font-mono">
-                  <Clock className="w-3.5 h-3.5 text-teal-400" />
-                  <span>{slide.duration}</span>
-                </div>
-                <span className="font-mono text-xs font-black text-teal-300 bg-teal-950/60 px-2 py-0.5 rounded border border-teal-500/30">
-                  {String(slide.slideNumber).padStart(2, '0')} / 21
-                </span>
-              </div>
-
               {/* Render Section Presentation Content */}
               <div className="min-h-[580px] w-full flex flex-col justify-center">
                 {SlideContent}
