@@ -166,7 +166,7 @@ export const PresentationEngine: React.FC = () => {
     >
       {/* 16:9 Presentation Stage with dynamic viewport scaling */}
       <div 
-        className="relative w-full max-w-[1920px] aspect-16/9 max-h-screen shadow-2xl overflow-hidden bg-[#0c1825] flex flex-col"
+        className="relative w-full max-w-[1920px] aspect-16/9 max-h-screen shadow-2xl overflow-y-auto bg-[#fafaf9] text-[#1a1a2e] flex flex-col"
         onClick={(e) => {
           // Prevent advancing slide when clicking interactive controls
           if ((e.target as HTMLElement).closest('button, a, input, select, svg, .recharts-wrapper')) return;

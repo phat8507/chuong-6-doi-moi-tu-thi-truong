@@ -104,7 +104,7 @@ export const Slide11: React.FC = () => {
           </div>
 
           <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700">
-            <strong>Mạch nói chuyển tiếp:</strong> Doanh nghiệp nên tự đầu tư sản xuất toàn bộ giải pháp hay nhượng quyền sở hữu trí tuệ cho các đối tác?
+            <strong>Câu hỏi chiến lược:</strong> Doanh nghiệp nên tự đầu tư sản xuất toàn bộ giải pháp hay nhượng quyền sở hữu trí tuệ cho các đối tác?
           </div>
         </div>
       </div>

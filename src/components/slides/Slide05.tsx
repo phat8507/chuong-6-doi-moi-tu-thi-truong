@@ -107,7 +107,7 @@ export const Slide05: React.FC = () => {
             />
             <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
               <span className="text-xs text-white">
-                Ảnh tư liệu IDEO: Quan sát người dùng thao tác thật thay vì chỉ phát bảng hỏi
+                Phương pháp IDEO: Quan sát người dùng thao tác thật thay vì chỉ phát bảng hỏi
               </span>
             </div>
           </div>

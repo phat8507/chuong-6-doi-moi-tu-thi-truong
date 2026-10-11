@@ -94,7 +94,7 @@ export const Slide08: React.FC = () => {
             />
             <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
               <span className="text-xs text-white">
-                Ảnh tư liệu: Người mua cùng thu nhập vẫn khác nhau về bối cảnh sống và mục đích sử dụng
+                Bối cảnh thực tế: Người mua cùng thu nhập vẫn khác biệt lớn về lối sống và nhu cầu
               </span>
             </div>
           </div>

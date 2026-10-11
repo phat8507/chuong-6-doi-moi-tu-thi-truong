@@ -62,7 +62,7 @@ export const Slide06: React.FC = () => {
             />
             <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
               <span className="text-xs text-white">
-                Ảnh tư liệu Nokia (Niên đại: 1998 – 2004): Lợi thế kỹ thuật GSM không tự bảo đảm vị thế cạnh tranh vĩnh viễn
+                Nokia (1998 – 2004): Lợi thế kỹ thuật GSM không tự bảo đảm vị thế cạnh tranh vĩnh viễn
               </span>
             </div>
           </div>

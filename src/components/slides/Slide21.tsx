@@ -68,7 +68,7 @@ export const Slide21: React.FC = () => {
         <div className="p-8 rounded-2xl bg-[#fbfbfa] border border-slate-300 shadow-xs space-y-6 text-center max-w-4xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-mono font-bold">
             <HelpCircle className="w-3.5 h-3.5 text-teal-700" />
-            CÂU HỎI QUAY VỀ TRẢI NGHIỆM BAN ĐẦU (TIẾP NỐI SECTION 02)
+            CÂU HỎI TỔNG KẾT
           </div>
 
           <blockquote className="text-xl md:text-2xl font-bold tracking-tight text-slate-900 leading-relaxed">

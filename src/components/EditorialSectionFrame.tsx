@@ -1,6 +1,5 @@
 import React from 'react';
 import { SectionMetadata } from '../data/chapter6Outline';
-import { BookOpen } from 'lucide-react';
 
 interface EditorialSectionFrameProps {
   meta: SectionMetadata;
@@ -10,7 +9,7 @@ interface EditorialSectionFrameProps {
 export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ meta, children }) => {
   return (
     <div className="editorial-container space-y-6">
-      {/* Editorial Header System - Inspired directly by MacroEco_N4_MarketFailure */}
+      {/* Editorial Header System */}
       <div className="border-b border-slate-200 pb-5 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3">
           {/* Section Part Eyebrow */}
@@ -24,14 +23,9 @@ export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ me
             </span>
           </div>
 
-          {/* Clean Speaker Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs text-xs select-none">
-            <span className="w-2 h-2 rounded-full bg-[#147D82]" />
-            <span className="font-semibold text-slate-900">{meta.presenter}</span>
-            <span className="text-slate-300">·</span>
-            <span className="font-mono text-slate-500">{meta.time}</span>
-            <span className="text-slate-300">·</span>
-            <span className="font-mono text-teal-700 font-bold">{meta.transcriptRef}</span>
+          {/* Section Index Marker (Clean & Minimal) */}
+          <div className="font-mono text-xs text-slate-400 font-semibold select-none">
+            {meta.sectionCode} / 21
           </div>
         </div>
 
@@ -64,17 +58,10 @@ export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ me
         {children}
       </div>
 
-      {/* Speech Flow Anchor Footer */}
-      <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600">
-        <div className="flex items-center gap-2">
-          <span className="font-mono font-bold text-teal-800 uppercase text-[10px] bg-teal-50 px-2 py-0.5 rounded border border-teal-200">
-            Mạch nói diễn giả:
-          </span>
-          <span className="italic text-slate-700">{meta.speechFlow}</span>
-        </div>
-        <div className="font-mono text-[11px] text-slate-400">
-          HUB · Quản trị Đổi mới &amp; Sáng tạo
-        </div>
+      {/* Clean Bottom Academic Divider */}
+      <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+        <span>Chương 6: Đổi Mới Từ Thị Trường</span>
+        <span>HUB · Quản trị Đổi mới &amp; Sáng tạo</span>
       </div>
     </div>
   );

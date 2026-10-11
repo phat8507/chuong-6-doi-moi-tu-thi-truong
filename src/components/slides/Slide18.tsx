@@ -147,7 +147,7 @@ export const Slide18: React.FC = () => {
 
             <div className="p-4 bg-slate-50 border-t border-slate-100 text-xs space-y-2">
               <div className="font-bold text-slate-800">
-                Tư liệu: Giao diện trải nghiệm ứng dụng tiêu dùng
+                Giao diện trải nghiệm ứng dụng số FE ONLINE 2.0
               </div>
               <p className="text-slate-600 leading-relaxed text-[11px]">
                 Nguồn: Báo cáo thường niên VPBank &amp; Tư liệu công bố ứng dụng FE ONLINE 2.0. Số hóa giúp tối ưu hóa điểm chạm khách hàng từ đăng ký, ký hợp đồng điện tử đến thanh toán định kỳ.

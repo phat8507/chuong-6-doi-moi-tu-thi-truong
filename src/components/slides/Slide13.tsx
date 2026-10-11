@@ -52,12 +52,12 @@ export const Slide13: React.FC = () => {
                 className="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-500"
               />
               <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md px-2.5 py-1 rounded text-[10px] font-mono text-white">
-                NIÊN ĐẠI 1972 · PHÁT MINH CT SCANNER
+                MÁY CHỤP CT SCANNER (1972)
               </div>
             </div>
             <div className="p-4 bg-slate-50 border-t border-slate-100 text-xs space-y-1.5">
               <div className="font-bold text-slate-800">
-                Tư liệu: Máy chụp cắt lớp vi tính (CT Scanner)
+                Hệ thống máy chụp cắt lớp vi tính (CT Scanner)
               </div>
               <p className="text-slate-600 leading-relaxed text-[11px]">
                 Nguồn: Lịch sử Đổi mới Công nghệ Y tế. Godfrey Hounsfield (EMI) nhận giải Nobel Y học 1979 cho phát minh này, nhưng doanh nghiệp lại thất bại thương mại hoàn toàn.

@@ -51,11 +51,8 @@ export const Slide01: React.FC = () => {
               alt="Real person adopting technology product in real life" 
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
-            {/* Bold Typography Overlay as requested in visualSpec */}
+            {/* Bold Typography Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex flex-col justify-end p-6">
-              <span className="text-xs font-mono font-bold uppercase text-teal-300 tracking-wider">
-                Câu hỏi xuyên suốt bài học
-              </span>
               <h3 className="display-lg text-white text-2xl md:text-3xl mt-1 leading-snug">
                 “Ai thực sự quyết định sự thành công của một đổi mới?”
               </h3>
@@ -63,10 +60,6 @@ export const Slide01: React.FC = () => {
                 Không phải kỹ sư phòng Lab — mà chính là Người dùng trên thị trường.
               </p>
             </div>
-          </div>
-          <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
-            <span>Tư liệu: Unsplash Verified License (Ảnh chụp người thật)</span>
-            <span>Chương 6 · Tr. 81–85</span>
           </div>
         </div>
       </div>
