@@ -14,20 +14,20 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
   const scrollProgress = useScrollProgress();
   const navContainerRef = useRef<HTMLDivElement>(null);
 
-  const [currentFont, setCurrentFont] = useState<'vietnam' | 'jakarta' | 'lora'>('vietnam');
+  const [currentFont, setCurrentFont] = useState<'inter' | 'jakarta' | 'montserrat' | 'vietnam'>('inter');
   const [showFontMenu, setShowFontMenu] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('chapter6_font') as 'vietnam' | 'jakarta' | 'lora';
+    const saved = localStorage.getItem('chapter6_font') as 'inter' | 'jakarta' | 'montserrat' | 'vietnam';
     if (saved) {
       setCurrentFont(saved);
       document.documentElement.setAttribute('data-font', saved);
     } else {
-      document.documentElement.setAttribute('data-font', 'vietnam');
+      document.documentElement.setAttribute('data-font', 'inter');
     }
   }, []);
 
-  const changeFont = (font: 'vietnam' | 'jakarta' | 'lora') => {
+  const changeFont = (font: 'inter' | 'jakarta' | 'montserrat' | 'vietnam') => {
     setCurrentFont(font);
     localStorage.setItem('chapter6_font', font);
     document.documentElement.setAttribute('data-font', font);
@@ -42,9 +42,10 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
   };
 
   const fontLabels = {
-    vietnam: 'Be Vietnam Pro',
-    jakarta: 'Plus Jakarta Sans',
-    lora: 'Lora Editorial'
+    inter: 'Inter',
+    jakarta: 'Plus Jakarta',
+    montserrat: 'Montserrat',
+    vietnam: 'Be Vietnam'
   };
 
   return (
@@ -102,18 +103,18 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
             </button>
 
             {showFontMenu && (
-              <div className="absolute right-0 top-full mt-1.5 w-48 bg-white border border-slate-200 rounded-xl shadow-xl p-1 z-50 text-xs">
+              <div className="absolute right-0 top-full mt-1.5 w-52 bg-white border border-slate-200 rounded-xl shadow-xl p-1 z-50 text-xs">
                 <div className="px-2.5 py-1 text-[10px] font-mono text-slate-400 uppercase font-bold border-b border-slate-100 mb-1">
-                  Chọn font chữ:
+                  Chọn font toàn bộ trang:
                 </div>
                 <button
-                  onClick={() => changeFont('vietnam')}
+                  onClick={() => changeFont('inter')}
                   className={`w-full text-left px-2.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-between ${
-                    currentFont === 'vietnam' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                    currentFont === 'inter' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <span>Be Vietnam Pro</span>
-                  <span className="text-[10px] text-teal-600 font-mono">Chuẩn</span>
+                  <span style={{ fontFamily: 'Inter, sans-serif' }}>Inter</span>
+                  <span className="text-[10px] text-teal-700 font-mono">Mặc định</span>
                 </button>
                 <button
                   onClick={() => changeFont('jakarta')}
@@ -121,17 +122,26 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
                     currentFont === 'jakarta' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <span>Plus Jakarta Sans</span>
+                  <span style={{ fontFamily: 'Plus Jakarta Sans, sans-serif' }}>Plus Jakarta Sans</span>
                   <span className="text-[10px] text-slate-400 font-mono">Hiện đại</span>
                 </button>
                 <button
-                  onClick={() => changeFont('lora')}
+                  onClick={() => changeFont('montserrat')}
                   className={`w-full text-left px-2.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-between ${
-                    currentFont === 'lora' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                    currentFont === 'montserrat' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
-                  <span style={{ fontFamily: 'Lora, serif' }}>Lora Editorial</span>
-                  <span className="text-[10px] text-slate-400 font-mono">Báo chí</span>
+                  <span style={{ fontFamily: 'Montserrat, sans-serif' }}>Montserrat</span>
+                  <span className="text-[10px] text-slate-400 font-mono">Đậm đà</span>
+                </button>
+                <button
+                  onClick={() => changeFont('vietnam')}
+                  className={`w-full text-left px-2.5 py-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-between ${
+                    currentFont === 'vietnam' ? 'bg-teal-50 text-teal-800 font-bold' : 'text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <span style={{ fontFamily: 'Be Vietnam Pro, sans-serif' }}>Be Vietnam Pro</span>
+                  <span className="text-[10px] text-slate-400 font-mono">Việt ngữ</span>
                 </button>
               </div>
             )}

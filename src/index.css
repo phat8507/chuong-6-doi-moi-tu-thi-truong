@@ -1,23 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --font-base: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-  --font-serif-safe: 'Lora', 'Be Vietnam Pro', serif;
+  --font-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif-safe: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-font="inter"] {
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+[data-font="jakarta"] {
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-base: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+[data-font="montserrat"] {
+  --font-heading: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-base: 'Montserrat', system-ui, -apple-system, sans-serif;
 }
 
 [data-font="vietnam"] {
   --font-heading: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-  --font-base: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-}
-
-[data-font="jakarta"] {
-  --font-heading: 'Plus Jakarta Sans', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-  --font-base: 'Plus Jakarta Sans', 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
-}
-
-[data-font="lora"] {
-  --font-heading: 'Lora', 'Be Vietnam Pro', serif;
   --font-base: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
 }
 
