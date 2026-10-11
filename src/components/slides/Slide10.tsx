@@ -1,143 +1,134 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SectionLabel } from '../ui/SectionLabel';
-import { SpeakerTag } from '../ui/SpeakerTag';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
 
-interface StrategyDirection {
+interface Branch {
   id: number;
-  title: string;
-  subtitle: string;
-  mechanism: string;
-  bicycleAnalogy: string;
+  name: string;
+  type: string;
+  example: string;
+  jtbdNote: string;
 }
 
-const STRATEGIES: StrategyDirection[] = [
+const BRANCHES: Branch[] = [
   {
     id: 1,
-    title: "1. Thêm tính năng cho phân khúc hiện tại",
-    subtitle: "Cải tiến liên tục trên nền tảng quen thuộc",
-    mechanism: "Tăng giá trị sử dụng cho nhóm khách hàng trung thành hiện có.",
-    bicycleAnalogy: "Lắp thêm đồng hồ đo tốc độ và giỏ chở đồ cho mẫu xe đạp phố hiện có."
+    name: "1. Thêm tính năng cho phân khúc hiện tại",
+    type: "Đổi mới duy trì (Sustaining)",
+    example: "Lắp thêm đồng hồ đo tốc độ điện tử và giỏ chở đồ cho mẫu xe đạp phố quen thuộc.",
+    jtbdNote: "Giải quyết việc di chuyển thường ngày tiện lợi hơn mà không thay đổi thói quen của khách hàng hiện tại."
   },
   {
     id: 2,
-    title: "2. Mở rộng lên phân khúc cao hơn (Upmarket)",
-    subtitle: "Tiếp cận khách hàng cao cấp & biên lợi nhuận cao",
-    mechanism: "Nâng chuẩn chất lượng vật liệu, dịch vụ đặc quyền và thương hiệu uy tín.",
-    bicycleAnalogy: "Sản xuất dòng xe đua chuyên nghiệp khung sườn carbon siêu nhẹ cho vận động viên."
+    name: "2. Mở rộng lên phân khúc cao hơn (Upmarket)",
+    type: "Đổi mới duy trì cao cấp",
+    example: "Sản xuất dòng xe đua chuyên nghiệp khung sườn carbon siêu nhẹ cho vận động viên.",
+    jtbdNote: "Đáp ứng công việc 'tối ưu tốc độ và thành tích thi đấu đỉnh cao' của người dùng chuyên nghiệp."
   },
   {
     id: 3,
-    title: "3. Chuyển xuống phân khúc thấp hơn (Downmarket)",
-    subtitle: "Mở rộng thị phần & tiếp cận nhóm chưa được phục vụ",
-    mechanism: "Đơn giản hóa cấu hình để giảm giá bán, hướng tới người dùng nhạy cảm về giá.",
-    bicycleAnalogy: "Sản xuất mẫu xe đạp cơ bản tối giản cho học sinh với giá thành cực thấp."
+    name: "3. Chuyển xuống phân khúc thấp hơn (Downmarket)",
+    type: "Đổi mới gián đoạn (Disruptive)",
+    example: "Sản xuất mẫu xe đạp cơ bản tối giản cho học sinh nông thôn với giá thành rẻ nhất có thể.",
+    jtbdNote: "Xóa bỏ rào cản tài chính để phục vụ trạng thái 'không tiêu dùng' (người chưa đủ tiền mua xe đắt)."
   },
   {
     id: 4,
-    title: "4. Bổ sung tính năng tùy chọn (Special Options)",
-    subtitle: "Cá nhân hóa theo kênh bán hoặc khách hàng đặc biệt",
-    mechanism: "Linh hoạt hóa sản phẩm theo từng nhóm người dùng ngách hoặc hợp đồng riêng.",
-    bicycleAnalogy: "Bán tùy chọn thêm ghế trẻ em an toàn hoặc bộ líp leo đèo dốc cho nhóm phượt thủ."
+    name: "4. Bổ sung tính năng tùy chọn (Special Options)",
+    type: "Cá nhân hóa theo ngách",
+    example: "Bán tùy chọn thêm ghế em bé an toàn hoặc bộ líp leo đèo dốc cho nhóm phượt thủ đường dài.",
+    jtbdNote: "Linh hoạt hóa sản phẩm để người dùng tự ghép giải pháp cho công việc đặc thù của riêng mình."
   },
   {
     id: 5,
-    title: "5. Sản phẩm hỗn hợp từ lõi công nghệ (Hybrid)",
-    subtitle: "Tận dụng các cấu phần và kiến trúc sẵn có",
-    mechanism: "Tái kết hợp module công nghệ giữa các dòng sản phẩm để tạo giải pháp lai mới lạ.",
-    bicycleAnalogy: "Kết hợp khung xe đạp truyền thống với động cơ trợ lực điện và pin tháo rời (E-bike)."
+    name: "5. Sản phẩm hỗn hợp từ lõi công nghệ (Hybrid)",
+    type: "Tái kết hợp kiến trúc",
+    example: "Kết hợp khung xe đạp cơ khí truyền thống với động cơ trợ lực điện và pin tháo rời (E-bike).",
+    jtbdNote: "Tạo ra một công việc hoàn toàn mới: vừa rèn luyện thể thao vừa không bị kiệt sức khi đi làm xa."
   }
 ];
 
-export const Slide10: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [selectedDirection, setSelectedDirection] = useState<number>(0);
+export const Slide10: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[9];
+  const [selectedBranch, setSelectedBranch] = useState<number>(0);
 
-  const current = STRATEGIES[selectedDirection];
+  const current = BRANCHES[selectedBranch];
 
   return (
-    <div className="editorial-container">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <SectionLabel index={10} label="CHIẾN LƯỢC SẢN PHẨM" accent="#7c3aed" />
-        <SpeakerTag name={slide.presenter} time={slide.duration} color="#7c3aed" />
-      </div>
-
+    <EditorialSectionFrame meta={meta}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        {/* Left Column: 5 Directions */}
+        {/* Left Column: 5-Branch Strategy Tree */}
         <div className="lg:col-span-7 space-y-4">
-          <div>
-            <h2 className="display-lg text-slate-900 leading-tight">
-              Năm Hướng Phát Triển<br />
-              <span className="text-violet-700">Sản Phẩm Chiến Lược</span>
-            </h2>
-            <p className="text-sm text-slate-600 mt-2 font-serif italic">
-              Từ một thiết kế cốt lõi đến mở rộng phân khúc và công việc cần hoàn thành (JTBD)
-            </p>
-          </div>
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
+              Cây chiến lược 5 nhánh từ một sản phẩm cốt lõi (Nhấp từng nhánh để hiện minh họa):
+            </span>
 
-          <div className="space-y-2">
-            {STRATEGIES.map((item, idx) => {
-              const isSelected = selectedDirection === idx;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedDirection(idx)}
-                  className={`w-full p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
-                    isSelected
-                      ? 'bg-violet-50/70 border-violet-600 ring-2 ring-violet-500/20 shadow-xs'
-                      : 'bg-white border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-900">{item.title}</div>
-                    <div className="text-[11px] text-slate-500">{item.subtitle}</div>
-                  </div>
-                  <span className={`text-[10px] font-semibold ${isSelected ? 'text-violet-700' : 'text-slate-400'}`}>
-                    Xem ví dụ →
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+            <div className="space-y-2">
+              {BRANCHES.map((b, idx) => {
+                const isSelected = selectedBranch === idx;
+                return (
+                  <button
+                    key={b.id}
+                    onClick={() => setSelectedBranch(idx)}
+                    className={`w-full p-3 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                      isSelected
+                        ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <div>
+                      <div className="text-xs font-bold text-slate-900">{b.name}</div>
+                      <span className="text-[10px] text-teal-700 font-mono font-semibold">{b.type}</span>
+                    </div>
+                    <span className={`text-[10px] font-semibold ${isSelected ? 'text-teal-700' : 'text-slate-400'}`}>
+                      Xem ví dụ &amp; JTBD →
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
 
-          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs text-xs space-y-2">
-            <span className="font-bold text-violet-900 uppercase font-mono">{current.title}:</span>
-            <p className="text-slate-700 leading-relaxed text-[11px]">{current.mechanism}</p>
-            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 text-[11px] text-slate-800">
-              🚲 <strong>Ẩn dụ xe đạp:</strong> {current.bicycleAnalogy}
+            {/* Revealed Branch Card */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-teal-900 uppercase font-mono">{current.name}</span>
+                <span className="text-[10px] bg-teal-100 text-teal-800 px-2 py-0.5 rounded font-mono font-semibold">{current.type}</span>
+              </div>
+              <div className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-800 text-[11px]">
+                🚲 <strong>Minh họa thực tế:</strong> {current.example}
+              </div>
+              <p className="text-[11px] text-slate-600 leading-relaxed">
+                🎯 <strong>Liên hệ Công việc cần hoàn thành (JTBD):</strong> {current.jtbdNote}
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Sustaining vs Disruptive Innovation & JTBD */}
+        {/* Right Column: Sustaining vs Disruptive Annotation & Section Bridge */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-            <span className="text-xs font-bold text-slate-900 uppercase font-mono">
-              Đổi mới Duy trì vs Đổi mới Gián đoạn (Christensen)
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3 text-xs">
+            <span className="font-bold text-slate-900 uppercase font-mono">
+              Chú thích phân biệt: Duy trì vs Gián đoạn
             </span>
-            <div className="space-y-2 text-xs">
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="font-bold text-teal-800">Đổi mới duy trì (Sustaining):</span>
-                <p className="text-slate-600 text-[11px] mt-0.5 leading-snug">
-                  Cải tiến chức năng cho phân khúc không đổi; phục vụ người mua quen thuộc.
-                </p>
-              </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="font-bold text-amber-800">Đổi mới gián đoạn (Disruptive):</span>
-                <p className="text-slate-600 text-[11px] mt-0.5 leading-snug">
-                  Mở ra thị trường mới bằng giải pháp đơn giản, thuận tiện, vừa túi tiền hơn (Southwest, QuickBooks).
-                </p>
-              </div>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <strong className="text-teal-800 block">Đổi mới duy trì (Sustaining):</strong>
+              <p className="text-slate-600 text-[11px]">Cải tiến tính năng cho phân khúc không đổi; phục vụ nhóm khách hàng hiện tại của doanh nghiệp dẫn đầu.</p>
+            </div>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <strong className="text-amber-800 block">Đổi mới gián đoạn (Disruptive):</strong>
+              <p className="text-slate-600 text-[11px]">Mở ra phân khúc mới hoặc xóa bỏ trạng thái không tiêu dùng bằng sản phẩm rẻ hơn, tiện lợi hơn (Southwest, QuickBooks).</p>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-violet-50/60 border border-violet-200 text-xs text-slate-800 space-y-1">
-            <span className="font-bold text-violet-900">Công việc khách hàng cần hoàn thành (JTBD):</span>
-            <p className="text-[11px] leading-relaxed text-slate-700">
-              Khách hàng không mua mũi khoan vì muốn cái mũi khoan; họ mua vì cần một cái lỗ trên tường để treo bức tranh gia đình.
+          <div className="p-4 rounded-xl bg-teal-50/70 border border-teal-200 text-xs text-teal-950 space-y-1">
+            <strong>Vấn đề tiếp theo của chuỗi quản trị:</strong>
+            <p className="text-[11px] leading-relaxed">
+              Sản phẩm sau khi thiết kế xong theo đúng hướng chiến lược liệu đã bán được ngay chưa? Hay vẫn cần một hệ thống thương mại hóa đi kèm?
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </EditorialSectionFrame>
   );
 };

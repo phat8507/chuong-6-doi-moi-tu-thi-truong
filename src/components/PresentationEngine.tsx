@@ -28,7 +28,7 @@ import { Slide19 } from './slides/Slide19';
 import { Slide20 } from './slides/Slide20';
 import { Slide21 } from './slides/Slide21';
 
-const SLIDE_COMPONENTS: Record<number, React.FC<{ slide: SlideData }>> = {
+const SLIDE_COMPONENTS: Record<number, React.FC<any>> = {
   1: Slide01,
   2: Slide02,
   3: Slide03,

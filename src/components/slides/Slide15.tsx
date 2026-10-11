@@ -1,114 +1,197 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SectionLabel } from '../ui/SectionLabel';
-import { SpeakerTag } from '../ui/SpeakerTag';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
+import { Zap, Puzzle, BrainCircuit, Eye, PlayCircle, ArrowRight } from 'lucide-react';
 
 interface RogerAttribute {
   id: string;
   name: string;
+  shortTag: string;
+  correlation: 'positive' | 'negative';
+  icon: any;
   desc: string;
-  ebikeExample: string;
-  impact: string;
+  academicDef: string;
+  realExample: string;
+  diffusionImpact: string;
 }
 
 const ROGERS_ATTRIBUTES: RogerAttribute[] = [
   {
-    id: "relative-advantage",
-    name: "1. Lợi thế tương đối",
-    desc: "Mức độ mà giải pháp mới được nhận thấy là tốt hơn phương án cũ về kinh tế, thuận tiện hoặc danh tiếng.",
-    ebikeExample: "Đi nhanh hơn xe đạp thường, không tốn sức ngược gió, tiết kiệm tiền xăng so với xe máy.",
-    impact: "Tương quan thuận chiều mạnh nhất với tốc độ lan tỏa."
+    id: 'relative-advantage',
+    name: '1. Lợi thế tương đối',
+    shortTag: 'Lợi thế',
+    correlation: 'positive',
+    icon: Zap,
+    academicDef: 'Mức độ giải pháp mới được nhận thức là ưu việt hơn các giải pháp thay thế tiền nhiệm (về kinh tế, thời gian, sự tiện lợi).',
+    desc: 'Khách hàng không mua công nghệ mới nếu nó không giải quyết được vấn đề cũ nhanh hơn, rẻ hơn hoặc thỏa mãn hơn đáng kể.',
+    realExample: 'Xe đạp điện: Đi nhanh hơn xe đạp cơ truyền thống khi ngược gió, tiết kiệm 80% chi phí xăng so với xe máy số.',
+    diffusionImpact: 'Tương quan thuận chiều mạnh nhất với tốc độ lan tỏa. Nếu không có lợi thế rõ rệt, người dùng sẽ không đổi thói quen.'
   },
   {
-    id: "compatibility",
-    name: "2. Tính tương thích",
-    desc: "Mức độ phù hợp với giá trị, niềm tin, kinh nghiệm đã có và thói quen sinh hoạt hiện tại.",
-    ebikeExample: "Có chỗ cắm sạc thuận tiện tại bãi xe, vừa làn đường hiện hữu, dễ gửi xe.",
-    impact: "Nếu không tương thích với hạ tầng, sản phẩm sẽ lan tỏa rất chậm."
+    id: 'compatibility',
+    name: '2. Tính tương thích',
+    shortTag: 'Tương thích',
+    correlation: 'positive',
+    icon: Puzzle,
+    academicDef: 'Mức độ phù hợp với hệ giá trị văn hóa, kinh nghiệm quá khứ và thói quen sinh hoạt hiện tại của người dùng tiềm năng.',
+    desc: 'Sản phẩm dù tốt đến đâu nhưng bắt người dùng đảo lộn toàn bộ lối sống hay hạ tầng thì tốc độ chấp nhận sẽ cực kỳ chậm.',
+    realExample: 'Xe đạp điện: Vừa vặn làn xe đạp/xe máy hiện có tại đô thị, cắm sạc trực tiếp tại ổ cắm gia đình 220V mà không cần trạm sạc đặc thù.',
+    diffusionImpact: 'Tương quan thuận. Đòi hỏi thay đổi văn hóa càng ít thì quá trình lan tỏa càng diễn ra nhanh chóng.'
   },
   {
-    id: "complexity",
-    name: "3. Độ phức tạp",
-    desc: "Mức độ khó khăn cảm nhận trong việc thấu hiểu và sử dụng đổi mới.",
-    ebikeExample: "Bảng điều khiển dễ hiểu, chỉ vặn ga là chạy, không đòi hỏi kỹ năng bảo trì điện phức tạp.",
-    impact: "Tương quan nghịch chiều: càng phức tạp chi phí học cách dùng càng lớn."
+    id: 'complexity',
+    name: '3. Độ phức tạp',
+    shortTag: 'Độ phức tạp',
+    correlation: 'negative',
+    icon: BrainCircuit,
+    academicDef: 'Mức độ khó khăn cảm nhận trong việc hiểu cách vận hành và sử dụng công nghệ đổi mới.',
+    desc: 'Thuộc tính DUY NHẤT có tác động nghịch chiều. Càng đòi hỏi đọc tài liệu hướng dẫn dài dòng, người dùng càng dễ nản lòng và từ bỏ.',
+    realExample: 'Xe đạp điện: Bảng điều khiển tối giản chỉ hiển thị mức pin và nút bấm ga đơn giản như xe đạp thường, không đòi hỏi đào tạo phức tạp.',
+    diffusionImpact: 'Tương quan NGHỊCH CHIỀU. Giảm độ phức tạp tương đương với việc tháo gỡ rào cản nhận thức lớn nhất của khách hàng.'
   },
   {
-    id: "trialability",
-    name: "4. Khả năng dùng thử",
-    desc: "Mức độ mà đổi mới có thể được trải nghiệm ở quy mô nhỏ trước khi cam kết mua.",
-    ebikeExample: "Cho khách hàng mượn chạy thử một vòng quanh công viên trước khi thanh toán.",
-    impact: "Giảm mạnh rủi ro cảm nhận và đẩy nhanh quyết định mua."
+    id: 'trialability',
+    name: '4. Khả năng dùng thử',
+    shortTag: 'Dùng thử',
+    correlation: 'positive',
+    icon: PlayCircle,
+    academicDef: 'Mức độ mà một đổi mới có thể được thử nghiệm ở quy mô giới hạn mà không phải trả giá bằng cam kết tài chính lớn.',
+    desc: 'Khả năng cho phép người mua trải nghiệm trước giải tỏa cảm giác bấp bênh và rủi ro tâm lý khi tiếp cận cái mới.',
+    realExample: 'Xe đạp điện: Đại lý cho khách hàng đạp thử một vòng quanh khuôn viên hoặc chính sách đổi trả miễn phí trong 7 ngày đầu.',
+    diffusionImpact: 'Tương quan thuận. Đặc biệt quan trọng đối với nhóm người chấp nhận sớm (Early Adopters) để ra quyết định nhanh hơn.'
   },
   {
-    id: "observability",
-    name: "5. Khả năng quan sát",
-    desc: "Mức độ mà kết quả hoặc hình ảnh sử dụng đổi mới có thể dễ dàng được người khác nhìn thấy.",
-    ebikeExample: "Nhìn thấy bạn bè trong lớp đi xe đạp điện an toàn, đẹp mắt mỗi ngày.",
-    impact: "Kích hoạt hiệu ứng truyền miệng và thúc đẩy đám đông bắt chước."
+    id: 'observability',
+    name: '5. Khả năng quan sát',
+    shortTag: 'Quan sát',
+    correlation: 'positive',
+    icon: Eye,
+    academicDef: 'Mức độ mà kết quả và lợi ích của việc sử dụng đổi mới có thể được những người xung quanh nhìn thấy trực quan.',
+    desc: 'Tính hữu hình kích hoạt hiệu ứng truyền miệng tự nhiên và sự kích thích xã hội trong cộng đồng.',
+    realExample: 'Xe đạp điện: Bạn bè cùng trường thấy bạn mình đi xe lướt nhẹ êm ái, màu sắc trẻ trung, không tiếng ồn động cơ và không khói bụi.',
+    diffusionImpact: 'Tương quan thuận. Thúc đẩy hiệu ứng mạng lưới (network effects) và tâm lý bắt chước của đa số người dùng.'
   }
 ];
 
-export const Slide15: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [selectedAttr, setSelectedAttr] = useState<string>("relative-advantage");
+export const Slide15: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[14];
+  const [selectedId, setSelectedId] = useState<string>('relative-advantage');
 
-  const current = ROGERS_ATTRIBUTES.find(a => a.id === selectedAttr) || ROGERS_ATTRIBUTES[0];
+  const current = ROGERS_ATTRIBUTES.find(a => a.id === selectedId) || ROGERS_ATTRIBUTES[0];
+  const CurrentIcon = current.icon;
 
   return (
-    <div className="editorial-container">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <SectionLabel index={15} label="LAN TỎA ĐỔI MỚI" accent="#0d9488" />
-        <SpeakerTag name={slide.presenter} time={slide.duration} color="#0d9488" />
-      </div>
-
+    <EditorialSectionFrame meta={meta}>
       <div className="space-y-6">
-        <div>
-          <h2 className="display-lg text-slate-900 leading-tight">
-            Năm Đặc Điểm Quyết Định<br />
-            <span className="text-teal-700">Tốc Độ Lan Tỏa Của Đổi Mới</span>
-          </h2>
-          <p className="text-sm text-slate-600 mt-2 font-serif italic">
-            Khung lý thuyết kinh điển của Rogers (2003) và phương pháp ghi nhớ qua ví dụ xe đạp điện
-          </p>
-        </div>
+        {/* Revolving Attributes Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Left Orbit Switcher: 5 attributes */}
+          <div className="lg:col-span-5 space-y-2">
+            <span className="text-xs font-mono uppercase font-bold text-slate-500 block mb-2">
+              Mô Hình Everett Rogers (1995) · Chọn thuộc tính:
+            </span>
+            {ROGERS_ATTRIBUTES.map((attr) => {
+              const Icon = attr.icon;
+              const isSelected = selectedId === attr.id;
+              return (
+                <button
+                  key={attr.id}
+                  onClick={() => setSelectedId(attr.id)}
+                  className={`w-full p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                    isSelected
+                      ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 rounded-lg ${
+                      isSelected ? 'bg-teal-700 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-slate-900">{attr.name}</div>
+                      <div className="text-[11px] text-slate-500 line-clamp-1">{attr.desc}</div>
+                    </div>
+                  </div>
+                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
+                    attr.correlation === 'positive'
+                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                      : 'bg-rose-50 text-rose-700 border border-rose-200'
+                  }`}>
+                    {attr.correlation === 'positive' ? '+ Thuận chiều' : '− Nghịch chiều'}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-        {/* 5 Attribute Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
-          {ROGERS_ATTRIBUTES.map((attr) => {
-            const isSelected = selectedAttr === attr.id;
-            return (
-              <button
-                key={attr.id}
-                onClick={() => setSelectedAttr(attr.id)}
-                className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-32 ${
-                  isSelected
-                    ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
-                    : 'bg-white border-slate-200 hover:border-slate-300'
-                }`}
-              >
-                <span className="text-xs font-bold text-slate-900 leading-snug">{attr.name}</span>
-                <span className="text-[10px] text-teal-700 font-semibold mt-2">Xem chi tiết →</span>
-              </button>
-            );
-          })}
-        </div>
+          {/* Right: Central Product Focus & Real-world Deep Dive */}
+          <div className="lg:col-span-7 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-xl bg-teal-800 text-white shadow-xs">
+                    <CurrentIcon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900 font-serif">
+                      {current.name}
+                    </h3>
+                    <span className="text-[11px] font-mono text-teal-700">
+                      Tác động tới tỷ lệ chấp nhận thị trường
+                    </span>
+                  </div>
+                </div>
 
-        {/* Selected Attribute Detail Box */}
-        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <span className="text-xs font-bold text-teal-800 uppercase font-mono">{current.name}:</span>
-            <p className="text-xs text-slate-700 leading-relaxed">{current.desc}</p>
-            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 text-xs text-slate-800">
-              ⚡ <strong>Ẩn dụ xe đạp điện:</strong> {current.ebikeExample}
+                <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full ${
+                  current.correlation === 'positive'
+                    ? 'bg-emerald-100 text-emerald-800'
+                    : 'bg-rose-100 text-rose-800'
+                }`}>
+                  {current.correlation === 'positive' ? 'Thúc đẩy lan tỏa' : 'Rào cản cản trở'}
+                </span>
+              </div>
+
+              {/* Academic definition */}
+              <div className="space-y-1.5 text-xs">
+                <div className="font-bold text-slate-700 font-mono text-[11px]">
+                  ĐỊNH NGHĨA HỌC THUẬT:
+                </div>
+                <p className="text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">
+                  {current.academicDef}
+                </p>
+              </div>
+
+              {/* Real World Product Illustration (E-bike & Fintech) */}
+              <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-200 text-xs space-y-1.5">
+                <div className="font-bold text-teal-950 font-mono text-[11px] flex items-center gap-1.5">
+                  <ArrowRight className="w-3.5 h-3.5 text-teal-700" />
+                  VÍ DỤ GẦN GŨI (XE ĐẠP ĐIỆN ĐÔ THỊ):
+                </div>
+                <p className="text-teal-900 leading-relaxed font-medium">
+                  {current.realExample}
+                </p>
+              </div>
+
+              {/* Diffusion Impact */}
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
+                <div className="font-bold text-slate-800 font-mono text-[11px]">
+                  Ý NGHĨA CHO ĐƯỜNG CONG LAN TỎA (S-CURVE):
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {current.diffusionImpact}
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom Citation */}
+            <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-400 font-mono">
+              Nguồn: Everett M. Rogers, Diffusion of Innovations (Free Press, tái bản).
             </div>
           </div>
-
-          <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-200 shrink-0 max-w-xs space-y-1 text-xs">
-            <span className="font-bold text-teal-900">Tác động lan tỏa:</span>
-            <p className="text-slate-700 text-[11px] leading-snug">{current.impact}</p>
-          </div>
         </div>
       </div>
-    </div>
+    </EditorialSectionFrame>
   );
 };

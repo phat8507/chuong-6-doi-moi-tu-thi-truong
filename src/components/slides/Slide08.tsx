@@ -1,104 +1,115 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SectionLabel } from '../ui/SectionLabel';
-import { SpeakerTag } from '../ui/SpeakerTag';
-import { AlertCircle } from 'lucide-react';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
 
-export const Slide08: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [selectedProfile, setSelectedProfile] = useState<'student' | 'runner'>('student');
+interface Persona {
+  id: string;
+  name: string;
+  context: string;
+  needs: string[];
+  buyingBehavior: string;
+}
+
+const PERSONAS: Persona[] = [
+  {
+    id: "student",
+    name: "Persona 1: Sinh viên học trực tuyến",
+    context: "Ngân sách 1.5 triệu, học tại phòng trọ hoặc thư viện 5–6 tiếng/ngày.",
+    needs: ["Micrô khử tiếng ồn môi trường", "Đệm tai êm ái không gây đau tai", "Dây cắm ổn định với laptop"],
+    buyingBehavior: "Tìm kiếm kỹ đánh giá về micrô trên diễn đàn học tập; không quan tâm chỉ số chống nước."
+  },
+  {
+    id: "athlete",
+    name: "Persona 2: Vận động viên chạy bộ ngoài trời",
+    context: "Cùng độ tuổi 20 & cùng ngân sách 1.5 triệu, chạy bộ mỗi sáng trên phố.",
+    needs: ["Móc vành tai chống rơi khi chạy nhanh", "Kháng mồ hôi và nước mưa chuẩn IPX7", "Nghe được âm thanh còi xe trên đường"],
+    buyingBehavior: "Mua theo tính năng bám chắc và độ bền; micrô đàm thoại chỉ cần mức tối thiểu."
+  }
+];
+
+export const Slide08: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[7];
+  const [activePersona, setActivePersona] = useState<string>("student");
+
+  const current = PERSONAS.find(p => p.id === activePersona) || PERSONAS[0];
 
   return (
-    <div className="editorial-container">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <SectionLabel index={8} label="PHÂN KHÚC TIÊU DÙNG (B2C)" accent="#d97706" />
-        <SpeakerTag name={slide.presenter} time={slide.duration} color="#d97706" />
-      </div>
-
+    <EditorialSectionFrame meta={meta}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        {/* Left Column: Personas Comparison */}
+        {/* Left Column: Interactive Two Contexts Persona Switcher */}
         <div className="lg:col-span-7 space-y-4">
-          <div>
-            <h2 className="display-lg text-slate-900 leading-tight">
-              Phân Khúc Tiêu Dùng:<br />
-              <span className="text-amber-700">Bối Cảnh Quyết Định Mua</span>
-            </h2>
-            <p className="text-sm text-slate-600 mt-2 font-serif italic">
-              Nghịch lý nhân khẩu học: Cùng tuổi 20 & Cùng ngân sách 1.500.000đ
-            </p>
-          </div>
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
+              Hai người tiêu dùng ở hai bối cảnh khác nhau (Bấm để chuyển đổi chân dung &amp; nhu cầu):
+            </span>
 
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              onClick={() => setSelectedProfile('student')}
-              className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-44 ${
-                selectedProfile === 'student'
-                  ? 'bg-amber-50/70 border-amber-600 ring-2 ring-amber-500/20 shadow-xs'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
-              }`}
-            >
-              <div>
-                <span className="text-[10px] font-mono uppercase font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
-                  Học Trực Tuyến
-                </span>
-                <h4 className="text-xs font-bold text-slate-900 mt-2">Nhu cầu: Micrô rõ & Đeo êm</h4>
-                <ul className="text-[11px] text-slate-600 space-y-1 mt-1">
-                  <li>• Lọc tạp âm môi trường</li>
-                  <li>• Đệm tai êm đeo liên tục 5h</li>
+            <div className="grid grid-cols-2 gap-3">
+              {PERSONAS.map((p) => {
+                const isSelected = activePersona === p.id;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => setActivePersona(p.id)}
+                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <span className="text-xs font-bold text-slate-900">{p.name}</span>
+                    <span className={`text-[10px] block mt-1 font-semibold ${isSelected ? 'text-teal-700' : 'text-slate-400'}`}>
+                      Bấm xem nhu cầu →
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Revealed Persona Card */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+              <strong className="text-teal-900 block font-mono uppercase">{current.name}</strong>
+              <div className="text-[11px] text-slate-700"><strong>Bối cảnh sống:</strong> {current.context}</div>
+              <div className="space-y-1">
+                <span className="font-semibold text-slate-800">Nhu cầu trọng tâm:</span>
+                <ul className="list-disc pl-4 text-[11px] text-slate-600 space-y-0.5">
+                  {current.needs.map((n, i) => (
+                    <li key={i}>{n}</li>
+                  ))}
                 </ul>
               </div>
-              <span className="text-[10px] font-semibold text-amber-800">Tiêu chí: Sự thoải mái</span>
-            </button>
-
-            <button
-              onClick={() => setSelectedProfile('runner')}
-              className={`p-4 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-44 ${
-                selectedProfile === 'runner'
-                  ? 'bg-amber-50/70 border-amber-600 ring-2 ring-amber-500/20 shadow-xs'
-                  : 'bg-white border-slate-200 hover:border-slate-300'
-              }`}
-            >
-              <div>
-                <span className="text-[10px] font-mono uppercase font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded">
-                  Chạy Bộ Thể Thao
-                </span>
-                <h4 className="text-xs font-bold text-slate-900 mt-2">Nhu cầu: Bám chắc & Kháng nước</h4>
-                <ul className="text-[11px] text-slate-600 space-y-1 mt-1">
-                  <li>• Móc vành tai chống rơi</li>
-                  <li>• Chuẩn kháng mồ hôi IPX7</li>
-                </ul>
+              <div className="p-2.5 rounded bg-white border border-slate-200 text-[11px] text-slate-800">
+                <strong>Hành vi ra quyết định:</strong> {current.buyingBehavior}
               </div>
-              <span className="text-[10px] font-semibold text-amber-800">Tiêu chí: Độ bám an toàn</span>
-            </button>
-          </div>
-
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
-            <strong>Luận điểm học thuật:</strong> Nhân khẩu học đơn lẻ không giải thích được hành vi mua. Phân khúc đúng là tìm những người có chung vấn đề sử dụng trong từng hoàn cảnh cụ thể.
+            </div>
           </div>
         </div>
 
-        {/* Right Column: Case Persil Power */}
+        {/* Right Column: Real Context Photography & Persil Power Historical Case */}
         <div className="lg:col-span-5 space-y-4">
           <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-44">
             <img 
-              src="/images/persil-washing.jpg" 
-              alt="Laundry care and textiles" 
+              src="/images/consumer-two-contexts.jpg" 
+              alt="Two real consumers with different context and lifestyle" 
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
+              <span className="text-xs text-white">
+                Ảnh tư liệu: Người mua cùng thu nhập vẫn khác nhau về bối cảnh sống và mục đích sử dụng
+              </span>
+            </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2 text-xs">
             <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-              <span className="text-xs font-bold text-rose-700 uppercase font-mono flex items-center gap-1.5">
-                <AlertCircle className="w-4 h-4 text-rose-600" /> Bài học Persil Power (1994)
-              </span>
-              <span className="text-[10px] text-slate-500 font-mono">Unilever Case</span>
+              <span className="font-bold text-rose-800 uppercase font-mono">Ví dụ lịch sử: Persil Power</span>
+              <span className="text-slate-500 font-mono">Unilever 1994</span>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Unilever thử nghiệm trên <strong>60.000 hộ và 3 triệu lần giặt</strong> nhưng mẫu tập trung tại Bắc Âu. Khi ra mắt, chất xúc tác làm rách sợi vải ở nhiệt độ cao tại Nam Âu. Nghiên cứu thị trường cần phản ánh đúng mọi bối cảnh sử dụng quan trọng.
+            <p className="text-slate-600 leading-relaxed">
+              Dù thử nghiệm trên <strong>60.000 hộ gia đình</strong>, mẫu thử tập trung ở Bắc Âu mà bỏ qua thói quen giặt ở Nam Âu khiến chất xúc tác làm mục rách sợi vải. Không có khách hàng trung bình; doanh nghiệp bắt buộc phải chọn đúng phân khúc trước khi phát triển sản phẩm.
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </EditorialSectionFrame>
   );
 };

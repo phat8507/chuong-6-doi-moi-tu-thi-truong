@@ -65,27 +65,27 @@ export const ScrollytellingApp: React.FC = () => {
 
           let SlideContent: React.ReactNode = null;
           switch (slide.slideNumber) {
-            case 1: SlideContent = <Slide01 slide={slide} />; break;
-            case 2: SlideContent = <Slide02 slide={slide} />; break;
-            case 3: SlideContent = <Slide03 slide={slide} />; break;
-            case 4: SlideContent = <Slide04 slide={slide} />; break;
-            case 5: SlideContent = <Slide05 slide={slide} />; break;
-            case 6: SlideContent = <Slide06 slide={slide} />; break;
-            case 7: SlideContent = <Slide07 slide={slide} />; break;
-            case 8: SlideContent = <Slide08 slide={slide} />; break;
-            case 9: SlideContent = <Slide09 slide={slide} />; break;
-            case 10: SlideContent = <Slide10 slide={slide} />; break;
-            case 11: SlideContent = <Slide11 slide={slide} />; break;
-            case 12: SlideContent = <Slide12 slide={slide} />; break;
-            case 13: SlideContent = <Slide13 slide={slide} />; break;
-            case 14: SlideContent = <Slide14 slide={slide} />; break;
-            case 15: SlideContent = <Slide15 slide={slide} />; break;
-            case 16: SlideContent = <Slide16 slide={slide} />; break;
-            case 17: SlideContent = <Slide17 slide={slide} />; break;
-            case 18: SlideContent = <Slide18 slide={slide} />; break;
-            case 19: SlideContent = <Slide19 slide={slide} />; break;
-            case 20: SlideContent = <Slide20 slide={slide} />; break;
-            case 21: SlideContent = <Slide21 slide={slide} />; break;
+            case 1: SlideContent = <Slide01 />; break;
+            case 2: SlideContent = <Slide02 />; break;
+            case 3: SlideContent = <Slide03 />; break;
+            case 4: SlideContent = <Slide04 />; break;
+            case 5: SlideContent = <Slide05 />; break;
+            case 6: SlideContent = <Slide06 />; break;
+            case 7: SlideContent = <Slide07 />; break;
+            case 8: SlideContent = <Slide08 />; break;
+            case 9: SlideContent = <Slide09 />; break;
+            case 10: SlideContent = <Slide10 />; break;
+            case 11: SlideContent = <Slide11 />; break;
+            case 12: SlideContent = <Slide12 />; break;
+            case 13: SlideContent = <Slide13 />; break;
+            case 14: SlideContent = <Slide14 />; break;
+            case 15: SlideContent = <Slide15 />; break;
+            case 16: SlideContent = <Slide16 />; break;
+            case 17: SlideContent = <Slide17 />; break;
+            case 18: SlideContent = <Slide18 />; break;
+            case 19: SlideContent = <Slide19 />; break;
+            case 20: SlideContent = <Slide20 />; break;
+            case 21: SlideContent = <Slide21 />; break;
           }
 
           // Alternate subtle clean section background for visual rhythm

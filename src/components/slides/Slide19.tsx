@@ -1,181 +1,164 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from 'recharts';
-import { TrendingUp, MessageSquare, DollarSign, AlertCircle, FileText, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, TrendingUp, Bot, FileText, CheckCircle2 } from 'lucide-react';
 
-// Verified quantitative data from VPBank & FE Credit reports
 const DISBURSEMENT_DATA = [
-  { year: "2023", value: 30700, label: "~30.700 tỷ" },
-  { year: "2024", value: 43000, label: "> 43.000 tỷ (+40%)" },
+  { year: 'Năm 2023', value: 30.7, label: '~30.700 tỷ VND' },
+  { year: 'Năm 2024', value: 43.0, label: '>43.000 tỷ VND (+~40%)' }
 ];
 
-const PROFIT_DATA = [
-  { source: "BCTN VPBank", profit: 512, note: "512 tỷ VND" },
-  { source: "Kiểm toán FE Credit", profit: 515, note: "Gần 515 tỷ VND" },
+const DIGITAL_USAGE_DATA = [
+  { metric: 'Người dùng Chatbot', count: 130, unit: 'Nghìn người / năm', label: '> 130.000 người/năm' },
+  { metric: 'Phiên tương tác Chatbot', count: 200, unit: 'Nghìn phiên / tháng', label: '> 200.000 phiên/tháng' }
 ];
 
-const CHATBOT_METRICS = [
-  { channel: "Người dùng Chatbot/Năm", count: 130000, display: "> 130.000 người/năm" },
-  { channel: "Phiên giao tiếp/Tháng", count: 200000, display: "> 200.000 phiên/tháng" },
-];
-
-export const Slide19: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [activeTab, setActiveTab] = useState<'financial' | 'digital'>('financial');
+export const Slide19: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[18];
+  const [activeTab, setActiveTab] = useState<'both' | 'financial' | 'digital'>('both');
 
   return (
-    <SlideLayout slide={slide}>
-      <div className="flex flex-col justify-between h-full space-y-3">
-        {/* Academic Principle Banner & Mode Switcher */}
-        <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
-            <span className="text-slate-300">
-              <strong>Nguyên tắc khoa học:</strong> Phân tách rõ ràng giữa <em>Chỉ số tài chính phục hồi</em> và <em>Chỉ số tương tác kênh số</em>; không ngộ nhận chatbot trực tiếp tạo ra toàn bộ lợi nhuận.
-            </span>
-          </div>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <button
-              onClick={() => setActiveTab('financial')}
-              className={`px-3 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'financial'
-                  ? 'bg-teal-700 text-white'
-                  : 'bg-slate-800 text-slate-400 hover:text-white'
-              }`}
-            >
-              1. Biểu đồ Tài chính
-            </button>
-            <button
-              onClick={() => setActiveTab('digital')}
-              className={`px-3 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
-                activeTab === 'digital'
-                  ? 'bg-teal-700 text-white'
-                  : 'bg-slate-800 text-slate-400 hover:text-white'
-              }`}
-            >
-              2. Biểu đồ Kênh số
-            </button>
+    <EditorialSectionFrame meta={meta}>
+      <div className="space-y-6">
+        {/* Methodological Caution Banner */}
+        <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs flex items-start gap-3">
+          <AlertCircle className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <strong className="text-amber-950 font-mono text-[11px] block">
+              THẬN TRỌNG HỌC THUẬT: SỐ LIỆU KẾT QUẢ KHÔNG TỰ CHỨNG MINH NGUYÊN NHÂN DUY NHẤT
+            </strong>
+            <p className="text-amber-900 leading-relaxed text-[11px]">
+              Tình huống này dựa trên <strong>tài liệu công khai thứ cấp</strong> (BCTN VPBank 2024 &amp; Báo cáo kiểm toán FE CREDIT). Kết quả tài chính và số người dùng kênh số là <em>hai nhóm chỉ số độc lập</em>. Không ngộ nhận rằng việc ra mắt chatbot trực tiếp tạo nên toàn bộ sự phục hồi kinh doanh, vốn còn phụ thuộc vào tái cơ cấu danh mục, quản trị rủi ro và điều kiện thị trường.
+            </p>
           </div>
         </div>
 
-        {/* Dynamic Interactive Charts Grid (Replaced raw numbers with actual charts) */}
-        {activeTab === 'financial' ? (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 items-center animate-fadeIn">
-            {/* Chart 1: Disbursement Growth */}
-            <div className="lg:col-span-6 p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col justify-between h-full">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <TrendingUp className="w-4 h-4 text-teal-400" /> Doanh số Giải ngân (Tỷ đồng)
-                </span>
-                <span className="text-[10px] font-mono text-teal-400 font-bold">+40% tăng trưởng</span>
-              </div>
-              <div className="w-full h-36">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={DISBURSEMENT_DATA}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                    <XAxis dataKey="year" tick={{ fontSize: 11, fill: '#94a3b8' }} />
-                    <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} unit=" tỷ" />
-                    <Tooltip 
-                      formatter={(val: any) => [`${val.toLocaleString()} tỷ VND`, 'Giải ngân']}
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: 8, fontSize: 11 }}
-                    />
-                    <Bar dataKey="value" fill="#0d9488" radius={[4, 4, 0, 0]}>
-                      <Cell fill="#334155" />
-                      <Cell fill="#0d9488" />
-                    </Bar>
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="text-[10px] text-slate-400 font-mono text-center">
-                Báo cáo thường niên VPBank 2024: Giải ngân vượt 43.000 tỷ, dư nợ +10,3%
-              </div>
-            </div>
-
-            {/* Chart 2: Profit Before Tax Dual Sources */}
-            <div className="lg:col-span-6 p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col justify-between h-full">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <DollarSign className="w-4 h-4 text-amber-400" /> Lợi nhuận trước thuế 2024 (Tỷ đồng)
-                </span>
-                <span className="text-[10px] font-mono text-amber-400 font-bold">Chuyển lỗ sang lãi</span>
-              </div>
-              <div className="w-full h-36">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={PROFIT_DATA}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                    <XAxis dataKey="source" tick={{ fontSize: 10, fill: '#94a3b8' }} />
-                    <YAxis tick={{ fontSize: 10, fill: '#94a3b8' }} domain={[0, 600]} unit=" tỷ" />
-                    <Tooltip 
-                      formatter={(val: any) => [`${val} tỷ VND`, 'LNTT']}
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: 8, fontSize: 11 }}
-                    />
-                    <Bar dataKey="profit" fill="#d97706" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="text-[10px] text-slate-400 font-mono text-center">
-                Giữ riêng 2 số liệu: 512 tỷ (VPBank BCTN) và gần 515 tỷ (Kiểm toán riêng FE Credit)
-              </div>
-            </div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 items-center animate-fadeIn">
-            {/* Chart 3: Chatbot Usage Scale */}
-            <div className="lg:col-span-7 p-4 rounded-xl bg-slate-900 border border-slate-800 flex flex-col justify-between h-full">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <MessageSquare className="w-4 h-4 text-teal-400" /> Quy mô tương tác số Chatbot AI
-                </span>
-                <span className="text-[10px] font-mono text-slate-400">Hai đơn vị đo tách biệt</span>
-              </div>
-              <div className="w-full h-36">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={CHATBOT_METRICS} layout="vertical">
-                    <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                    <XAxis type="number" tick={{ fontSize: 10, fill: '#94a3b8' }} />
-                    <YAxis dataKey="channel" type="category" tick={{ fontSize: 9, fill: '#94a3b8' }} width={140} />
-                    <Tooltip 
-                      formatter={(val: any) => [`${val.toLocaleString()}`, 'Số lượng']}
-                      contentStyle={{ backgroundColor: '#0f172a', borderColor: '#334155', borderRadius: 8, fontSize: 11 }}
-                    />
-                    <Bar dataKey="count" fill="#0d9488" radius={[0, 4, 4, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-              <div className="text-[10px] text-slate-400 font-mono text-center">
-                Không đánh đồng số người dùng theo năm (&gt;130.000) với số phiên theo tháng (&gt;200.000)
-              </div>
-            </div>
-
-            {/* Side Image of Finance Tech Platform */}
-            <div className="lg:col-span-5 relative rounded-xl overflow-hidden border border-slate-800 h-full max-h-48 group">
-              <img 
-                src="/images/finance-growth.jpg" 
-                alt="Consumer Finance Capital Portfolio" 
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
-                <span className="text-[10px] text-slate-200">
-                  Phục hồi biên lợi nhuận gắn liền với chất lượng tài sản và quản trị danh mục tín dụng
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Academic Contextual Evaluation Box */}
-        <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-1">
-          <div className="flex items-center justify-between text-teal-400 font-bold">
-            <span className="flex items-center gap-1.5">
-              <FileText className="w-4 h-4" /> Bối cảnh kinh tế & Đánh giá nhân quả
+        {/* Big Numbers Editorial Callout Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+              Quy mô giải ngân 2024
             </span>
-            <span className="text-[10px] font-mono text-slate-500">Niên độ tài chính 2024</span>
+            <div className="text-2xl font-serif font-bold text-teal-800">
+              &gt; 43.000 <span className="text-sm font-sans font-normal text-slate-600">tỷ VND</span>
+            </div>
+            <div className="text-[11px] text-emerald-700 font-medium">
+              Tăng trưởng khoảng +40% so với 2023 (~30.700 tỷ)
+            </div>
+            <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-slate-100">
+              Nguồn: Báo cáo tài chính thường niên VPBank
+            </div>
           </div>
-          <p className="text-slate-300 text-[11px] leading-relaxed">
-            Sự phục hồi của FE CREDIT đến từ quá trình <strong>tái cấu trúc kinh doanh toàn diện, nâng chuẩn tín dụng, kiểm soát nợ và tối ưu chi phí</strong>. Cần bổ sung các chỉ số chiều sâu (tỷ lệ giải quyết thành công, thời gian xử lý) thay vì chỉ nhìn vào số lượng phiên tương tác chatbot.
-          </p>
+
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+              Lợi nhuận trước thuế (LNTT 2024)
+            </span>
+            <div className="text-2xl font-serif font-bold text-slate-900">
+              512 / ~515 <span className="text-sm font-sans font-normal text-slate-600">tỷ VND</span>
+            </div>
+            <div className="text-[11px] text-slate-600">
+              Phục hồi mạnh mẽ sau giai đoạn tái cơ cấu 2022–2023
+            </div>
+            <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-slate-100">
+              512 tỷ (BCTN VPBank) · gần 515 tỷ (Kiểm toán FE CREDIT)
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+              Khối lượng tương tác kênh số
+            </span>
+            <div className="text-2xl font-serif font-bold text-indigo-700">
+              &gt; 200.000 <span className="text-sm font-sans font-normal text-slate-600">phiên/tháng</span>
+            </div>
+            <div className="text-[11px] text-slate-600">
+              &gt; 130.000 người dùng Chatbot giải đáp tự động/năm
+            </div>
+            <div className="text-[10px] font-mono text-slate-400 pt-1 border-t border-slate-100">
+              Nguồn: Báo cáo chuyển đổi số kênh giao tiếp khách hàng
+            </div>
+          </div>
+        </div>
+
+        {/* Dual Visual Charts Grid: 1. Business Metrics / 2. Digital Adoption Metrics */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Chart 1: Business Disbursement Comparison */}
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-teal-700" />
+                  <span className="text-xs font-bold text-slate-900">
+                    Nhóm 1: Kết Quả Kinh Doanh — Giải Ngân (Nghìn Tỷ VND)
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-slate-500">2023 vs 2024</span>
+              </div>
+              <p className="text-[11px] text-slate-500 mb-3">
+                Không dùng đường xu hướng liên tục (trendline) khi chỉ có 2 mốc số liệu năm kiểm toán.
+              </p>
+            </div>
+
+            <div className="w-full h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={DISBURSEMENT_DATA} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                  <XAxis dataKey="year" tick={{ fontSize: 10, fill: '#475569' }} />
+                  <YAxis domain={[0, 50]} unit="k tỷ" tick={{ fontSize: 10, fill: '#475569' }} />
+                  <Tooltip
+                    formatter={(val: any) => [`${val} nghìn tỷ VND`, 'Giải ngân']}
+                    contentStyle={{ borderRadius: 8, fontSize: 11, border: '1px solid #cbd5e1' }}
+                  />
+                  <Bar dataKey="value" fill="#0d9488" radius={[6, 6, 0, 0]} barSize={50} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="pt-2 text-[10px] font-mono text-slate-400 text-center">
+              Đơn vị: Nghìn tỷ Đồng (VND) · Nguồn: Báo cáo thường niên hợp nhất VPBank
+            </div>
+          </div>
+
+          {/* Chart 2: Digital Channel Adoption */}
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center gap-2">
+                  <Bot className="w-4 h-4 text-indigo-700" />
+                  <span className="text-xs font-bold text-slate-900">
+                    Nhóm 2: Mức Độ Tương Tác Kênh Số Chatbot
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono text-slate-500">Kênh hỗ trợ tự động</span>
+              </div>
+              <p className="text-[11px] text-slate-500 mb-3">
+                Đo lường năng lực phục vụ tự động hóa và hành vi tự phục vụ của người vay.
+              </p>
+            </div>
+
+            <div className="w-full h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={DIGITAL_USAGE_DATA} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                  <XAxis dataKey="metric" tick={{ fontSize: 10, fill: '#475569' }} />
+                  <YAxis domain={[0, 250]} unit="k" tick={{ fontSize: 10, fill: '#475569' }} />
+                  <Tooltip
+                    formatter={(val: any, _name: any, item: any) => [`${val}.000`, item.payload.unit]}
+                    contentStyle={{ borderRadius: 8, fontSize: 11, border: '1px solid #cbd5e1' }}
+                  />
+                  <Bar dataKey="count" fill="#4f46e5" radius={[6, 6, 0, 0]} barSize={50} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="pt-2 text-[10px] font-mono text-slate-400 text-center">
+              Đơn vị: Nghìn lượt/phiên · Nguồn: Dữ liệu công bố giải pháp số FE ONLINE
+            </div>
+          </div>
         </div>
       </div>
-    </SlideLayout>
+    </EditorialSectionFrame>
   );
 };

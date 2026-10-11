@@ -1,140 +1,125 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SectionLabel } from '../ui/SectionLabel';
-import { SpeakerTag } from '../ui/SpeakerTag';
-import { ArrowRight, CheckCircle2, Layers } from 'lucide-react';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
 
-interface CustomerNeed {
+interface QFDItem {
   id: string;
-  category: 'must-be' | 'one-dimensional' | 'delighter';
-  voiceOfCustomer: string;
-  technicalMetric: string;
-  explanation: string;
+  demand: string;
+  category: string;
+  techConstraint: string;
+  benchmark: string;
 }
 
-const NEEDS: CustomerNeed[] = [
+const QFD_DATA: QFDItem[] = [
+  {
+    id: "loan_schedule",
+    demand: "Dễ tra cứu lịch trả nợ",
+    category: "Thuộc tính một chiều",
+    techConstraint: "API truy vấn cơ sở dữ liệu &lt; 500ms; hiển thị số tiền và ngày đến hạn tại màn hình chính với kích thước font tối thiểu 16pt.",
+    benchmark: "Khách hàng tìm thấy thông tin ngay trong 2 thao tác chạm."
+  },
   {
     id: "accuracy",
-    category: "must-be",
-    voiceOfCustomer: "Số tiền đến hạn và dư nợ phải tuyệt đối chính xác",
-    technicalMetric: "Hệ thống Core Banking đối soát tự động, sai số 0.00%",
-    explanation: "Thuộc tính nền tảng (Must-be). Nếu tính sai tiền hoặc thông tin ảo, khách hàng sẽ mất niềm tin ngay lập tức dù app có đẹp đến đâu."
+    demand: "Thông tin lãi phí chính xác 100%",
+    category: "Thuộc tính phải có (Must-be)",
+    techConstraint: "Hệ thống Core Banking đối soát giao dịch thời gian thực; sai số tài chính 0.00%; có lưu nhật ký giao dịch phục vụ tra soát.",
+    benchmark: "Tuyệt đối không được sai sót; nếu sai hệ thống mất niềm tin ngay."
   },
   {
-    id: "speed",
-    category: "one-dimensional",
-    voiceOfCustomer: "Tôi muốn tra cứu lịch trả nợ nhanh trong 2 giây",
-    technicalMetric: "Tối ưu API phản hồi < 800ms, giao diện 1 chạm",
-    explanation: "Thuộc tính một chiều (One-dimensional). Tốc độ càng nhanh và số bước thao tác càng ít thì mức độ hài lòng của người dùng càng tăng tuyến tính."
-  },
-  {
-    id: "reminder",
-    category: "delighter",
-    voiceOfCustomer: "Tự động nhắc lịch trả nợ qua Zalo/App trước 3 ngày",
-    technicalMetric: "Notification engine cá nhân hóa đa kênh thời gian thực",
-    explanation: "Thuộc tính gây thích thú (Delighter). Khách hàng không yêu cầu ban đầu, nhưng khi có sẽ tạo trải nghiệm bất ngờ vượt trội so với đối thủ."
+    id: "smart_alert",
+    demand: "Tự động nhắc lịch qua Zalo/App trước 3 ngày",
+    category: "Thuộc tính thích thú (Delighter)",
+    techConstraint: "Notification Engine tích hợp Webhook đa kênh; tự động cá nhân hóa tin nhắn kèm nút thanh toán tức thì.",
+    benchmark: "Vượt ngoài mong đợi ban đầu của người vay."
   }
 ];
 
-export const Slide07: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [selectedNeed, setSelectedNeed] = useState<string>("speed");
+export const Slide07: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[6];
+  const [selectedId, setSelectedId] = useState<string>("loan_schedule");
 
-  const current = NEEDS.find(n => n.id === selectedNeed) || NEEDS[0];
+  const current = QFD_DATA.find(q => q.id === selectedId) || QFD_DATA[0];
 
   return (
-    <div className="editorial-container">
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <SectionLabel index={7} label="THIẾT KẾ SẢN PHẨM" accent="#0891b2" />
-        <SpeakerTag name={slide.presenter} time={slide.duration} color="#0891b2" />
-      </div>
-
+    <EditorialSectionFrame meta={meta}>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        {/* Left Column: Interactive QFD Selection */}
+        {/* Left Column: Interactive QFD Matrix Selection */}
         <div className="lg:col-span-7 space-y-4">
-          <div>
-            <h2 className="display-lg text-slate-900 leading-tight">
-              QFD: Từ Nhu Cầu Đến<br />
-              <span className="text-cyan-700">Thiết Kế Sản Phẩm</span>
-            </h2>
-            <p className="text-sm text-slate-600 mt-2 font-serif italic">
-              Ngôi nhà chất lượng và ba nhóm thuộc tính trong mô hình Kano
-            </p>
-          </div>
-
-          <div className="space-y-2.5">
-            {NEEDS.map((item) => {
-              const isSelected = selectedNeed === item.id;
-              const isMustBe = item.category === 'must-be';
-              const isOneDim = item.category === 'one-dimensional';
-
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setSelectedNeed(item.id)}
-                  className={`w-full p-4 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
-                    isSelected
-                      ? 'bg-cyan-50/60 border-cyan-600 ring-2 ring-cyan-500/20 shadow-xs'
-                      : 'bg-white border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div className="space-y-1">
-                    <span className={`text-[10px] uppercase font-bold font-mono px-2 py-0.5 rounded-full ${
-                      isMustBe 
-                        ? 'bg-rose-100 text-rose-700' 
-                        : isOneDim 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'bg-amber-100 text-amber-700'
-                    }`}>
-                      {isMustBe ? 'Thuộc tính phải có' : isOneDim ? 'Thuộc tính một chiều' : 'Thuộc tính thích thú'}
-                    </span>
-                    <div className="text-xs font-bold text-slate-900 mt-1">
-                      “{item.voiceOfCustomer}”
-                    </div>
-                  </div>
-                  <ArrowRight className={`w-4 h-4 shrink-0 ${isSelected ? 'text-cyan-700' : 'text-slate-400'}`} />
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-xs space-y-1.5">
-            <span className="text-xs font-bold text-cyan-800 uppercase font-mono">
-              Chỉ tiêu kỹ thuật thiết kế tương ứng (QFD Translation):
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
+              Ma trận QFD đơn giản: Bấm chọn nhu cầu để hiển thị ràng buộc kỹ thuật
             </span>
-            <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100 text-xs font-mono text-slate-900 font-semibold">
-              {current.technicalMetric}
+
+            <div className="space-y-2">
+              {QFD_DATA.map((item) => {
+                const isSelected = selectedId === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => setSelectedId(item.id)}
+                    className={`w-full p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
+                      isSelected
+                        ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <div>
+                      <span className="text-[10px] font-mono uppercase font-bold text-teal-800 bg-teal-100 px-2 py-0.5 rounded">
+                        {item.category}
+                      </span>
+                      <h4 className="text-xs font-bold text-slate-900 mt-1">
+                        Nhu cầu: “{item.demand}”
+                      </h4>
+                    </div>
+                    <span className={`text-[10px] font-semibold ${isSelected ? 'text-teal-700' : 'text-slate-400'}`}>
+                      Xem ràng buộc →
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-            <p className="text-[11px] text-slate-600 leading-relaxed pt-1">
-              {current.explanation}
-            </p>
+
+            {/* Technical Constraint Reveal Box */}
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+              <span className="font-bold text-teal-900 uppercase font-mono">
+                Ràng buộc kỹ thuật liên quan:
+              </span>
+              <div 
+                className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-800 font-mono text-[11px] leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: current.techConstraint }}
+              />
+              <p className="text-[11px] text-slate-600">
+                <strong>Tiêu chí kiểm chứng:</strong> {current.benchmark}
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Right Column: QFD 5 Steps & Toyota Case */}
+        {/* Right Column: QFD 5 Steps & 3 Kano Attributes Distinction */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-44">
-            <img 
-              src="/images/patent-blueprint.jpg" 
-              alt="Engineering Blueprint Quality House" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
-              <span className="text-xs text-white">
-                Bản vẽ kỹ thuật QFD: Cầu nối có cấu trúc giữa Marketing, Kỹ thuật và Vận hành
-              </span>
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3 text-xs">
+            <span className="font-bold text-slate-900 uppercase font-mono">
+              Phân biệt phương pháp QFD &amp; 3 nhóm thuộc tính Kano
+            </span>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <strong className="text-teal-800 block">QFD (Triển khai chức năng chất lượng):</strong>
+              <p className="text-slate-600 text-[11px]">Là phương pháp dịch tiếng nói khách hàng (VOC) thành các chỉ tiêu kỹ thuật đo lường được và đối chuẩn cạnh tranh qua 5 bước.</p>
+            </div>
+            <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 space-y-1">
+              <strong className="text-amber-800 block">3 Nhóm thuộc tính Kano (Khung phân loại bổ trợ):</strong>
+              <ul className="text-slate-600 text-[11px] space-y-0.5">
+                <li>• <strong>Phải có (Must-be):</strong> Điều kiện nền tảng bắt buộc.</li>
+                <li>• <strong>Một chiều:</strong> Càng đáp ứng cao thì giá trị cảm nhận càng tăng.</li>
+                <li>• <strong>Thích thú (Delighters):</strong> Vượt ngoài kỳ vọng ban đầu.</li>
+              </ul>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2">
-            <span className="text-xs font-bold text-slate-900 uppercase font-mono">
-              Thực nghiệm sản xuất Toyota
-            </span>
-            <p className="text-xs text-slate-600 leading-relaxed">
-              Toyota đã <strong>giảm khoảng 40% thời gian và chi phí phát triển</strong> nhờ QFD. Tuy nhiên, giá trị của QFD nằm ở năng lực đối thoại liên chức năng — không thể biến thành công thức giấy tờ hình thức.
-            </p>
+          <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700">
+            <strong>Thực nghiệm Toyota:</strong> Giảm khoảng 40% thời gian và chi phí phát triển khi dùng QFD liên kết hiệu quả giữa Marketing, Thiết kế và Vận hành.
           </div>
         </div>
       </div>
-    </div>
+    </EditorialSectionFrame>
   );
 };

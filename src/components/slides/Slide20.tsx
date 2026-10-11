@@ -1,126 +1,168 @@
 import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { ShieldCheck, Layers, CheckCircle2, ArrowRight } from 'lucide-react';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
+import { HeartHandshake, Gauge, ShieldAlert, CheckCircle, HelpCircle, Layers } from 'lucide-react';
 
-interface Pillar {
+interface FrameworkPillar {
   id: string;
+  number: string;
   title: string;
-  subtitle: string;
-  metrics: string[];
-  lesson: string;
+  theme: string;
+  icon: any;
+  summary: string;
+  auditQuestions: string[];
+  warningNote: string;
 }
 
-const PILLARS: Pillar[] = [
+const PILLARS: FrameworkPillar[] = [
   {
-    id: "innovation",
-    title: "1. Hoạt động Đổi mới (Implementation)",
-    subtitle: "Kênh số & Hạ tầng công nghệ",
-    metrics: [
-      "Triển khai ứng dụng FE ONLINE 2.0",
-      "Tích hợp Chatbot AI chăm sóc khách hàng 24/7",
-      "Số hóa quy trình thẩm định hồ sơ tại điểm bán"
+    id: 'customer_value',
+    number: 'Trụ cột 01',
+    title: 'Giá trị Khách hàng',
+    theme: 'Trải nghiệm & Minh bạch thông tin',
+    icon: HeartHandshake,
+    summary: 'Đổi mới công nghệ chỉ có giá trị khi giải quyết đúng nhu cầu thực tế và duy trì được sự gắn kết bền vững của người dùng.',
+    auditQuestions: [
+      'Giao diện mới có thực sự giúp người dùng hiểu rõ nghĩa vụ trả nợ hay chỉ làm đẹp mắt bề ngoài?',
+      'Khách hàng có tự giác thanh toán đúng hạn hơn nhờ tính năng tra cứu minh bạch và thông báo đẩy không?',
+      'Tỷ lệ khiếu nại về hiểu lầm lãi suất, phí phát sinh có suy giảm sau khi chuyển sang kênh số?'
     ],
-    lesson: "Đổi mới kỹ thuật số phải gắn liền với quy trình thẩm định nội bộ, không đơn thuần chỉ là thay đổi giao diện."
+    warningNote: 'Một ứng dụng tải về nhiều nhưng tỷ lệ xóa app cao chứng tỏ sản phẩm chưa tạo ra giá trị giữ chân thực chất.'
   },
   {
-    id: "customer",
-    title: "2. Giá trị Khách hàng (Customer Value)",
-    subtitle: "Minh bạch & Trải nghiệm thực tế",
-    metrics: [
-      "Dễ dàng tra cứu số tiền phải trả và ngày đến hạn",
-      "Minh bạch lãi suất, điều khoản phí và lịch trả nợ",
-      "Rút ngắn thời gian giải quyết sự cố hỗ trợ"
+    id: 'operations',
+    number: 'Trụ cột 02',
+    title: 'Hiệu quả Vận hành',
+    theme: 'Tối ưu chi phí & Tự động hóa',
+    icon: Gauge,
+    summary: 'Số hóa phải trực tiếp giải phóng sức lao động, giảm thiểu sai sót thủ công và tối ưu chi phí phục vụ (Cost-to-Serve).',
+    auditQuestions: [
+      'Hệ thống tự động hóa eKYC và Chatbot có thực sự cắt giảm chi phí vận hành trên mỗi hợp đồng giải ngân?',
+      'Năng suất xử lý hồ sơ của nhân sự tuyến đầu có tăng lên khi các tác vụ lặp lại được chuyển giao cho AI?',
+      'Mức độ đồng bộ dữ liệu giữa kênh ứng dụng di động và mạng lưới điểm bán trực tiếp (POS) có liền mạch không?'
     ],
-    lesson: "Một giao diện đẹp mắt không thể bù đắp cho việc sai sót thông tin tài chính hoặc sự thiếu minh bạch trong hợp đồng."
+    warningNote: 'Đổi mới thiếu tích hợp với quy trình nội bộ sẽ chỉ làm tăng chi phí bảo trì CNTT mà không cải thiện biên lợi nhuận.'
   },
   {
-    id: "economic",
-    title: "3. Hiệu quả Kinh tế (Economic Return)",
-    subtitle: "Chất lượng tài sản & Kiểm soát rủi ro",
-    metrics: [
-      "Kiểm soát tỷ lệ nợ xấu (NPL) trong ngưỡng an toàn",
-      "Tối ưu chi phí vận hành trên mỗi khoản vay giải ngân",
-      "Phục hồi lợi nhuận trước thuế bền vững (>500 tỷ VND)"
+    id: 'risk_control',
+    number: 'Trụ cột 03',
+    title: 'Kiểm soát Rủi ro',
+    theme: 'Rủi ro tín dụng & An toàn dữ liệu',
+    icon: ShieldAlert,
+    summary: 'Tăng trưởng quy mô giải ngân không được đánh đổi bằng việc hạ thấp chuẩn thẩm định và suy giảm chất lượng tài sản nợ.',
+    auditQuestions: [
+      'Tốc độ phê duyệt siêu nhanh có vô tình làm tăng tỷ lệ nợ xấu (NPL) ở các chu kỳ sau không?',
+      'Hệ thống định danh eKYC và dữ liệu thay thế có đủ sức phòng ngừa các hình thức gian lận tinh vi mới?',
+      'Dữ liệu định danh và thông tin tài chính của người vay có được bảo vệ nghiêm ngặt theo quy chuẩn bảo mật?'
     ],
-    lesson: "Hiệu quả kinh tế phải dựa trên chất lượng tín dụng và thu hồi nợ, không chỉ nhìn vào số lượng người tải app."
+    warningNote: 'Đối với tài chính tiêu dùng, rủi ro tín dụng là biến số quyết định sự sống còn của doanh nghiệp, vượt trên mọi chỉ số số hóa.'
   }
 ];
 
-export const Slide20: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [activePillar, setActivePillar] = useState<string>("customer");
+export const Slide20: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[19];
+  const [selectedPillarId, setSelectedPillarId] = useState<string>('customer_value');
 
-  const current = PILLARS.find(p => p.id === activePillar) || PILLARS[1];
+  const current = PILLARS.find(p => p.id === selectedPillarId) || PILLARS[0];
+  const CurrentIcon = current.icon;
 
   return (
-    <SlideLayout slide={slide}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-center">
-        {/* Left Column: 3 Pillars Interactive Selection */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-3">
-          <div className="grid grid-cols-3 gap-2.5">
-            {PILLARS.map((p) => {
-              const isSelected = activePillar === p.id;
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => setActivePillar(p.id)}
-                  className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-28 ${
-                    isSelected
-                      ? 'bg-slate-800 border-teal-500 ring-1 ring-teal-400'
-                      : 'bg-slate-900 border-slate-800 hover:border-slate-700'
-                  }`}
-                >
-                  <span className="text-xs font-bold text-white">{p.title}</span>
-                  <div className="text-[10px] text-slate-400">{p.subtitle}</div>
-                  <span className={`text-[10px] font-semibold ${isSelected ? 'text-teal-400' : 'text-slate-500'}`}>
-                    Xem chi tiết →
-                  </span>
-                </button>
-              );
-            })}
+    <EditorialSectionFrame meta={meta}>
+      <div className="space-y-6">
+        {/* Methodological Guidance Note */}
+        <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-teal-700" />
+            <span className="text-slate-800 font-medium">
+              <strong>Khung đánh giá quản trị 3 trụ cột:</strong> Nhấp vào từng trụ cột để xem <em>Bộ câu hỏi thẩm định</em> (Không hiển thị KPI giả định như kết quả thực tế).
+            </span>
           </div>
-
-          {/* Selected Pillar Detailed Panel */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-teal-300 uppercase">
-                Chỉ số đo lường: {current.title}
-              </span>
-            </div>
-            <ul className="text-xs text-slate-300 space-y-1.5">
-              {current.metrics.map((m, idx) => (
-                <li key={idx} className="flex items-center gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-                  <span>{m}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="p-2.5 rounded-lg bg-slate-800 border border-slate-700 text-[11px] text-amber-300 mt-2">
-              <strong>Hàm ý quản trị rủi ro:</strong> {current.lesson}
-            </div>
-          </div>
+          <span className="text-[11px] font-mono text-slate-500 hidden sm:block">
+            Mô hình đánh giá toàn diện
+          </span>
         </div>
 
-        {/* Right Column: Real Team Photography & University Analogy */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-3">
-          <div className="relative rounded-xl overflow-hidden border border-slate-800 h-44 group shadow-md">
-            <img 
-              src="/images/team-collaboration.jpg" 
-              alt="Interdisciplinary Team Risk Management Hub" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-2.5">
-              <span className="text-[10px] text-slate-200">
-                Đổi mới dịch vụ tài chính đòi hỏi phối hợp toàn diện giữa Công nghệ, Thẩm định và Quản trị Rủi ro
+        {/* 3 Pillars Overview Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {PILLARS.map((p) => {
+            const Icon = p.icon;
+            const isSelected = selectedPillarId === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => setSelectedPillarId(p.id)}
+                className={`p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
+                  isSelected
+                    ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                    : 'bg-white border-slate-200 hover:border-slate-300'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[10px] font-mono uppercase font-bold text-teal-800">
+                      {p.number}
+                    </span>
+                    <Icon className={`w-4 h-4 ${isSelected ? 'text-teal-700' : 'text-slate-400'}`} />
+                  </div>
+                  <h3 className="text-sm font-bold text-slate-900 font-serif mb-1">
+                    {p.title}
+                  </h3>
+                  <div className="text-[11px] text-teal-700 font-medium mb-2">
+                    {p.theme}
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-snug line-clamp-2">
+                    {p.summary}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 mt-3 text-[11px] font-semibold text-teal-700 flex items-center justify-between">
+                  <span>{isSelected ? 'Đang kiểm tra' : 'Mở câu hỏi thẩm định'}</span>
+                  <span>→</span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Pillar Inspection Box: Audit Questions */}
+        <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs space-y-4">
+          <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
+            <div className="p-2.5 rounded-xl bg-teal-800 text-white shadow-xs">
+              <CurrentIcon className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-sm font-bold text-slate-900 font-serif">
+                Bộ Câu Hỏi Đánh Giá Thẩm Định: {current.title}
+              </div>
+              <span className="text-[11px] text-teal-700 font-mono">
+                {current.theme} · Tiêu chí kiểm chứng thực tế
               </span>
             </div>
           </div>
 
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-300">
-            🎓 <strong>Ẩn dụ giáo dục:</strong> Giống như trường đại học chuyển cổng đăng ký môn học lên online — nếu sinh viên không thể tra cứu rõ môn hay hệ thống nghẽn mạng, việc bỏ mẫu giấy đơn thuần chưa thể coi là đổi mới thành công.
+          <div className="space-y-2.5">
+            {current.auditQuestions.map((q, idx) => (
+              <div
+                key={idx}
+                className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3 text-slate-700"
+              >
+                <span className="w-5 h-5 rounded-full bg-teal-100 text-teal-900 flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  0{idx + 1}
+                </span>
+                <p className="text-xs leading-relaxed">{q}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Strategic Warning */}
+          <div className="p-3.5 rounded-xl bg-rose-50/50 border border-rose-200 flex items-start gap-2.5 text-rose-900 text-[11px]">
+            <ShieldAlert className="w-4 h-4 shrink-0 mt-0.5" />
+            <div>
+              <strong>Lưu ý cảnh báo quản trị:</strong> {current.warningNote}
+            </div>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </EditorialSectionFrame>
   );
 };

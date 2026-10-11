@@ -1,114 +1,83 @@
-import React, { useState } from 'react';
-import { SlideData } from '../../data/slidesMetadata';
-import { SlideLayout } from '../SlideLayout';
-import { Scale, AlertOctagon, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
+import { EditorialSectionFrame } from '../EditorialSectionFrame';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Cell } from 'recharts';
 
-export const Slide06: React.FC<{ slide: SlideData }> = ({ slide }) => {
-  const [selectedProduct, setSelectedProduct] = useState<'smart' | 'simple'>('simple');
+const BENEFIT_COST_DATA = [
+  { name: "Mẫu A: Nhiều tính năng", benefit: 85, cost: 95, netValue: -10, desc: "Giá 850k, LED cảm ứng, sạc pin phức tạp" },
+  { name: "Mẫu B: Thực dụng bền", benefit: 90, cost: 35, netValue: 55, desc: "Giá 220k, giữ nhiệt 18h, chống tràn 100%" },
+];
+
+export const Slide06: React.FC = () => {
+  const meta = CHAPTER6_SECTIONS[5];
 
   return (
-    <SlideLayout slide={slide}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-center">
-        {/* Left Column: Visual Comparison with Real Bottle Photo */}
-        <div className="lg:col-span-7 flex flex-col justify-between space-y-3">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span className="font-bold text-white">Thực nghiệm: Bình giữ nhiệt cho học sinh</span>
-            <span className="text-[11px] italic text-slate-500">Bấm để chuyển đổi góc nhìn so sánh</span>
-          </div>
+    <EditorialSectionFrame meta={meta}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* Left Column: Benefit-Cost Chart Comparison */}
+        <div className="lg:col-span-7 space-y-4">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
+            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
+              Đồ thị so sánh: Lợi ích cảm nhận vs Chi phí bỏ ra (Net Value)
+            </span>
 
-          <div className="grid grid-cols-2 gap-3">
-            {/* Product A: High Tech Bottle */}
-            <button
-              onClick={() => setSelectedProduct('smart')}
-              className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-44 ${
-                selectedProduct === 'smart'
-                  ? 'bg-slate-800 border-amber-600 ring-1 ring-amber-500'
-                  : 'bg-slate-900 border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-400">Mẫu A · Công Nghệ Cao</span>
-                  <span className="text-[10px] font-mono bg-amber-950 text-amber-300 px-1.5 py-0.5 rounded font-bold">850.000đ</span>
-                </div>
-                <h4 className="text-xs font-bold text-white mt-1">Bình LED Đo Nhiệt Độ AI</h4>
-                <ul className="text-[11px] text-slate-300 space-y-1 mt-2">
-                  <li>• Màn hình LED cảm ứng</li>
-                  <li>• Cần cắm sạc pin định kỳ</li>
-                  <li>• Nặng, vệ sinh phức tạp</li>
-                </ul>
-              </div>
-              <div className="text-[10px] font-semibold text-amber-300 bg-amber-950/60 p-1 rounded">
-                Chất lượng kỹ thuật cao nhưng giá đắt & phức tạp
-              </div>
-            </button>
-
-            {/* Product B: Simple Practical Bottle */}
-            <button
-              onClick={() => setSelectedProduct('simple')}
-              className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-44 ${
-                selectedProduct === 'simple'
-                  ? 'bg-slate-800 border-teal-500 ring-1 ring-teal-400'
-                  : 'bg-slate-900 border-slate-800 hover:border-slate-700'
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-teal-400">Mẫu B · Thực Dụng Bền Bỉ</span>
-                  <span className="text-[10px] font-mono bg-teal-950 text-teal-300 px-1.5 py-0.5 rounded font-bold">220.000đ</span>
-                </div>
-                <h4 className="text-xs font-bold text-white mt-1">Bình Inox Chân Không 316</h4>
-                <ul className="text-[11px] text-slate-300 space-y-1 mt-2">
-                  <li>• Giữ nhiệt 18h, chống tràn 100%</li>
-                  <li>• Dễ vệ sinh, chịu va đập</li>
-                  <li>• Không cần cắm sạc điện</li>
-                </ul>
-              </div>
-              <div className="text-[10px] font-semibold text-teal-300 bg-teal-950/60 p-1 rounded flex items-center gap-1">
-                <CheckCircle2 className="w-3 h-3 shrink-0" /> Giá trị tương đối vượt trội đối với học sinh
-              </div>
-            </button>
-          </div>
-
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-1">
-            <div className="flex items-center gap-2 text-white font-bold">
-              <Scale className="w-4 h-4 text-teal-400" />
-              <span>Chất lượng tương đối ≠ Chất lượng tuyệt đối</span>
+            <div className="w-full h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={BENEFIT_COST_DATA}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#334155' }} />
+                  <YAxis tick={{ fontSize: 10, fill: '#64748b' }} domain={[0, 100]} />
+                  <Tooltip 
+                    formatter={(val: any, name: any) => [`${val} điểm`, name === 'benefit' ? 'Lợi ích cảm nhận' : 'Chi phí & Bất tiện']}
+                    contentStyle={{ borderRadius: 8, fontSize: 11 }}
+                  />
+                  <Bar dataKey="benefit" name="benefit" fill="#0d9488" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="cost" name="cost" fill="#e11d48" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
             </div>
-            <p className="text-slate-300 text-[11px] leading-relaxed">
-              Khảo sát trên 3.000 đơn vị kinh doanh (PIMS): Lợi nhuận sinh ra từ <strong>giá trị tương đối mà khách hàng cảm nhận so với giá và so với giải pháp thay thế</strong>, chứ không đến từ việc nhồi nhét mọi thông số kỹ thuật đắt đỏ.
-            </p>
+
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-900">
+                <strong>Mẫu A (LED thông minh):</strong> Chi phí &amp; giá tiền (95đ) cao hơn lợi ích thực (85đ) → Giá trị tương đối âm đối với học sinh.
+              </div>
+              <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-teal-900">
+                <strong>Mẫu B (Inox chân không):</strong> Lợi ích thực dụng (90đ) vượt xa chi phí bỏ ra (35đ) → Khách hàng quyết định lựa chọn!
+              </div>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700">
+            <strong>Bằng chứng lịch sử (PIMS):</strong> Khảo sát hơn 3.000 đơn vị kinh doanh cho thấy lợi nhuận đến từ chất lượng tương đối và giá trị tương đối cảm nhận được, chứ không đến từ việc nhồi nhét mọi thông số kỹ thuật đắt đỏ.
           </div>
         </div>
 
-        {/* Right Column: Historical Nokia Case with Real Photo */}
-        <div className="lg:col-span-5 flex flex-col justify-between space-y-3">
-          <div className="relative rounded-xl overflow-hidden border border-slate-800 h-40 group shadow-md">
+        {/* Right Column: Historical Nokia Photo with Correct Dating */}
+        <div className="lg:col-span-5 space-y-4">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-48">
             <img 
               src="/images/nokia-phone.jpg" 
-              alt="Classic Nokia Mobile Phone Era" 
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt="Historical Nokia Phone Era 2003" 
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-2.5">
-              <span className="text-[10px] text-slate-200">
-                Nokia từng thống lĩnh nhờ GSM và độ bền, nhưng sụt giảm khi thị hiếu chuyển sang nắp gập & camera
+            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
+              <span className="text-xs text-white">
+                Ảnh tư liệu Nokia (Niên đại: 1998 – 2004): Lợi thế kỹ thuật GSM không tự bảo đảm vị thế cạnh tranh vĩnh viễn
               </span>
             </div>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                <AlertOctagon className="w-4 h-4 text-amber-400" /> Bài học lịch sử: Nokia (2003)
-              </span>
-              <span className="text-[10px] font-mono text-slate-400">Thị phần giảm: 35% → &lt;30%</span>
+          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-2 text-xs">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+              <span className="font-bold text-slate-900 uppercase font-mono">Bài học lịch sử: Nokia</span>
+              <span className="text-amber-800 font-mono font-bold">Thị phần: 35% → &lt;30% (2003)</span>
             </div>
-            <p className="text-[11px] text-slate-300 leading-snug">
-              Khác biệt hóa có tính chất tương đối và luôn biến đổi theo thị trường. Những thuộc tính từng tạo nên lợi thế vượt trội sẽ mất giá trị nếu không theo kịp nhu cầu thực tế của khách hàng.
+            <p className="text-slate-600 leading-relaxed">
+              Nokia từng dẫn đầu nhờ GSM và độ bền. Nhưng khi kỳ vọng thị trường chuyển sang <strong>điện thoại nắp gập và tích hợp máy ảnh</strong>, Nokia chậm cải tiến khiến thị phần sụt giảm. Khác biệt hóa luôn có tính tương đối và biến đổi theo thời gian.
             </p>
           </div>
         </div>
       </div>
-    </SlideLayout>
+    </EditorialSectionFrame>
   );
 };
