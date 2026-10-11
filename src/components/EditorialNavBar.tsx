@@ -14,16 +14,17 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
   const scrollProgress = useScrollProgress();
   const navContainerRef = useRef<HTMLDivElement>(null);
 
-  const [currentFont, setCurrentFont] = useState<'inter' | 'jakarta' | 'montserrat' | 'vietnam'>('inter');
+  const [currentFont, setCurrentFont] = useState<'montserrat' | 'inter' | 'jakarta' | 'vietnam'>('montserrat');
   const [showFontMenu, setShowFontMenu] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem('chapter6_font') as 'inter' | 'jakarta' | 'montserrat' | 'vietnam';
+    const saved = localStorage.getItem('chapter6_font') as 'montserrat' | 'inter' | 'jakarta' | 'vietnam';
     if (saved) {
       setCurrentFont(saved);
       document.documentElement.setAttribute('data-font', saved);
     } else {
-      document.documentElement.setAttribute('data-font', 'inter');
+      setCurrentFont('montserrat');
+      document.documentElement.setAttribute('data-font', 'montserrat');
     }
   }, []);
 
