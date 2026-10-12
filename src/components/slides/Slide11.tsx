@@ -8,103 +8,142 @@ export const Slide11: React.FC = () => {
 
   return (
     <EditorialSectionFrame meta={meta}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
         {/* Left Column: Layered Assembly Diagram */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
-              Sơ đồ sản phẩm “lắp ghép” từng lớp (Từ công nghệ lõi đến giải pháp hoàn chỉnh):
-            </span>
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <span className="text-xs sm:text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
+                  Sản phẩm “lắp ghép” từng lớp (Từ công nghệ lõi đến giải pháp hoàn chỉnh)
+                </span>
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+                  Chọn cấp độ
+                </span>
+              </div>
 
-            {/* Interactive Layer Switches */}
-            <div className="grid grid-cols-3 gap-2">
-              <button
-                onClick={() => setActiveLayer(1)}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  activeLayer === 1 
-                    ? 'bg-teal-50 border-teal-600 text-teal-800 font-bold shadow-2xs' 
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                <span className="text-[11px] block font-mono">Lớp 1</span>
-                <span className="text-xs">Công nghệ lõi</span>
-              </button>
-              <button
-                onClick={() => setActiveLayer(2)}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  activeLayer === 2 
-                    ? 'bg-teal-50 border-teal-600 text-teal-800 font-bold shadow-2xs' 
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                <span className="text-[11px] block font-mono">Lớp 2</span>
-                <span className="text-xs">+ Phần mềm &amp; Tương thích</span>
-              </button>
-              <button
-                onClick={() => setActiveLayer(3)}
-                className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
-                  activeLayer === 3 
-                    ? 'bg-teal-50 border-teal-600 text-teal-800 font-bold shadow-2xs' 
-                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
-                }`}
-              >
-                <span className="text-[11px] block font-mono">Lớp 3</span>
-                <span className="text-xs">+ Hỗ trợ &amp; Bảo hành</span>
-              </button>
-            </div>
+              {/* Interactive Layer Switches */}
+              <div className="grid grid-cols-3 gap-2.5">
+                <button
+                  onClick={() => setActiveLayer(1)}
+                  className={`p-3 sm:p-3.5 rounded-2xl border text-center transition-all duration-200 cursor-pointer ${
+                    activeLayer === 1 
+                      ? 'bg-teal-50/90 border-teal-600 text-teal-900 font-bold ring-2 ring-teal-500/25 shadow-sm' 
+                      : 'bg-slate-50/80 border-slate-200 text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  <span className="text-xs block font-mono font-bold text-teal-700 uppercase">Lớp 1</span>
+                  <span className="text-xs sm:text-sm font-semibold mt-0.5 block">Công nghệ lõi</span>
+                </button>
+                <button
+                  onClick={() => setActiveLayer(2)}
+                  className={`p-3 sm:p-3.5 rounded-2xl border text-center transition-all duration-200 cursor-pointer ${
+                    activeLayer === 2 
+                      ? 'bg-teal-50/90 border-teal-600 text-teal-900 font-bold ring-2 ring-teal-500/25 shadow-sm' 
+                      : 'bg-slate-50/80 border-slate-200 text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  <span className="text-xs block font-mono font-bold text-teal-700 uppercase">Lớp 2</span>
+                  <span className="text-xs sm:text-sm font-semibold mt-0.5 block">+ Phần mềm chuẩn</span>
+                </button>
+                <button
+                  onClick={() => setActiveLayer(3)}
+                  className={`p-3 sm:p-3.5 rounded-2xl border text-center transition-all duration-200 cursor-pointer ${
+                    activeLayer === 3 
+                      ? 'bg-teal-50/90 border-teal-600 text-teal-900 font-bold ring-2 ring-teal-500/25 shadow-sm' 
+                      : 'bg-slate-50/80 border-slate-200 text-slate-700 hover:bg-white'
+                  }`}
+                >
+                  <span className="text-xs block font-mono font-bold text-teal-700 uppercase">Lớp 3</span>
+                  <span className="text-xs sm:text-sm font-semibold mt-0.5 block">+ Hỗ trợ toàn diện</span>
+                </button>
+              </div>
 
-            {/* Visual Assembly Canvas */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3 min-h-[160px] flex flex-col justify-center text-xs">
-              {activeLayer >= 1 && (
-                <div className="p-2.5 rounded-lg bg-white border border-slate-200 shadow-2xs animate-fadeIn">
-                  <span className="font-bold text-slate-900 block font-mono text-[11px]">LỚP 1: CÔNG NGHỆ LÕI (CORE HARDWARE)</span>
-                  <p className="text-slate-600 text-[11px] mt-0.5">Vi xử lý nhanh hơn, cell pin dung lượng lớn hơn. Nhưng khách hàng không thể cắm trực tiếp cell pin trần vào sinh hoạt hàng ngày!</p>
-                </div>
-              )}
-              {activeLayer >= 2 && (
-                <div className="p-2.5 rounded-lg bg-teal-50/70 border border-teal-200 shadow-2xs animate-fadeIn">
-                  <span className="font-bold text-teal-900 block font-mono text-[11px]">LỚP 2: HỆ ĐIỀU HÀNH, PHẦN MỀM &amp; CHUẨN TƯƠNG THÍCH</span>
-                  <p className="text-teal-800 text-[11px] mt-0.5">Hệ điều hành tương thích, driver điều khiển, phần mềm ứng dụng, cổng kết nối tiêu chuẩn.</p>
-                </div>
-              )}
-              {activeLayer >= 3 && (
-                <div className="p-2.5 rounded-lg bg-emerald-50/70 border border-emerald-200 shadow-2xs animate-fadeIn">
-                  <span className="font-bold text-emerald-900 block font-mono text-[11px]">LỚP 3: DỊCH VỤ HỖ TRỢ, BẢO HÀNH &amp; KÊNH PHÂN PHỐI</span>
-                  <p className="text-emerald-800 text-[11px] mt-0.5">Mạng lưới trung tâm bảo hành, tài liệu đào tạo, tổng đài hỗ trợ 24/7 và chính sách đổi trả khi phát sinh sự cố.</p>
-                </div>
-              )}
-            </div>
+              {/* Visual Assembly Layers Container */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 min-h-[200px] flex flex-col justify-center">
+                {activeLayer >= 1 && (
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                    <span className="font-bold text-slate-900 block font-mono text-xs sm:text-sm uppercase tracking-wide">
+                      LỚP 1: CÔNG NGHỆ LÕI (CORE HARDWARE / ALGORITHM)
+                    </span>
+                    <p className="text-xs sm:text-[14px] text-slate-600 mt-1 leading-relaxed">
+                      Vi xử lý silicon nhanh hơn, cell pin dung lượng cao hơn hoặc thuật toán phân tích. Khách hàng thông thường không thể dùng trực tiếp linh kiện bán dẫn trần này!
+                    </p>
+                  </div>
+                )}
+                {activeLayer >= 2 && (
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-teal-50/80 border border-teal-200 shadow-2xs">
+                    <span className="font-bold text-teal-950 block font-mono text-xs sm:text-sm uppercase tracking-wide">
+                      LỚP 2: HỆ ĐIỀU HÀNH, PHẦN MỀM &amp; CHUẨN TƯƠNG THÍCH
+                    </span>
+                    <p className="text-xs sm:text-[14px] text-teal-900 mt-1 leading-relaxed">
+                      Hệ điều hành tương thích, driver điều khiển, phần mềm ứng dụng giao diện thân thiện, chuẩn kết nối phần cứng và API mở.
+                    </p>
+                  </div>
+                )}
+                {activeLayer >= 3 && (
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 shadow-2xs">
+                    <span className="font-bold text-emerald-950 block font-mono text-xs sm:text-sm uppercase tracking-wide">
+                      LỚP 3: DỊCH VỤ HỖ TRỢ, BẢO HÀNH &amp; KÊNH PHÂN PHỐI
+                    </span>
+                    <p className="text-xs sm:text-[14px] text-emerald-900 mt-1 leading-relaxed">
+                      Mạng lưới trạm bảo hành, tài liệu đào tạo người dùng, tổng đài hỗ trợ 24/7 và chính sách cam kết đổi trả khi phát sinh sự cố kỹ thuật.
+                    </p>
+                  </div>
+                )}
+              </div>
 
-            <div className="text-[11px] text-slate-500 font-mono text-center">
-              Công nghệ lõi + Phần mềm + Tương thích + Hỗ trợ = Giải pháp thương mại
+              {/* Whole Product Formula Pill */}
+              <div className="p-3 rounded-xl bg-teal-50 border border-teal-200 text-xs sm:text-sm text-teal-900 font-mono font-medium text-center">
+                Công nghệ lõi + Phần mềm + Chuẩn tương thích + Dịch vụ hỗ trợ = <strong>Giải pháp toàn vẹn (Whole Product)</strong>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: 3 High-Tech Buying Factors */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3 text-xs">
-            <span className="font-bold text-slate-900 uppercase font-mono">
-              Ba yếu tố tâm lý khi mua công nghệ cao
-            </span>
-            <div className="space-y-2">
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
-                <strong className="text-teal-800 block font-mono">1. Khác biệt công nghệ:</strong>
-                <span className="text-slate-600 text-[11px]">Người mua có nhận thấy ưu thế vượt trội rõ rệt hay xem các giải pháp đều na ná nhau?</span>
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
+              <span className="font-bold text-xs sm:text-sm text-slate-900 uppercase font-mono tracking-wider block pb-2 border-b border-slate-100">
+                Ba yếu tố tâm lý khi mua công nghệ cao
+              </span>
+
+              {/* 3 High Tech Buying Factors */}
+              <div className="space-y-3">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                  <strong className="text-xs sm:text-sm font-bold text-teal-900 block font-mono">
+                    1. Mức độ khác biệt công nghệ:
+                  </strong>
+                  <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
+                    Khách hàng có nhận thấy ưu thế hiệu năng vượt trội rõ rệt, hay họ cảm thấy mọi thương hiệu đều na ná nhau?
+                  </p>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                  <strong className="text-xs sm:text-sm font-bold text-amber-900 block font-mono">
+                    2. Tốc độ đổi mới quá nhanh:
+                  </strong>
+                  <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
+                    Tâm lý lo sợ sản phẩm vừa mua xong sẽ lập tức bị lỗi thời khiến khách hàng có xu hướng chần chừ và trì hoãn giải ngân.
+                  </p>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                  <strong className="text-xs sm:text-sm font-bold text-rose-900 block font-mono">
+                    3. Chi phí chuyển đổi (Switching Costs):
+                  </strong>
+                  <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
+                    Bao gồm chi phí đào tạo lại nhân sự, mua phụ kiện mới và nguy cơ gián đoạn vận hành hệ sinh thái hiện hữu.
+                  </p>
+                </div>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
-                <strong className="text-amber-800 block font-mono">2. Tốc độ đổi mới nhanh:</strong>
-                <span className="text-slate-600 text-[11px]">Nỗi sợ mua xong sẽ sớm bị lỗi thời khiến khách hàng có xu hướng trì hoãn quyết định mua.</span>
-              </div>
-              <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-100">
-                <strong className="text-rose-800 block font-mono">3. Chi phí chuyển đổi (Switching costs):</strong>
-                <span className="text-slate-600 text-[11px]">Chi phí đào tạo nhân viên, mua lại phụ kiện và rủi ro gián đoạn hệ thống hiện tại.</span>
+
+              {/* Strategic Reflection Note */}
+              <div className="p-4 rounded-xl bg-slate-100 border border-slate-200 text-xs sm:text-[13px] text-slate-800 leading-relaxed">
+                <strong className="font-semibold text-slate-900">Câu hỏi định hướng:</strong> Doanh nghiệp nên tự dấn thân xây dựng toàn bộ chuỗi sản phẩm hay chọn cấp phép sở hữu trí tuệ (IP Licensing) cho các hãng lớn?
               </div>
             </div>
-          </div>
-
-          <div className="p-3.5 rounded-xl bg-slate-100 border border-slate-200 text-xs text-slate-700">
-            <strong>Câu hỏi chiến lược:</strong> Doanh nghiệp nên tự đầu tư sản xuất toàn bộ giải pháp hay nhượng quyền sở hữu trí tuệ cho các đối tác?
           </div>
         </div>
       </div>

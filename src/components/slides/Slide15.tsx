@@ -18,18 +18,18 @@ interface RogerAttribute {
 const ROGERS_ATTRIBUTES: RogerAttribute[] = [
   {
     id: 'relative-advantage',
-    name: '1. Lợi thế tương đối',
+    name: '1. Lợi thế tương đối (Relative Advantage)',
     shortTag: 'Lợi thế',
     correlation: 'positive',
     icon: Zap,
     academicDef: 'Mức độ giải pháp mới được nhận thức là ưu việt hơn các giải pháp thay thế tiền nhiệm (về kinh tế, thời gian, sự tiện lợi).',
     desc: 'Khách hàng không mua công nghệ mới nếu nó không giải quyết được vấn đề cũ nhanh hơn, rẻ hơn hoặc thỏa mãn hơn đáng kể.',
-    realExample: 'Xe đạp điện: Đi nhanh hơn xe đạp cơ truyền thống khi ngược gió, tiết kiệm 80% chi phí xăng so với xe máy số.',
-    diffusionImpact: 'Tương quan thuận chiều mạnh nhất với tốc độ lan tỏa. Nếu không có lợi thế rõ rệt, người dùng sẽ không đổi thói quen.'
+    realExample: 'Xe đạp điện: Đi nhanh hơn xe đạp cơ truyền thống khi leo dốc, tiết kiệm 80% chi phí xăng so với xe máy số.',
+    diffusionImpact: 'Tương quan thuận chiều mạnh nhất với tốc độ lan tỏa. Nếu không có lợi thế rõ rệt, người dùng sẽ không bao giờ đổi thói quen.'
   },
   {
     id: 'compatibility',
-    name: '2. Tính tương thích',
+    name: '2. Tính tương thích (Compatibility)',
     shortTag: 'Tương thích',
     correlation: 'positive',
     icon: Puzzle,
@@ -40,29 +40,29 @@ const ROGERS_ATTRIBUTES: RogerAttribute[] = [
   },
   {
     id: 'complexity',
-    name: '3. Độ phức tạp',
+    name: '3. Độ phức tạp (Complexity)',
     shortTag: 'Độ phức tạp',
     correlation: 'negative',
     icon: BrainCircuit,
-    academicDef: 'Mức độ khó khăn cảm nhận trong việc hiểu cách vận hành và sử dụng công nghệ đổi mới.',
+    academicDef: 'Mức độ khó khăn cảm nhận trong việc hiểu cách vận hành và làm chủ công nghệ đổi mới.',
     desc: 'Thuộc tính DUY NHẤT có tác động nghịch chiều. Càng đòi hỏi đọc tài liệu hướng dẫn dài dòng, người dùng càng dễ nản lòng và từ bỏ.',
     realExample: 'Xe đạp điện: Bảng điều khiển tối giản chỉ hiển thị mức pin và nút bấm ga đơn giản như xe đạp thường, không đòi hỏi đào tạo phức tạp.',
     diffusionImpact: 'Tương quan NGHỊCH CHIỀU. Giảm độ phức tạp tương đương với việc tháo gỡ rào cản nhận thức lớn nhất của khách hàng.'
   },
   {
     id: 'trialability',
-    name: '4. Khả năng dùng thử',
+    name: '4. Khả năng dùng thử (Trialability)',
     shortTag: 'Dùng thử',
     correlation: 'positive',
     icon: PlayCircle,
     academicDef: 'Mức độ mà một đổi mới có thể được thử nghiệm ở quy mô giới hạn mà không phải trả giá bằng cam kết tài chính lớn.',
     desc: 'Khả năng cho phép người mua trải nghiệm trước giải tỏa cảm giác bấp bênh và rủi ro tâm lý khi tiếp cận cái mới.',
-    realExample: 'Xe đạp điện: Đại lý cho khách hàng đạp thử một vòng quanh khuôn viên hoặc chính sách đổi trả miễn phí trong 7 ngày đầu.',
+    realExample: 'Xe đạp điện: Đại lý cho khách hàng đạp thử một vòng quanh khuôn viên hoặc áp dụng chính sách đổi trả miễn phí trong 7 ngày đầu.',
     diffusionImpact: 'Tương quan thuận. Đặc biệt quan trọng đối với nhóm người chấp nhận sớm (Early Adopters) để ra quyết định nhanh hơn.'
   },
   {
     id: 'observability',
-    name: '5. Khả năng quan sát',
+    name: '5. Khả năng quan sát (Observability)',
     shortTag: 'Quan sát',
     correlation: 'positive',
     icon: Eye,
@@ -84,110 +84,126 @@ export const Slide15: React.FC = () => {
     <EditorialSectionFrame meta={meta}>
       <div className="space-y-6">
         {/* Revolving Attributes Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left Orbit Switcher: 5 attributes */}
-          <div className="lg:col-span-5 space-y-2">
-            <span className="text-xs font-mono uppercase font-bold text-slate-500 block mb-2">
-              Mô Hình Everett Rogers (1995) · Chọn thuộc tính:
-            </span>
-            {ROGERS_ATTRIBUTES.map((attr) => {
-              const Icon = attr.icon;
-              const isSelected = selectedId === attr.id;
-              return (
-                <button
-                  key={attr.id}
-                  onClick={() => setSelectedId(attr.id)}
-                  className={`w-full p-3.5 rounded-xl border text-left transition-all cursor-pointer flex items-center justify-between ${
-                    isSelected
-                      ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
-                      : 'bg-white border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${
-                      isSelected ? 'bg-teal-700 text-white' : 'bg-slate-100 text-slate-600'
-                    }`}>
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-slate-900">{attr.name}</div>
-                      <div className="text-[11px] text-slate-500 line-clamp-1">{attr.desc}</div>
-                    </div>
-                  </div>
-                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded ${
-                    attr.correlation === 'positive'
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                      : 'bg-rose-50 text-rose-700 border border-rose-200'
-                  }`}>
-                    {attr.correlation === 'positive' ? '+ Thuận chiều' : '− Nghịch chiều'}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner h-full">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-3 h-full flex flex-col justify-between">
+                <div>
+                  <span className="text-xs sm:text-sm font-mono uppercase font-bold text-slate-900 tracking-wider block mb-3 pb-2 border-b border-slate-100">
+                    Mô Hình Everett Rogers (1995) · Chọn thuộc tính:
                   </span>
-                </button>
-              );
-            })}
+                  <div className="space-y-2.5">
+                    {ROGERS_ATTRIBUTES.map((attr) => {
+                      const Icon = attr.icon;
+                      const isSelected = selectedId === attr.id;
+                      return (
+                        <button
+                          key={attr.id}
+                          onClick={() => setSelectedId(attr.id)}
+                          className={`w-full p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                            isSelected
+                              ? 'bg-teal-50/90 border-teal-600 ring-2 ring-teal-500/25 shadow-sm translate-y-[-1px]'
+                              : 'bg-slate-50/80 border-slate-200 hover:border-teal-300 hover:bg-white'
+                          }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className={`p-2 rounded-xl shrink-0 ${
+                              isSelected ? 'bg-teal-700 text-white' : 'bg-slate-200/80 text-slate-700'
+                            }`}>
+                              <Icon className="w-4 h-4" />
+                            </div>
+                            <div>
+                              <div className="text-xs sm:text-sm font-bold text-slate-900">{attr.name}</div>
+                              <div className="text-xs text-slate-500 line-clamp-1 mt-0.5">{attr.desc}</div>
+                            </div>
+                          </div>
+                          <span className={`text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full shrink-0 ml-2 ${
+                            attr.correlation === 'positive'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                              : 'bg-rose-100 text-rose-800 border border-rose-200'
+                          }`}>
+                            {attr.correlation === 'positive' ? '+ Thuận' : '− Nghịch'}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-mono text-center">
+                  5 thuộc tính giải thích tới 49–87% tốc độ lan tỏa của đổi mới
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Right: Central Product Focus & Real-world Deep Dive */}
-          <div className="lg:col-span-7 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="p-2.5 rounded-xl bg-teal-800 text-white shadow-xs">
-                    <CurrentIcon className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-slate-900">
-                      {current.name}
-                    </h3>
-                    <span className="text-[11px] font-mono text-teal-700">
-                      Tác động tới tỷ lệ chấp nhận thị trường
+          <div className="lg:col-span-7 flex flex-col justify-between">
+            <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner h-full flex flex-col justify-between">
+              <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm flex flex-col justify-between h-full space-y-5">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 rounded-xl bg-teal-800 text-white shadow-xs">
+                        <CurrentIcon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                          {current.name}
+                        </h3>
+                        <span className="text-xs font-mono text-teal-800 font-semibold">
+                          Tác động tới tỷ lệ và tốc độ chấp nhận thị trường
+                        </span>
+                      </div>
+                    </div>
+
+                    <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full ${
+                      current.correlation === 'positive'
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                        : 'bg-rose-100 text-rose-800 border border-rose-300'
+                    }`}>
+                      {current.correlation === 'positive' ? 'Thúc đẩy lan tỏa (+)' : 'Rào cản tâm lý (−)'}
                     </span>
                   </div>
+
+                  {/* Academic definition */}
+                  <div className="space-y-1.5">
+                    <span className="font-bold text-slate-900 font-mono text-xs uppercase tracking-wide block">
+                      ĐỊNH NGHĨA HỌC THUẬT:
+                    </span>
+                    <p className="text-xs sm:text-[14px] text-slate-800 leading-relaxed bg-slate-50/80 p-4 rounded-xl border border-slate-200">
+                      {current.academicDef}
+                    </p>
+                  </div>
+
+                  {/* Real World Product Illustration (E-bike & Lifestyle) */}
+                  <div className="p-4 rounded-xl bg-teal-50/80 border border-teal-200 space-y-1.5">
+                    <div className="font-bold text-teal-950 font-mono text-xs uppercase flex items-center gap-1.5">
+                      <ArrowRight className="w-4 h-4 text-teal-700" />
+                      MINH HỌA THỰC TIỄN (XE ĐẠP ĐIỆN ĐÔ THỊ):
+                    </div>
+                    <p className="text-teal-950 leading-relaxed font-medium text-xs sm:text-[14px]">
+                      {current.realExample}
+                    </p>
+                  </div>
+
+                  {/* Diffusion Impact */}
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
+                    <div className="font-bold text-slate-900 font-mono text-xs uppercase">
+                      Ý NGHĨA CHO ĐƯỜNG CONG LAN TỎA (S-CURVE):
+                    </div>
+                    <p className="text-slate-700 leading-relaxed text-xs sm:text-[14px]">
+                      {current.diffusionImpact}
+                    </p>
+                  </div>
                 </div>
 
-                <span className={`text-xs font-mono font-bold px-2.5 py-1 rounded-full ${
-                  current.correlation === 'positive'
-                    ? 'bg-emerald-100 text-emerald-800'
-                    : 'bg-rose-100 text-rose-800'
-                }`}>
-                  {current.correlation === 'positive' ? 'Thúc đẩy lan tỏa' : 'Rào cản cản trở'}
-                </span>
-              </div>
-
-              {/* Academic definition */}
-              <div className="space-y-1.5 text-xs">
-                <div className="font-bold text-slate-700 font-mono text-[11px]">
-                  ĐỊNH NGHĨA HỌC THUẬT:
+                {/* Bottom Citation */}
+                <div className="pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
+                  Nguồn: Everett M. Rogers, <em>Diffusion of Innovations</em> (Free Press, 5th Edition).
                 </div>
-                <p className="text-slate-600 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                  {current.academicDef}
-                </p>
               </div>
-
-              {/* Real World Product Illustration (E-bike & Fintech) */}
-              <div className="p-4 rounded-xl bg-teal-50/60 border border-teal-200 text-xs space-y-1.5">
-                <div className="font-bold text-teal-950 font-mono text-[11px] flex items-center gap-1.5">
-                  <ArrowRight className="w-3.5 h-3.5 text-teal-700" />
-                  VÍ DỤ GẦN GŨI (XE ĐẠP ĐIỆN ĐÔ THỊ):
-                </div>
-                <p className="text-teal-900 leading-relaxed font-medium">
-                  {current.realExample}
-                </p>
-              </div>
-
-              {/* Diffusion Impact */}
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
-                <div className="font-bold text-slate-800 font-mono text-[11px]">
-                  Ý NGHĨA CHO ĐƯỜNG CONG LAN TỎA (S-CURVE):
-                </div>
-                <p className="text-slate-600 leading-relaxed text-[11px]">
-                  {current.diffusionImpact}
-                </p>
-              </div>
-            </div>
-
-            {/* Bottom Citation */}
-            <div className="pt-4 border-t border-slate-100 text-[11px] text-slate-400 font-mono">
-              Nguồn: Everett M. Rogers, Diffusion of Innovations (Free Press, tái bản).
             </div>
           </div>
         </div>

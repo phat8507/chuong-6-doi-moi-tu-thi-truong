@@ -8,36 +8,41 @@ interface B2BStakeholder {
   title: string;
   cncPriority: string;
   riskConcern: string;
+  badgeColor: string;
 }
 
 const STAKEHOLDERS: B2BStakeholder[] = [
   {
     id: "users",
-    role: "Người dùng (Users)",
+    role: "1. Người dùng (Users)",
     title: "Công nhân vận hành & Thợ cơ khí đứng máy",
-    cncPriority: "Bảng điều khiển trực quan, lập trình gá đặt nhanh, ít mỏi mắt và an toàn lao động tuyệt đối khi thao tác ca đêm.",
-    riskConcern: "Lo sợ máy mới khó dùng, dễ phát sinh thao tác lỗi làm hỏng phôi kim loại."
+    cncPriority: "Bảng điều khiển trực quan, lập trình gá đặt nhanh chóng, ít gây mỏi mắt và bảo đảm an toàn lao động tuyệt đối khi thao tác ca đêm.",
+    riskConcern: "Lo sợ máy mới quá phức tạp, giao diện khó hiểu dẫn đến thao tác sai làm hỏng phôi kim loại đắt tiền.",
+    badgeColor: "teal"
   },
   {
     id: "gatekeepers",
-    role: "Người giữ cổng (Gatekeepers)",
-    title: "Chuyên viên bảo trì cơ điện & Phòng IT",
-    cncPriority: "Sàng lọc tiêu chuẩn kỹ thuật điện áp, tính sẵn có của linh kiện thay thế tại Việt Nam và tài liệu hướng dẫn kỹ thuật rõ ràng.",
-    riskConcern: "Từ chối hồ sơ nhà thầu nếu máy dùng linh kiện độc quyền khó tìm hoặc không tương thích nguồn điện xưởng."
+    role: "2. Người giữ cổng (Gatekeepers)",
+    title: "Chuyên viên bảo trì cơ điện & Phòng IT xưởng",
+    cncPriority: "Sàng lọc tiêu chuẩn kỹ thuật điện áp 3 pha, tính sẵn có của linh kiện thay thế tại Việt Nam và tài liệu hướng dẫn kỹ thuật chi tiết.",
+    riskConcern: "Sẽ thẳng thừng loại hồ sơ nhà thầu nếu máy dùng linh kiện độc quyền khó tìm hoặc không tương thích nguồn điện lưới xưởng.",
+    badgeColor: "blue"
   },
   {
     id: "influencers",
-    role: "Người ảnh hưởng (Influencers)",
-    title: "Kỹ sư trưởng phòng R&D & Trưởng phòng Kỹ thuật",
-    cncPriority: "Đánh giá dung sai sai số cơ khí (&lt;0.01mm), tốc độ cắt gọt và độ ổn định khi gia công vật liệu hợp kim cứng.",
-    riskConcern: "Lo ngại máy không đạt chứng nhận chất lượng quốc tế của khách hàng xuất khẩu."
+    role: "3. Người ảnh hưởng (Influencers)",
+    title: "Kỹ sư trưởng phòng R&D & Trưởng ban Kỹ thuật",
+    cncPriority: "Đánh giá dung sai sai số cơ khí siêu nhỏ (&lt;0.01mm), tốc độ trục chính cắt gọt và độ ổn định khi gia công hợp kim cứng.",
+    riskConcern: "Lo ngại máy không đạt chứng nhận dung sai quốc tế, gây nguy cơ bị đối tác xuất khẩu hủy đơn hàng.",
+    badgeColor: "indigo"
   },
   {
     id: "buyers",
-    role: "Bên mua (Buyers)",
-    title: "Giám đốc tài chính & Trưởng phòng Mua hàng",
-    cncPriority: "Đàm phán tổng chi phí sở hữu (TCO), tiến độ giải ngân trả chậm, chính sách bảo hành 2 năm và cam kết khấu hao.",
-    riskConcern: "Máy tốt về thông số nhưng thời gian hoàn vốn (ROI) quá lâu sẽ bị bác bỏ."
+    role: "4. Bên mua (Buyers / Deciders)",
+    title: "Giám đốc tài chính (CFO) & Trưởng phòng Mua hàng",
+    cncPriority: "Đàm phán tổng chi phí sở hữu (TCO), tiến độ giải ngân trả chậm linh hoạt, cam kết bảo hành 2 năm và thời gian hoàn vốn.",
+    riskConcern: "Dù máy tốt về mặt kỹ thuật nhưng giá thành quá cao, ROI vượt quá 3 năm thì hợp đồng vẫn sẽ bị bác bỏ lập tức.",
+    badgeColor: "amber"
   }
 ];
 
@@ -49,72 +54,108 @@ export const Slide09: React.FC = () => {
 
   return (
     <EditorialSectionFrame meta={meta}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
         {/* Left Column: 4-Party Network Diagram & CNC Machine Purchasing Scenario */}
-        <div className="lg:col-span-7 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
-              Sơ đồ mạng lưới 4 bên: Chọn vai trò để hiện mối quan tâm khi mua máy CNC
-            </span>
-
-            {/* 4 Roles Interactive Network */}
-            <div className="grid grid-cols-2 gap-2.5">
-              {STAKEHOLDERS.map((stk) => {
-                const isSelected = selectedRole === stk.id;
-                return (
-                  <button
-                    key={stk.id}
-                    onClick={() => setSelectedRole(stk.id)}
-                    className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-24 ${
-                      isSelected
-                        ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
-                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
-                    }`}
-                  >
-                    <span className="text-xs font-bold text-slate-900">{stk.role}</span>
-                    <span className={`text-[10px] font-semibold ${isSelected ? 'text-teal-700' : 'text-slate-400'}`}>
-                      Bấm xem ưu tiên đánh giá →
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Selected Role Detail Box */}
-            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-2">
-              <span className="font-bold text-teal-900 font-mono uppercase block">
-                Mối quan tâm khi mua máy CNC: {current.title}
-              </span>
-              <div className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-800 leading-relaxed text-[11px]">
-                <strong className="text-slate-900">Ưu tiên kỹ thuật / vận hành:</strong> {current.cncPriority}
+        <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+                <span className="text-xs sm:text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
+                  Mạng lưới 4 bên mua sắm B2B (Đơn vị ra quyết định DMU)
+                </span>
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">
+                  Chọn bên tham gia
+                </span>
               </div>
-              <p className="text-[11px] text-rose-700">
-                <strong>Rào cản từ chối:</strong> {current.riskConcern}
-              </p>
+
+              {/* 4 Roles Interactive Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {STAKEHOLDERS.map((stk) => {
+                  const isSelected = selectedRole === stk.id;
+                  return (
+                    <button
+                      key={stk.id}
+                      onClick={() => setSelectedRole(stk.id)}
+                      className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[90px] ${
+                        isSelected
+                          ? 'bg-teal-50/90 border-teal-600 ring-2 ring-teal-500/30 shadow-sm translate-y-[-1px]'
+                          : 'bg-slate-50/80 border-slate-200 hover:border-teal-300 hover:bg-white'
+                      }`}
+                    >
+                      <span className="text-xs sm:text-sm font-bold text-slate-900">{stk.role}</span>
+                      <span className={`text-xs mt-1.5 font-medium ${isSelected ? 'text-teal-700 font-bold' : 'text-slate-400'}`}>
+                        {isSelected ? 'Đang chọn •' : 'Xem ưu tiên &amp; rào cản →'}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Selected Role Detail Box */}
+              <div className="p-5 rounded-2xl bg-teal-50/50 border border-teal-200/80 space-y-3.5">
+                <div className="flex items-center justify-between border-b border-teal-200/60 pb-2">
+                  <h3 className="text-sm sm:text-base font-bold text-teal-950 font-mono uppercase tracking-wide">
+                    {current.title}
+                  </h3>
+                  <span className="text-xs font-mono font-semibold px-2 py-0.5 rounded bg-teal-100 text-teal-800">
+                    Bối cảnh mua máy CNC
+                  </span>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white/95 border border-teal-100 space-y-1 shadow-2xs">
+                  <strong className="text-xs sm:text-sm font-bold text-slate-900 block font-mono">
+                    Ưu tiên kỹ thuật &amp; vận hành cốt lõi:
+                  </strong>
+                  <p 
+                    className="text-xs sm:text-[14px] text-slate-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: current.cncPriority }}
+                  />
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-rose-50/80 border border-rose-200 space-y-1">
+                  <strong className="text-xs sm:text-sm font-bold text-rose-900 block font-mono">
+                    Rào cản từ chối (Veto power):
+                  </strong>
+                  <p className="text-xs sm:text-[14px] text-rose-900/90 leading-relaxed">
+                    {current.riskConcern}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Industrial B2B Photo & Multi-sided Value Logic */}
-        <div className="lg:col-span-5 space-y-4">
-          <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-md h-48">
-            <img 
-              src="/images/b2b-cnc.jpg" 
-              alt="High Precision CNC Industrial Milling Equipment" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-slate-950/60 flex items-end p-3">
-              <span className="text-xs text-white">
-                Mua sắm thiết bị công nghiệp B2B: Người dùng, người trả tiền và người phê duyệt là các bên hoàn toàn khác nhau
-              </span>
-            </div>
-          </div>
+        <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
+            <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
+              {/* Industrial CNC Equipment Photo */}
+              <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-md h-52 sm:h-56 group">
+                <img 
+                  src="/images/b2b-cnc.jpg" 
+                  alt="High Precision CNC Industrial Milling Equipment" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex items-end p-4">
+                  <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
+                    <strong>Mua sắm thiết bị công nghiệp B2B:</strong> Người dùng cuối, người trả tiền và người phê duyệt tiêu chuẩn là các chủ thể hoàn toàn độc lập.
+                  </p>
+                </div>
+              </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs text-xs space-y-1.5">
-            <span className="font-bold text-slate-900 uppercase font-mono">So sánh với thị trường tiêu dùng:</span>
-            <p className="text-slate-600 leading-relaxed text-[11px]">
-              Trong B2C, người mua và người dùng thường là một. Trong B2B, một giải pháp công nghệ dù rất tốt vẫn có thể bị bác bỏ nếu người giữ cổng thấy khó bảo trì hoặc giám đốc tài chính thấy thời gian hoàn vốn chưa hợp lý.
-            </p>
+              {/* B2B vs B2C Strategic Comparison Card */}
+              <div className="p-4 sm:p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2.5">
+                <span className="font-bold text-xs sm:text-sm text-slate-900 uppercase font-mono tracking-wider block">
+                  Quy luật giá trị đa phương B2B:
+                </span>
+                <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
+                  Trong B2C, người ra quyết định và người thụ hưởng thường trùng khớp. Trong B2B, một sản phẩm công nghệ dẫu có tính năng kỹ thuật xuất sắc vẫn có thể bị thất bại thảm hại nếu <em>người giữ cổng</em> phát hiện khó tích hợp hoặc <em>giám đốc tài chính</em> thấy chi phí TCO vượt định mức.
+                </p>
+                <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-xs sm:text-[13px] text-teal-900 font-medium">
+                  <strong>Khuyến nghị thiết kế:</strong> Phải cung cấp tài liệu giá trị chuyên biệt cho từng mắt xích trong DMU.
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
