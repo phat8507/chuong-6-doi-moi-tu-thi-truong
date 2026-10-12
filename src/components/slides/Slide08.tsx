@@ -124,11 +124,11 @@ export const Slide08: React.FC = React.memo(() => {
         {/* Right Column: Real Context Photography & Persil Power Historical Case */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="editorial-card p-6 space-y-5">
-            {/* Watercolor Context Illustration with Lazy Loading */}
-            <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
+            {/* Documentary Photo: Two Consumer Contexts with Lazy Loading */}
+            <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-900 group">
               <img 
-                src="/images/consumer-two-personas-watercolor.jpg" 
-                alt="Watercolor illustration of Student with laptop and Urban runner in two lifestyle contexts" 
+                src="/images/consumer-two-contexts.jpg" 
+                alt="Hai bối cảnh người tiêu dùng thực tế: Sinh viên & Vận động viên chạy bộ" 
                 loading="lazy"
                 decoding="async"
                 className="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-500"

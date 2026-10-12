@@ -29,28 +29,14 @@ export const Slide21: React.FC = React.memo(() => {
             </span>
           </div>
 
-          {/* Innovation Closed Loop Watercolor Illustration */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center bg-amber-50/20 p-4 rounded-xl border border-slate-200/80">
-            <div className="md:col-span-5 rounded-xl overflow-hidden border border-slate-200 shadow-sm bg-white">
-              <img 
-                src="/images/innovation-closed-loop.png" 
-                alt="Watercolor closed loop innovation lifecycle diagram" 
-                loading="lazy"
-                decoding="async"
-                className="w-full h-48 sm:h-56 object-contain p-2"
-              />
-            </div>
-            <div className="md:col-span-7 space-y-2.5">
-              <span className="text-xs font-mono font-bold text-teal-800 uppercase tracking-wider block">
-                Vòng phản hồi khép kín (Closed-Loop Innovation Lifecycle)
-              </span>
-              <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
-                Đổi mới sáng tạo không phải là một đường thẳng tuyến tính kết thúc ở khâu bán hàng. Đó là một <strong>chu trình học hỏi liên tục</strong>: dữ liệu sử dụng thực tế từ thị trường phản hồi ngược về Bước 1 để khai phóng các cơ hội đổi mới tiếp theo.
-              </p>
-              <div className="text-xs font-mono text-slate-500">
-                5 quyết định cốt lõi liên kết chặt chẽ qua các vòng lặp phản hồi thị trường.
-              </div>
-            </div>
+          {/* Innovation Closed Loop Framework Overview */}
+          <div className="p-5 rounded-xl bg-teal-50/60 border border-teal-200/80 space-y-2">
+            <span className="text-xs font-mono font-bold text-teal-900 uppercase tracking-wider block">
+              Vòng phản hồi khép kín (Closed-Loop Innovation Lifecycle)
+            </span>
+            <p className="text-xs sm:text-[14px] text-slate-700 leading-relaxed">
+              Đổi mới sáng tạo không phải là một đường thẳng tuyến tính kết thúc ở khâu bán hàng. Đó là một <strong>chu trình học hỏi liên tục</strong>: dữ liệu và phản hồi thực tế từ thị trường liên tục quay ngược về Bước 1 để tái cấu trúc và khai phóng các cơ hội đổi mới tiếp theo.
+            </p>
           </div>
 
           {/* 5-Step Connected Chain */}

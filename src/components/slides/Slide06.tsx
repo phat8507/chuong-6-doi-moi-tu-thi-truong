@@ -190,18 +190,18 @@ export const Slide06: React.FC = React.memo(() => {
         {/* Right Column: Historical Nokia Photo with Correct Dating */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="editorial-card p-6 space-y-5">
-            {/* Relative Value Watercolor Illustration with Lazy Loading */}
-            <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-sm h-56 group bg-amber-50/20">
+            {/* Historical Nokia Documentary Photo with Lazy Loading */}
+            <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-sm h-56 group bg-slate-900">
               <img 
-                src="/images/relative-value-balance-watercolor.jpg" 
-                alt="Cán cân giá trị tương đối: Lợi ích cảm nhận vs Chi phí bỏ ra" 
+                src="/images/nokia-phone.jpg" 
+                alt="Nokia 6600 & Early 2000s Mobile Devices" 
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent flex items-end p-4">
                 <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                  <strong>Cán cân giá trị tương đối:</strong> Lợi ích thực dụng (Mẫu B) chiến thắng sản phẩm nhồi nhét tính năng đắt đỏ (Mẫu A).
+                  <strong>Nokia 6600 (Giai đoạn 2003):</strong> Dòng sản phẩm định hình thị trường trước khi các đối thủ tạo bước ngoặt thiết kế nắp gập.
                 </p>
               </div>
             </div>

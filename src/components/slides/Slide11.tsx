@@ -136,21 +136,6 @@ export const Slide11: React.FC = React.memo(() => {
                 </div>
               </div>
 
-              {/* Whole Product Watercolor Architecture Illustration */}
-              <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
-                <img 
-                  src="/images/whole-product-watercolor.jpg" 
-                  alt="Watercolor concentric diagram of Whole Product architecture (Core Tech -> Software -> Solution)" 
-                  loading="lazy"
-                  decoding="async"
-                  className="w-full h-44 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-3">
-                  <span className="text-[11px] sm:text-xs text-white font-mono font-medium">
-                    Mô hình 3 lớp đồng tâm: Công nghệ lõi → Hệ điều hành/Phần mềm → Giải pháp toàn diện
-                  </span>
-                </div>
-              </div>
 
               {/* Strategic Reflection Note */}
               <div className="p-4 rounded-xl bg-slate-100 border border-slate-200 text-xs sm:text-[13px] text-slate-800 leading-relaxed">

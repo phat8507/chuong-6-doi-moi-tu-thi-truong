@@ -126,18 +126,18 @@ export const Slide09: React.FC = React.memo(() => {
         {/* Right Column: Industrial B2B Photo & Multi-sided Value Logic */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="editorial-card p-6 space-y-5">
-            {/* DMU Stakeholders Watercolor Diagram with Lazy Loading */}
-            <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
+            {/* Industrial B2B Documentary Photo with Lazy Loading */}
+            <div className="relative rounded-2xl overflow-hidden border border-slate-200 shadow-sm bg-slate-900 group">
               <img 
-                src="/images/b2b-dmu-stakeholders.jpg" 
-                alt="Watercolor ink diagram showing B2B DMU 4 roles around industrial CNC equipment" 
+                src="/images/b2b-cnc.jpg" 
+                alt="Dây chuyền cơ khí CNC & Quyết định mua sắm công nghiệp B2B" 
                 loading="lazy"
                 decoding="async"
                 className="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent flex items-end p-4">
                 <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                  <strong>Mô hình DMU 4 bên:</strong> Người dùng, Người giữ cổng, Người ảnh hưởng và Bên mua cùng tương tác xung quanh quyết định đầu tư thiết bị.
+                  <strong>Thực tế công nghiệp:</strong> Quyết định mua sắm máy móc triệu USD trải qua nhiều cấp thẩm định kỹ thuật và tài chính nghiêm ngặt.
                 </p>
               </div>
             </div>

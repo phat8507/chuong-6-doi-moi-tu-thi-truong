@@ -161,21 +161,6 @@ export const Slide07: React.FC = React.memo(() => {
               </ul>
             </div>
 
-            {/* QFD Watercolor Illustration with Lazy Loading */}
-            <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
-              <img 
-                src="/images/qfd-voc-features.jpg" 
-                alt="QFD Diagram: Voice of Customer to Product Features in watercolor ink style" 
-                loading="lazy"
-                decoding="async"
-                className="w-full h-44 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-3">
-                <span className="text-[11px] sm:text-xs text-white font-mono font-medium">
-                  Sơ đồ minh họa: Dịch VOC → Ràng buộc kỹ thuật → Tính năng sản phẩm
-                </span>
-              </div>
-            </div>
 
             {/* Empirical Toyota Citation */}
             <div className="p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 text-xs sm:text-[13px] text-emerald-950 leading-relaxed">

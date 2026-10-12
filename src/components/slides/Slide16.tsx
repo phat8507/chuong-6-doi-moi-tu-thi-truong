@@ -209,23 +209,6 @@ export const Slide16: React.FC = React.memo(() => {
           </div>
         </div>
 
-        {/* Watercolor S-Curve & Rogers Categories Art Illustration with Lazy Loading */}
-        <div className="editorial-card p-3 rounded-2xl overflow-hidden bg-amber-50/20 group">
-          <div className="rounded-xl overflow-hidden relative">
-            <img 
-              src="/images/scurve-adopters-watercolor.jpg" 
-              alt="Watercolor artistic diagram of S-Curve and Rogers Adopter Categories" 
-              loading="lazy"
-              decoding="async"
-              className="w-full h-44 sm:h-52 object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
-              <span className="text-xs sm:text-sm text-white font-medium">
-                <strong>Minh họa nghệ thuật màu nước:</strong> Quỹ đạo S-Curve tích lũy kết hợp 5 nhóm đối tượng tiếp nhận công nghệ theo tiến trình khuếch tán.
-              </span>
-            </div>
-          </div>
-        </div>
 
         {/* Selected Group Inspector in Editorial Card */}
         <div className="editorial-card p-6 space-y-4">
