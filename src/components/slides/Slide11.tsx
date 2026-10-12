@@ -62,7 +62,7 @@ export const Slide11: React.FC = () => {
               {/* Visual Assembly Layers Container */}
               <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3.5 min-h-[200px] flex flex-col justify-center">
                 {activeLayer >= 1 && (
-                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200 shadow-2xs">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200 shadow-2xs animate-fadeInUp">
                     <span className="font-bold text-slate-900 block font-mono text-xs sm:text-sm uppercase tracking-wide">
                       LỚP 1: CÔNG NGHỆ LÕI (CORE HARDWARE / ALGORITHM)
                     </span>
@@ -72,7 +72,7 @@ export const Slide11: React.FC = () => {
                   </div>
                 )}
                 {activeLayer >= 2 && (
-                  <div className="p-3.5 sm:p-4 rounded-xl bg-teal-50/80 border border-teal-200 shadow-2xs">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-teal-50/80 border border-teal-200 shadow-2xs animate-fadeInUp">
                     <span className="font-bold text-teal-950 block font-mono text-xs sm:text-sm uppercase tracking-wide">
                       LỚP 2: HỆ ĐIỀU HÀNH, PHẦN MỀM &amp; CHUẨN TƯƠNG THÍCH
                     </span>
@@ -82,7 +82,7 @@ export const Slide11: React.FC = () => {
                   </div>
                 )}
                 {activeLayer >= 3 && (
-                  <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 shadow-2xs">
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/80 border border-emerald-200 shadow-2xs animate-fadeInUp">
                     <span className="font-bold text-emerald-950 block font-mono text-xs sm:text-sm uppercase tracking-wide">
                       LỚP 3: DỊCH VỤ HỖ TRỢ, BẢO HÀNH &amp; KÊNH PHÂN PHỐI
                     </span>

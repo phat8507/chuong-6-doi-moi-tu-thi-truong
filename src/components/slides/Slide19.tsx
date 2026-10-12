@@ -72,10 +72,10 @@ export const Slide19: React.FC = () => {
               <span className="text-xs font-mono uppercase text-slate-500 font-bold block tracking-wider">
                 Khối lượng tương tác kênh số
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-indigo-700">
+              <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-teal-900">
                 &gt; 200.000 <span className="text-base sm:text-lg font-sans font-medium text-slate-600">phiên/tháng</span>
               </div>
-              <div className="text-xs sm:text-sm text-indigo-900 font-medium">
+              <div className="text-xs sm:text-sm text-teal-800 font-semibold">
                 &gt; 130.000 người dùng Chatbot giải đáp tự động/năm
               </div>
               <div className="text-xs font-mono text-slate-400 pt-2 border-t border-slate-100">
@@ -158,7 +158,7 @@ export const Slide19: React.FC = () => {
                       formatter={(val: any, _name: any, item: any) => [`${val}.000`, item.payload.unit]}
                       contentStyle={{ borderRadius: '12px', fontSize: '13px', border: '1px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.08)' }}
                     />
-                    <Bar dataKey="count" fill="#4f46e5" radius={[8, 8, 0, 0]} barSize={56} />
+                    <Bar dataKey="count" fill="#0f766e" radius={[8, 8, 0, 0]} barSize={56} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

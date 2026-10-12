@@ -88,44 +88,44 @@ export const Slide02: React.FC = () => {
               </div>
 
               {/* State Canvas */}
-              <div className="p-4 rounded-xl bg-stone-50/80 border border-stone-200 min-h-[170px] flex flex-col justify-center text-xs">
+              <div className="p-4 sm:p-5 rounded-2xl bg-stone-50/80 border border-stone-200 min-h-[180px] flex flex-col justify-center text-xs sm:text-[14px]">
                 {activeState === 'download' && (
-                  <div className="space-y-1.5 animate-fadeIn">
-                    <div className="flex items-center gap-2 text-rose-700 font-bold">
-                      <Download className="w-4 h-4" /> Trạng thái 1: Lượt tải về từ App Store
+                  <div className="space-y-2 animate-fadeInUp">
+                    <div className="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                      <Download className="w-4 h-4 text-rose-600" /> Trạng thái 1: Lượt tải về từ App Store
                     </div>
-                    <p className="text-slate-600 leading-relaxed text-[11px]">
-                      Kích thích bởi thông điệp quảng cáo hoặc tò mò công nghệ mới. Doanh nghiệp dễ lầm tưởng đây là thành công thương mại.
+                    <p className="text-slate-700 leading-relaxed text-xs sm:text-[13px]">
+                      Kích thích bởi thông điệp quảng cáo hấp dẫn hoặc sự tò mò nhất thời. Doanh nghiệp dễ lầm tưởng số lượt cài đặt là thành công thương mại.
                     </p>
-                    <div className="text-[10px] font-mono text-rose-700 bg-rose-100/70 p-2 rounded-lg border border-rose-200/80">
+                    <div className="text-xs font-mono text-rose-900 bg-rose-100/80 p-2.5 rounded-xl border border-rose-200">
                       Rủi ro: 70–80% người dùng bỏ rơi ứng dụng sau 48 giờ nếu gặp rào cản thao tác.
                     </div>
                   </div>
                 )}
 
                 {activeState === 'trial' && (
-                  <div className="space-y-1.5 animate-fadeIn">
-                    <div className="flex items-center gap-2 text-amber-700 font-bold">
-                      <Sparkles className="w-4 h-4" /> Trạng thái 2: Dùng thử lần đầu (First Run)
+                  <div className="space-y-2 animate-fadeInUp">
+                    <div className="flex items-center gap-2 text-amber-900 font-bold text-sm">
+                      <Sparkles className="w-4 h-4 text-amber-600" /> Trạng thái 2: Dùng thử lần đầu (First Run)
                     </div>
-                    <p className="text-slate-600 leading-relaxed text-[11px]">
+                    <p className="text-slate-700 leading-relaxed text-xs sm:text-[13px]">
                       Khách hàng kiểm tra xem giải pháp có giúp giải quyết đúng việc họ cần hay không. Thời gian tìm thấy giá trị (Time-to-Value) là yếu tố sống còn.
                     </p>
-                    <div className="text-[10px] font-mono text-amber-800 bg-amber-100/70 p-2 rounded-lg border border-amber-200/80">
+                    <div className="text-xs font-mono text-amber-900 bg-amber-100/80 p-2.5 rounded-xl border border-amber-200">
                       Điểm nghẽn: Giao diện rườm rà, bắt đăng ký quá nhiều thông tin không cần thiết.
                     </div>
                   </div>
                 )}
 
                 {activeState === 'retention' && (
-                  <div className="space-y-1.5 animate-fadeIn">
-                    <div className="flex items-center gap-2 text-teal-700 font-bold">
-                      <Repeat className="w-4 h-4" /> Trạng thái 3: Sử dụng lặp lại bền vững (Adoption)
+                  <div className="space-y-2 animate-fadeInUp">
+                    <div className="flex items-center gap-2 text-teal-950 font-bold text-sm">
+                      <Repeat className="w-4 h-4 text-teal-700" /> Trạng thái 3: Sử dụng lặp lại bền vững (Adoption)
                     </div>
-                    <p className="text-slate-600 leading-relaxed text-[11px]">
+                    <p className="text-slate-700 leading-relaxed text-xs sm:text-[13px]">
                       Sản phẩm hòa nhập vào thói quen hàng ngày. Đây mới là thước đo chân thực nhất của một đổi mới thành công trên thị trường.
                     </p>
-                    <div className="text-[10px] font-mono text-teal-800 bg-teal-100/70 p-2 rounded-lg border border-teal-200/80">
+                    <div className="text-xs font-mono text-teal-950 bg-teal-100/80 p-2.5 rounded-xl border border-teal-200">
                       Bằng chứng giá trị: Tỷ lệ quay lại (Retention) &amp; Khuyến nghị người khác dùng theo.
                     </div>
                   </div>

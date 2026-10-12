@@ -66,7 +66,7 @@ export const Slide12: React.FC = () => {
         <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
           <div className="p-6 sm:p-8 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm min-h-[300px] flex flex-col justify-center">
             {activeLayer === 'armFlow' && (
-              <div className="space-y-5 animate-fadeIn">
+              <div className="space-y-5 animate-fadeInUp">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                   <span className="text-xs sm:text-sm font-bold text-slate-900 uppercase font-mono tracking-wider">
                     Hệ sinh thái nhượng quyền ARM (Kiến trúc RISC &amp; Dòng giá trị kinh tế):
@@ -126,7 +126,7 @@ export const Slide12: React.FC = () => {
             )}
 
             {activeLayer === 'protection' && (
-              <div className="space-y-4 animate-fadeIn">
+              <div className="space-y-4 animate-fadeInUp">
                 <span className="text-xs sm:text-sm font-bold text-slate-900 uppercase font-mono tracking-wider block">
                   Năm điều kiện bảo hộ sáng chế pháp lý bắt buộc:
                 </span>
@@ -159,7 +159,7 @@ export const Slide12: React.FC = () => {
             )}
 
             {activeLayer === 'pricing' && (
-              <div className="space-y-4 animate-fadeIn">
+              <div className="space-y-4 animate-fadeInUp">
                 <span className="text-xs sm:text-sm font-bold text-slate-900 uppercase font-mono tracking-wider block">
                   Bốn phương pháp định giá phí cấp phép công nghệ (IP Licensing Valuation):
                 </span>

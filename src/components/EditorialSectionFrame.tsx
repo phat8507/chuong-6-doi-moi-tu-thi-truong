@@ -33,13 +33,13 @@ export const EditorialSectionFrame: React.FC<EditorialSectionFrameProps> = ({ me
 
           {/* Section Headline */}
           <div className="space-y-2">
-            <div className="font-mono text-[11px] font-bold text-teal-700 tracking-widest uppercase">
+            <div className="font-mono text-[11px] font-bold text-teal-800 tracking-widest uppercase tabular-nums">
               SECTION {meta.sectionCode}
             </div>
             <h2 className="display-lg text-slate-900 leading-tight tracking-tight">
               {meta.title}
             </h2>
-            <p className="text-base md:text-lg text-slate-600 max-w-4xl leading-relaxed font-normal">
+            <p className="text-base md:text-lg text-slate-700 prose-measure font-normal">
               {meta.coreMessage}
             </p>
           </div>
