@@ -14,7 +14,7 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
   const scrollProgress = useScrollProgress();
   const navContainerRef = useRef<HTMLDivElement>(null);
 
-  const [currentFont, setCurrentFont] = useState<'montserrat' | 'inter' | 'jakarta' | 'vietnam'>('montserrat');
+  const [currentFont, setCurrentFont] = useState<'montserrat' | 'inter' | 'jakarta' | 'vietnam'>('vietnam');
   const [showFontMenu, setShowFontMenu] = useState(false);
 
   useEffect(() => {
@@ -23,8 +23,8 @@ export const EditorialNavBar: React.FC<EditorialNavBarProps> = ({ currentMode, o
       setCurrentFont(saved);
       document.documentElement.setAttribute('data-font', saved);
     } else {
-      setCurrentFont('montserrat');
-      document.documentElement.setAttribute('data-font', 'montserrat');
+      setCurrentFont('vietnam');
+      document.documentElement.setAttribute('data-font', 'vietnam');
     }
   }, []);
 
