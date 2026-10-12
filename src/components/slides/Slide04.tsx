@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
 import { EditorialSectionFrame } from '../EditorialSectionFrame';
-import { CheckCircle2, AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from 'lucide-react';
 
 const FOUR_P = [
   {
@@ -35,36 +35,40 @@ export const Slide04: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         {/* Left Column: Real Product at Center with 4P Branches appearing */}
         <div className="lg:col-span-7 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-4">
-            <span className="text-xs font-bold text-slate-900 font-mono uppercase">
+          <div className="p-6 md:p-8 rounded-3xl bg-white border border-stone-200/90 shadow-sm space-y-5">
+            <span className="text-sm font-bold text-slate-900 font-mono uppercase tracking-wide block">
               Sản phẩm thật ở trung tâm và bốn nhánh 4P định hướng đổi mới:
             </span>
 
-            {/* Central Product Banner */}
-            <div className="p-3.5 rounded-xl bg-teal-50 border border-teal-200 text-center">
-              <span className="text-[10px] font-mono uppercase font-bold text-teal-800">Sản phẩm trung tâm</span>
-              <div className="text-sm font-bold text-slate-900">Ứng dụng Giao đồ ăn &amp; Đặt hàng Trực tuyến</div>
-              <p className="text-[11px] text-teal-900 mt-0.5">
+            {/* Central Product Banner — Tăng font tiêu đề và giải thích */}
+            <div className="p-5 rounded-2xl bg-teal-50/80 border border-teal-200 text-center space-y-1">
+              <span className="text-xs font-mono uppercase font-bold text-teal-800 tracking-wider">
+                Sản phẩm trung tâm
+              </span>
+              <div className="text-base md:text-lg font-bold text-slate-900">
+                Ứng dụng Giao đồ ăn &amp; Đặt hàng Trực tuyến
+              </div>
+              <p className="text-xs md:text-sm text-teal-900 leading-relaxed font-medium">
                 Giá trị không chỉ nằm ở bản thân món ăn, mà lan tỏa ra toàn bộ 4 khâu phối thức Marketing:
               </p>
             </div>
 
-            {/* 4P Interactive Selector */}
-            <div className="grid grid-cols-2 gap-2.5">
+            {/* 4P Interactive Selector — Tăng kích thước nút và chữ */}
+            <div className="grid grid-cols-2 gap-3.5">
               {FOUR_P.map((item, idx) => {
                 const isSelected = selectedP === idx;
                 return (
                   <button
                     key={item.name}
                     onClick={() => setSelectedP(idx)}
-                    className={`p-3 rounded-xl border text-left transition-all cursor-pointer flex flex-col justify-between h-24 ${
+                    className={`p-4 md:p-5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between h-28 ${
                       isSelected
-                        ? 'bg-teal-50/70 border-teal-600 ring-2 ring-teal-500/20 shadow-2xs'
-                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
+                        ? 'bg-teal-50/90 border-teal-600 ring-2 ring-teal-500/20 shadow-xs'
+                        : 'bg-stone-50/80 border-stone-200 hover:border-stone-300 hover:bg-stone-100/70'
                     }`}
                   >
-                    <span className="text-xs font-bold text-slate-900">{item.name}</span>
-                    <span className={`text-[10px] font-semibold ${isSelected ? 'text-teal-700' : 'text-slate-500'}`}>
+                    <span className="text-sm md:text-[15px] font-bold text-slate-900">{item.name}</span>
+                    <span className={`text-xs font-semibold ${isSelected ? 'text-teal-700 font-bold' : 'text-slate-500'}`}>
                       Xem đổi mới nhánh này →
                     </span>
                   </button>
@@ -72,11 +76,12 @@ export const Slide04: React.FC = () => {
               })}
             </div>
 
-            <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs space-y-1">
-              <span className="font-bold text-teal-800">{FOUR_P[selectedP].name}:</span>
-              <p className="text-slate-600 text-[11px] leading-relaxed">{FOUR_P[selectedP].desc}</p>
-              <p className="text-[11px] text-slate-800 pt-0.5 font-medium">
-                <strong>Minh họa:</strong> {FOUR_P[selectedP].example}
+            {/* Detail Box — Chữ to rõ ràng hơn */}
+            <div className="p-4 md:p-5 rounded-2xl bg-stone-50 border border-stone-200/90 text-sm space-y-2">
+              <span className="font-bold text-teal-900 text-sm md:text-base block">{FOUR_P[selectedP].name}:</span>
+              <p className="text-slate-700 text-sm md:text-[15px] leading-relaxed">{FOUR_P[selectedP].desc}</p>
+              <p className="text-sm text-slate-900 pt-1 font-medium">
+                <strong className="text-teal-800">Minh họa thực tế:</strong> {FOUR_P[selectedP].example}
               </p>
             </div>
           </div>
@@ -84,32 +89,36 @@ export const Slide04: React.FC = () => {
 
         {/* Right Column: Strategic vs Tactical & Explicit Citation at 110 Projects */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-3">
-            <span className="text-xs font-bold text-slate-900 uppercase font-mono">
+          <div className="p-6 rounded-3xl bg-white border border-stone-200/90 shadow-xs space-y-4">
+            <span className="text-xs md:text-sm font-bold text-slate-900 uppercase font-mono tracking-wide block">
               Phân biệt hai cấp độ quyết định marketing
             </span>
-            <div className="space-y-2 text-xs">
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="font-bold text-teal-800">1. Marketing Chiến lược:</span>
-                <p className="text-slate-600 text-[11px] mt-0.5">Xác định có nên gia nhập thị trường mới, phát triển công nghệ mới hoặc phục vụ phân khúc mới hay không.</p>
+            <div className="space-y-3">
+              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/80 space-y-1">
+                <span className="font-bold text-teal-900 text-sm md:text-[15px] block">1. Marketing Chiến lược:</span>
+                <p className="text-slate-700 text-xs md:text-sm leading-relaxed">
+                  Xác định có nên gia nhập thị trường mới, phát triển công nghệ mới hoặc phục vụ phân khúc mới hay không.
+                </p>
               </div>
-              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="font-bold text-amber-800">2. Marketing Chiến thuật:</span>
-                <p className="text-slate-600 text-[11px] mt-0.5">Triển khai định vị, giá, thông điệp và kênh phân phối của sản phẩm đã chọn.</p>
+              <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/80 space-y-1">
+                <span className="font-bold text-amber-900 text-sm md:text-[15px] block">2. Marketing Chiến thuật:</span>
+                <p className="text-slate-700 text-xs md:text-sm leading-relaxed">
+                  Triển khai định vị, giá, thông điệp và kênh phân phối của sản phẩm đã chọn.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Research 110 Projects with explicit citation at number location */}
-          <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-xs space-y-1.5">
-            <div className="flex items-center gap-2 text-amber-900 font-bold">
-              <AlertTriangle className="w-4 h-4 text-amber-600" />
+          {/* Research 110 Projects with explicit citation */}
+          <div className="p-5 rounded-2xl bg-amber-50/70 border border-amber-200 space-y-2">
+            <div className="flex items-center gap-2 text-amber-950 font-bold text-sm md:text-base">
+              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
               <span>Khảo sát 110 dự án đổi mới sản phẩm</span>
             </div>
-            <p className="text-[11px] text-slate-700 leading-relaxed">
-              Kết quả khảo sát 110 dự án phát triển sản phẩm cho thấy: <strong>không có một quy trình đổi mới duy nhất tối ưu cho mọi hoàn cảnh</strong>. Độ mới lạ và độ phức tạp quyết định công cụ nghiên cứu phù hợp.
+            <p className="text-xs md:text-sm text-slate-700 leading-relaxed">
+              Kết quả khảo sát 110 dự án phát triển sản phẩm cho thấy: <strong className="text-slate-900 font-semibold">không có một quy trình đổi mới duy nhất tối ưu cho mọi hoàn cảnh</strong>. Độ mới lạ và độ phức tạp quyết định công cụ nghiên cứu phù hợp.
             </p>
-            <div className="pt-1 text-[10px] font-mono text-amber-800 font-semibold border-t border-amber-200/60">
+            <div className="pt-2 text-xs font-mono text-amber-900 font-semibold border-t border-amber-200/60">
               [Nguồn tham chiếu: Giáo trình Quản trị Đổi mới sáng tạo HUB, Tr. 82–83]
             </div>
           </div>
