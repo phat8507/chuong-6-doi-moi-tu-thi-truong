@@ -136,13 +136,13 @@ export const Slide05: React.FC = () => {
               {/* IDEO Photo Card with double-bezel aesthetic */}
               <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-md h-52 sm:h-56 group">
                 <img 
-                  src="/images/ideo-design.jpg" 
-                  alt="Licensed IDEO Prototyping Workshop Archive" 
+                  src="/images/ideo-learning-chain.jpg" 
+                  alt="Chuỗi học hỏi thực nghiệm IDEO" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex items-end p-4">
                   <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                    <strong>Phương pháp IDEO:</strong> Quan sát người dùng thao tác thực tế thay vì chỉ thu thập ý kiến qua bảng hỏi trừu tượng.
+                    <strong>Chu trình IDEO:</strong> Quan sát → Trực quan hóa → Tạo nguyên mẫu → Kiểm tra → Thương mại hóa.
                   </p>
                 </div>
               </div>

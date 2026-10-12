@@ -127,16 +127,16 @@ export const Slide08: React.FC = () => {
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
             <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
-              {/* Context photography */}
-              <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-md h-52 sm:h-56 group">
+              {/* Watercolor Context Illustration */}
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
                 <img 
-                  src="/images/consumer-two-contexts.jpg" 
-                  alt="Two real consumers with different context and lifestyle" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  src="/images/consumer-two-personas-watercolor.jpg" 
+                  alt="Watercolor illustration of Student with laptop and Urban runner in two lifestyle contexts" 
+                  className="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent flex items-end p-4">
                   <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                    <strong>Bối cảnh thực tế:</strong> Người tiêu dùng cùng phân khúc nhân khẩu học vẫn khác biệt rất lớn về thói quen, môi trường và công việc cần hoàn thành.
+                    <strong>Bối cảnh thực tế:</strong> Cùng một tầm giá &amp; độ tuổi, sinh viên học trực tuyến và vận động viên đô thị đòi hỏi hai tập thuộc tính sản phẩm hoàn toàn đối lập.
                   </p>
                 </div>
               </div>

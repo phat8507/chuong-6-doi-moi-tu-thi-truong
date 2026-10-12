@@ -129,6 +129,20 @@ export const Slide15: React.FC = () => {
                       );
                     })}
                   </div>
+
+                  {/* 5 Rogers Attributes Watercolor Diagram */}
+                  <div className="mt-3 relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
+                    <img 
+                      src="/images/rogers-attributes-watercolor.jpg" 
+                      alt="Everett Rogers 5 Perceived Attributes watercolor illustration with circular vignettes" 
+                      className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent flex items-end p-2.5">
+                      <span className="text-[11px] text-white font-mono font-medium">
+                        5 thuộc tính cảm nhận định hình tốc độ khuếch tán
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-mono text-center">

@@ -215,6 +215,22 @@ export const Slide16: React.FC = () => {
           </div>
         </div>
 
+        {/* Watercolor S-Curve & Rogers Categories Art Illustration */}
+        <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
+          <div className="rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm relative group bg-amber-50/20">
+            <img 
+              src="/images/scurve-adopters-watercolor.jpg" 
+              alt="Watercolor artistic diagram of S-Curve and Rogers Adopter Categories" 
+              className="w-full h-44 sm:h-52 object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-4">
+              <span className="text-xs sm:text-sm text-white font-medium">
+                <strong>Minh họa nghệ thuật màu nước:</strong> Quỹ đạo S-Curve tích lũy kết hợp 5 nhóm đối tượng tiếp nhận công nghệ theo tiến trình khuếch tán.
+              </span>
+            </div>
+          </div>
+        </div>
+
         {/* Selected Group Inspector in Double-Bezel Frame */}
         <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
           <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-4">

@@ -129,16 +129,16 @@ export const Slide09: React.FC = () => {
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
             <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
-              {/* Industrial CNC Equipment Photo */}
-              <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-md h-52 sm:h-56 group">
+              {/* DMU Stakeholders Watercolor Diagram */}
+              <div className="relative rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-amber-50/20 group">
                 <img 
-                  src="/images/b2b-cnc.jpg" 
-                  alt="High Precision CNC Industrial Milling Equipment" 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  src="/images/b2b-dmu-stakeholders.jpg" 
+                  alt="Watercolor ink diagram showing B2B DMU 4 roles around industrial CNC equipment" 
+                  className="w-full h-56 sm:h-60 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex items-end p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent flex items-end p-4">
                   <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                    <strong>Mua sắm thiết bị công nghiệp B2B:</strong> Người dùng cuối, người trả tiền và người phê duyệt tiêu chuẩn là các chủ thể hoàn toàn độc lập.
+                    <strong>Mô hình DMU 4 bên:</strong> Người dùng, Người giữ cổng, Người ảnh hưởng và Bên mua cùng tương tác xung quanh quyết định đầu tư thiết bị.
                   </p>
                 </div>
               </div>

@@ -103,16 +103,16 @@ export const Slide06: React.FC = () => {
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
           <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
             <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
-              {/* Historical Nokia photo */}
+              {/* Relative Value Watercolor Illustration */}
               <div className="relative rounded-xl overflow-hidden border border-slate-200 shadow-md h-52 sm:h-56 group">
                 <img 
-                  src="/images/nokia-phone.jpg" 
-                  alt="Historical Nokia Phone Era 2003" 
+                  src="/images/relative-value-balance-watercolor.jpg" 
+                  alt="Cán cân giá trị tương đối: Lợi ích cảm nhận vs Chi phí bỏ ra" 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/30 to-transparent flex items-end p-4">
                   <p className="text-xs sm:text-[13px] text-white font-medium leading-relaxed">
-                    <strong>Nokia (1998 – 2004):</strong> Lợi thế kỹ thuật GSM và độ bền cơ học không tự động bảo đảm vị thế cạnh tranh vĩnh viễn.
+                    <strong>Cán cân giá trị tương đối:</strong> Lợi ích thực dụng (Mẫu B) chiến thắng sản phẩm nhồi nhét tính năng đắt đỏ (Mẫu A).
                   </p>
                 </div>
               </div>
