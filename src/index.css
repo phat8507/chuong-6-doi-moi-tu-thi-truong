@@ -1,14 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --font-base: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-heading: 'Montserrat', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif-safe: 'Montserrat', system-ui, -apple-system, sans-serif;
-}
-
-[data-font="inter"] {
-  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-base: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif-safe: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-accent: #0f766e;
+  --color-accent-hover: #115e59;
 }
 
 [data-font="jakarta"] {
@@ -26,12 +24,19 @@
   --font-base: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
 }
 
+[data-font="inter"] {
+  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-base: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
 @layer base {
-  *, *::before, *::after { box-sizing: border-box; }
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 48px;
+    scroll-padding-top: 80px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -39,110 +44,143 @@
   body {
     font-family: var(--font-base);
     background-color: #fafaf9;
-    color: #1a1a2e;
+    color: #1e293b;
     line-height: 1.7;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    line-height: 1.25;
-    color: #0d0d0d;
+    letter-spacing: -0.025em;
+    color: #0f172a;
+    text-wrap: balance;
   }
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #f5f4f0; }
-  ::-webkit-scrollbar-thumb { background: #c7c7d0; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #147D82; }
+  /* Custom Smooth Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1ee;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+  }
 }
 
 @layer components {
-  /* ── Liquid Clean Editorial Glass Cards ── */
-  .glass-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.25s ease;
-  }
-  .glass-card:hover {
-    box-shadow: 0 10px 30px -4px rgba(20, 125, 130, 0.12);
-    border-color: #cbd5e1;
+  /* ── Doppelrand (Double-Bezel Architecture) from taste-skill ── */
+  .double-bezel {
+    position: relative;
+    padding: 6px;
+    border-radius: 24px;
+    background: rgba(15, 23, 42, 0.03);
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .double-bezel:hover {
+    border-color: rgba(15, 118, 110, 0.25);
+    box-shadow: 0 12px 32px -4px rgba(15, 118, 110, 0.08);
+  }
+
+  .double-bezel-inner {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.5rem;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  }
+
+  /* ── Interactive tactile button styling ── */
+  .btn-tactile {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    user-select: none;
+  }
+  .btn-tactile:active {
+    transform: scale(0.98) translateY(1px);
+  }
+
+  .btn-primary {
+    background: #0f766e;
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(15, 118, 110, 0.25);
+  }
+  .btn-primary:hover {
+    background: #115e59;
+    box-shadow: 0 4px 16px rgba(15, 118, 110, 0.35);
+  }
+
+  /* ── Macro Spatial Rhythm ── */
   .editorial-section {
     position: relative;
-    padding: 5rem 1rem;
-    overflow: hidden;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 5.5rem 1rem;
+    border-bottom: 1px solid #e7e5e4;
   }
   @media (min-width: 768px) {
     .editorial-section {
-      padding: 6.5rem 2rem;
+      padding: 7rem 2rem;
     }
   }
 
   .editorial-container {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
   }
 
-  /* ── Typography System 100% Vietnamese Safe & Crisp ── */
+  /* ── Typography Scale ── */
   .display-xl {
     font-family: var(--font-heading);
-    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+    font-size: clamp(2.2rem, 4.8vw, 3.8rem);
     font-weight: 800;
-    letter-spacing: -0.025em;
-    line-height: 1.1;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
     color: #0f172a;
   }
 
   .display-lg {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 3.8vw, 3.2rem);
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
     font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
     color: #0f172a;
   }
 
-  .font-serif {
-    font-family: var(--font-serif-safe) !important;
-  }
-
   .section-eyebrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-  }
-
-  .stat-number {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 700;
-    letter-spacing: -0.02em;
   }
 
   /* ── Magazine Drop Cap ── */
   .drop-cap::first-letter {
     font-family: var(--font-heading);
-    font-size: 4.8em;
-    font-weight: 900;
-    line-height: 0.8;
+    font-size: 4.4em;
+    font-weight: 800;
+    line-height: 0.82;
     float: left;
-    margin-right: 0.1em;
-    margin-top: 0.05em;
-    color: #147D82;
-  }
-
-  .chart-wrapper {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    margin-right: 0.12em;
+    margin-top: 0.08em;
+    color: #0f766e;
   }
 }
 
@@ -150,9 +188,10 @@
 .recharts-tooltip-wrapper .recharts-default-tooltip {
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
-  border-radius: 10px !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
-  font-family: 'Be Vietnam Pro', sans-serif !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.12) !important;
+  font-family: var(--font-base) !important;
   font-size: 12px !important;
   color: #1e293b !important;
+  padding: 8px 12px !important;
 }
