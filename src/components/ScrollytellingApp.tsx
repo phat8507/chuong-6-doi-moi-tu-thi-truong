@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { SLIDES_METADATA } from '../data/slidesMetadata';
-import { EditorialNavBar } from './EditorialNavBar';
 import { PresentationEngine } from './PresentationEngine';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Monitor } from 'lucide-react';
 
 // Import All 21 Slide Components
 import { Slide01 } from './slides/Slide01';
@@ -52,12 +51,6 @@ export const ScrollytellingApp: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-ambient-flow text-[#1a1a2e] font-sans selection:bg-[#0f766e] selection:text-white relative">
-      {/* Sticky Top Clean Navigation */}
-      <EditorialNavBar 
-        currentMode={viewMode} 
-        onToggleMode={() => setViewMode(viewMode === 'scrollytelling' ? 'slide' : 'scrollytelling')} 
-      />
-
       {/* Main Continuous Scrollytelling Stream with Ambient Flowing Canvas */}
       <main className="w-full">
         {SLIDES_METADATA.map((slide) => {
@@ -105,14 +98,25 @@ export const ScrollytellingApp: React.FC = () => {
         })}
       </main>
 
-      {/* Floating Scroll To Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-white text-slate-800 shadow-xl hover:bg-slate-50 transition-all cursor-pointer border border-slate-200"
-        title="Cuộn lên đầu trang"
-      >
-        <ArrowUp className="w-5 h-5 text-[#147D82]" />
-      </button>
+      {/* Floating Controls at bottom-right (Scroll to top & Slide Mode) */}
+      <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+        <button
+          onClick={() => setViewMode(viewMode === 'scrollytelling' ? 'slide' : 'scrollytelling')}
+          className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/90 backdrop-blur-md text-slate-800 text-xs font-bold shadow-xl hover:bg-white hover:text-teal-800 transition-all cursor-pointer border border-stone-200/90 font-mono"
+          title="Chuyển sang chế độ Slide 16:9 toàn màn hình"
+        >
+          <Monitor className="w-4 h-4 text-teal-700" />
+          <span className="hidden sm:inline">Chế độ Slide 16:9</span>
+        </button>
+
+        <button
+          onClick={scrollToTop}
+          className="p-2.5 rounded-full bg-white/90 backdrop-blur-md text-slate-800 shadow-xl hover:bg-white hover:text-teal-800 transition-all cursor-pointer border border-stone-200/90"
+          title="Cuộn lên đầu trang"
+        >
+          <ArrowUp className="w-4 h-4 text-teal-700" />
+        </button>
+      </div>
 
       {/* Clean Global Academic Editorial Footer */}
       <footer className="w-full bg-[#f0f0eb] border-t border-slate-200 py-12 px-6 text-center text-xs text-slate-600 space-y-2">
