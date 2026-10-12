@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CHAPTER6_SECTIONS } from '../../data/chapter6Outline';
 import { EditorialSectionFrame } from '../EditorialSectionFrame';
 
-export const Slide11: React.FC = () => {
+export const Slide11: React.FC = React.memo(() => {
   const meta = CHAPTER6_SECTIONS[10];
   const [activeLayer, setActiveLayer] = useState<number>(3); // 1: Core tech, 2: Software, 3: Whole product
 
@@ -11,8 +11,7 @@ export const Slide11: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
         {/* Left Column: Layered Assembly Diagram */}
         <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
-          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
+          <div className="editorial-card p-6 space-y-5">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                 <span className="text-xs sm:text-sm font-bold text-slate-900 font-mono uppercase tracking-wider">
                   Sản phẩm “lắp ghép” từng lớp (Từ công nghệ lõi đến giải pháp hoàn chỉnh)
@@ -99,13 +98,11 @@ export const Slide11: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
 
         {/* Right Column: 3 High-Tech Buying Factors */}
         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-          <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner">
-            <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-5">
-              <span className="font-bold text-xs sm:text-sm text-slate-900 uppercase font-mono tracking-wider block pb-2 border-b border-slate-100">
+          <div className="editorial-card p-6 space-y-5">
+            <span className="font-bold text-xs sm:text-sm text-slate-900 uppercase font-mono tracking-wider block pb-2 border-b border-slate-100">
                 Ba yếu tố tâm lý khi mua công nghệ cao
               </span>
 
@@ -144,6 +141,8 @@ export const Slide11: React.FC = () => {
                 <img 
                   src="/images/whole-product-watercolor.jpg" 
                   alt="Watercolor concentric diagram of Whole Product architecture (Core Tech -> Software -> Solution)" 
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-44 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-3">
@@ -158,9 +157,8 @@ export const Slide11: React.FC = () => {
                 <strong className="font-semibold text-slate-900">Câu hỏi định hướng:</strong> Doanh nghiệp nên tự dấn thân xây dựng toàn bộ chuỗi sản phẩm hay chọn cấp phép sở hữu trí tuệ (IP Licensing) cho các hãng lớn?
               </div>
             </div>
-          </div>
         </div>
       </div>
     </EditorialSectionFrame>
   );
-};
+});

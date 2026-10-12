@@ -101,16 +101,28 @@
     }
   }
 
+  /* Themed browser surface: Selection, Caret & Focus */
+  ::selection {
+    background-color: #0f766e;
+    color: #ffffff;
+  }
+  
+  :focus-visible {
+    outline: 2px solid #0f766e;
+    outline-offset: 2px;
+  }
+
   /* Custom Smooth Scrollbar */
   ::-webkit-scrollbar {
-    width: 7px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #eef3f2;
+    background: #f1f5f4;
   }
   ::-webkit-scrollbar-thumb {
     background: #99c2bf;
     border-radius: 9999px;
+    border: 2px solid #f1f5f4;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #0f766e;
@@ -130,15 +142,18 @@
     background-attachment: fixed;
   }
 
-  /* ── Section xen kẽ lả lướt tinh tế ── */
+  /* ── Section xen kẽ lả lướt tinh tế (Tối ưu 60fps với content-visibility) ── */
   .editorial-section {
     position: relative;
-    padding: 6rem 1.25rem;
+    padding: 5rem 1.25rem;
     transition: background 0.3s ease;
+    /* /optimize: Skip off-screen paint & layout tree calculation for instant 60fps scrolling */
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 750px;
   }
   @media (min-width: 768px) {
     .editorial-section {
-      padding: 7.5rem 2.5rem;
+      padding: 6.5rem 2.5rem;
     }
   }
 
@@ -149,6 +164,20 @@
   .editorial-section-even {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(241, 248, 247, 0.6) 50%, rgba(255, 255, 255, 0.5) 100%);
     backdrop-filter: blur(2px);
+  }
+
+  /* ── /layout: Clean Single-Surface Editorial Card (Replaces nested card anti-pattern) ── */
+  .editorial-card {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid rgba(226, 232, 240, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    backdrop-filter: blur(8px);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .editorial-card:hover {
+    border-color: rgba(15, 118, 110, 0.3);
+    box-shadow: 0 10px 28px -4px rgba(15, 118, 110, 0.08), 0 4px 10px -2px rgba(15, 118, 110, 0.03);
   }
 
   /* ── Doppelrand (Double-Bezel Architecture) from taste-skill ── */

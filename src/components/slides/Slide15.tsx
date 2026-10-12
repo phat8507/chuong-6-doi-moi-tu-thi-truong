@@ -73,7 +73,7 @@ const ROGERS_ATTRIBUTES: RogerAttribute[] = [
   }
 ];
 
-export const Slide15: React.FC = () => {
+export const Slide15: React.FC = React.memo(() => {
   const meta = CHAPTER6_SECTIONS[14];
   const [selectedId, setSelectedId] = useState<string>('relative-advantage');
 
@@ -87,12 +87,11 @@ export const Slide15: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           {/* Left Orbit Switcher: 5 attributes */}
           <div className="lg:col-span-5 flex flex-col justify-between">
-            <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner h-full">
-              <div className="p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm space-y-3 h-full flex flex-col justify-between">
-                <div>
-                  <span className="text-xs sm:text-sm font-mono uppercase font-bold text-slate-900 tracking-wider block mb-3 pb-2 border-b border-slate-100">
-                    Mô Hình Everett Rogers (1995) · Chọn thuộc tính:
-                  </span>
+            <div className="editorial-card p-6 h-full flex flex-col justify-between space-y-4">
+              <div>
+                <span className="text-xs sm:text-sm font-mono uppercase font-bold text-slate-900 tracking-wider block mb-3 pb-2 border-b border-slate-100">
+                  Mô Hình Everett Rogers (1995) · Chọn thuộc tính:
+                </span>
                   <div className="space-y-2.5">
                     {ROGERS_ATTRIBUTES.map((attr) => {
                       const Icon = attr.icon;
@@ -135,6 +134,8 @@ export const Slide15: React.FC = () => {
                     <img 
                       src="/images/rogers-attributes-watercolor.jpg" 
                       alt="Everett Rogers 5 Perceived Attributes watercolor illustration with circular vignettes" 
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent flex items-end p-2.5">
@@ -150,14 +151,12 @@ export const Slide15: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
 
           {/* Right: Central Product Focus & Real-world Deep Dive */}
           <div className="lg:col-span-7 flex flex-col justify-between">
-            <div className="p-2 sm:p-2.5 rounded-3xl bg-slate-100/80 border border-slate-200/80 shadow-inner h-full flex flex-col justify-between">
-              <div className="p-5 sm:p-6 rounded-2xl bg-white/95 backdrop-blur-sm border border-slate-200/90 shadow-sm flex flex-col justify-between h-full space-y-5">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="editorial-card p-6 flex flex-col justify-between h-full space-y-5">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                     <div className="flex items-center gap-3">
                       <div className="p-2.5 rounded-xl bg-teal-800 text-white shadow-xs">
                         <CurrentIcon className="w-5 h-5" />
@@ -217,11 +216,10 @@ export const Slide15: React.FC = () => {
                 <div className="pt-3 border-t border-slate-100 text-xs text-slate-500 font-mono">
                   Nguồn: Everett M. Rogers, <em>Diffusion of Innovations</em> (Free Press, 5th Edition).
                 </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </EditorialSectionFrame>
   );
-};
+});
