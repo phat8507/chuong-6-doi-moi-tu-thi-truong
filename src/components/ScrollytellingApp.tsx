@@ -51,14 +51,14 @@ export const ScrollytellingApp: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fafaf9] text-[#1a1a2e] font-sans selection:bg-[#147D82] selection:text-white">
+    <div className="min-h-screen bg-ambient-flow text-[#1a1a2e] font-sans selection:bg-[#0f766e] selection:text-white relative">
       {/* Sticky Top Clean Navigation */}
       <EditorialNavBar 
         currentMode={viewMode} 
         onToggleMode={() => setViewMode(viewMode === 'scrollytelling' ? 'slide' : 'scrollytelling')} 
       />
 
-      {/* Main Continuous Scrollytelling Stream with Solid White/Warm Canvas */}
+      {/* Main Continuous Scrollytelling Stream with Ambient Flowing Canvas */}
       <main className="w-full">
         {SLIDES_METADATA.map((slide) => {
           const sid = `slide-${String(slide.slideNumber).padStart(2, '0')}`;
@@ -88,14 +88,14 @@ export const ScrollytellingApp: React.FC = () => {
             case 21: SlideContent = <Slide21 />; break;
           }
 
-          // Alternate subtle clean section background for visual rhythm
+          // Alternate subtle flowing section background for visual rhythm
           const isEven = slide.slideNumber % 2 === 0;
 
           return (
             <section
               key={slide.id}
               id={sid}
-              className={`editorial-section ${isEven ? 'bg-[#f4f4f0]' : 'bg-[#fafaf9]'}`}
+              className={`editorial-section ${isEven ? 'editorial-section-even' : 'editorial-section-odd'}`}
             >
               <div className="w-full">
                 {SlideContent}
